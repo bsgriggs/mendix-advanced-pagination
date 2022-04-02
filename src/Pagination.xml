@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id=".pagination.Pagination" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Pagination</name>
+    <description>My widget description</description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <property key="refreshAction" type="action">
+                <caption>Refresh Action</caption>
+                <description>Action to refresh the datasource</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Attributes">
+            <property key="page" type="attribute" required="true">
+                <caption>Page</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="Integer" />
+                </attributeTypes>
+            </property>
+            <property key="pageSize" type="expression" defaultValue="10">
+                <caption>Page Size</caption>
+                <description></description>
+                <returnType type="Integer" />
+            </property>
+            <property key="resultCount" type="attribute" required="true">
+                <caption>Result Count</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="Integer" />
+                </attributeTypes>
+            </property>
+            <property key="resultCountCaption" type="expression" defaultValue="10">
+                <caption>Result Count Caption</caption>
+                <description></description>
+                <returnType type="String" />
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
