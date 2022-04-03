@@ -5,9 +5,58 @@
     <icon />
     <properties>
         <propertyGroup caption="General">
+            <property key="displayFormat" type="enumeration" defaultValue="navigation">
+                <caption>Display Format</caption>
+                <description></description>
+                <enumerationValues>
+                    <enumerationValue key="navigation">Navigation</enumerationValue>
+                    <enumerationValue key="perPage">Per Page</enumerationValue>
+                </enumerationValues>
+            </property>
             <property key="refreshAction" type="action">
                 <caption>Refresh Action</caption>
                 <description>Action to refresh the datasource</description>
+            </property>
+            <property key="resultCountCaption" type="expression" defaultValue="10">
+                <caption>Total Caption</caption>
+                <description></description>
+                <returnType type="String" />
+            </property>
+            <property key="resultCountCaptionAlignment" type="enumeration" defaultValue="start">
+                <caption>Total Caption Alignment</caption>
+                <description></description>
+                <enumerationValues>
+                    <enumerationValue key="start">Start</enumerationValue>
+                    <enumerationValue key="end">End</enumerationValue>
+                    <enumerationValue key="hide">Hide</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="buttonAlignment" type="enumeration" defaultValue="end">
+                <caption>Button Alignment</caption>
+                <description></description>
+                <enumerationValues>
+                    <enumerationValue key="start">Start</enumerationValue>
+                    <enumerationValue key="middle">Middle</enumerationValue>
+                    <enumerationValue key="end">End</enumerationValue>
+                </enumerationValues>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Navigation Settings">
+            <property key="pageDisplay" type="expression" defaultValue="''">
+                <caption>Page Display</caption>
+                <description></description>
+                <returnType type="String" />
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Per Page Settings">
+            <property key="includeNavs" type="boolean" defaultValue="true">
+                <caption>Include Navigations?</caption>
+                <description>When Yes, shows the Previous and Next buttons on the ends of the pages.</description>
+            </property>
+            <property key="maxPages" type="expression" defaultValue="4" required="true">
+                <caption>Max Pages</caption>
+                <description></description>
+                <returnType type="Integer" />
             </property>
         </propertyGroup>
         <propertyGroup caption="Attributes">
@@ -18,7 +67,7 @@
                     <attributeType name="Integer" />
                 </attributeTypes>
             </property>
-            <property key="pageSize" type="expression" defaultValue="10">
+            <property key="pageSize" type="expression" defaultValue="10" required="true">
                 <caption>Page Size</caption>
                 <description></description>
                 <returnType type="Integer" />
@@ -29,11 +78,6 @@
                 <attributeTypes>
                     <attributeType name="Integer" />
                 </attributeTypes>
-            </property>
-            <property key="resultCountCaption" type="expression" defaultValue="10">
-                <caption>Result Count Caption</caption>
-                <description></description>
-                <returnType type="String" />
             </property>
         </propertyGroup>
     </properties>

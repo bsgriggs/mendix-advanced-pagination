@@ -1,11 +1,14 @@
-import { createElement } from "react";
+import React, { createElement } from "react";
 import { ValueStatus } from "mendix";
 import { PaginationContainerProps } from "../typings/PaginationProps";
+import NavigationPagination from "./components/NavigationPagination";
+import PerPagePagination from "./components/PerPagePagination";
 import Big from "big.js";
 
 import "./ui/Pagination.css";
 
 const Pagination = (props: PaginationContainerProps) => {
+    // console.log("main props", props);
     const page =
         props.page.status === ValueStatus.Available && props.page.value ? parseFloat(props.page.value.toFixed(0)) : 1;
     const pageSize =
@@ -23,92 +26,58 @@ const Pagination = (props: PaginationContainerProps) => {
             : resultCount === 1
             ? "1 result"
             : resultCount + " results";
+    const pageDisplay =
+        props.pageDisplay.status === ValueStatus.Available ? props.pageDisplay.value : `Page ${page} of ${pageTotal}`;
+    const maxPages = props.maxPages.status === ValueStatus.Available ? parseFloat(props.maxPages.value.toFixed(0)) : 5;
 
-    const setPage = (newPage: number) => {
+    const setPage = (newPage: number): void => {
         props.page.setValue(Big(newPage));
         props.refreshAction?.execute();
     };
 
-    console.log("page", page);
-    console.log("pageSize", pageSize);
-    console.log("pageTotal", pageTotal);
-    console.log("resultCount", resultCount);
+    // console.log("page", page);
+    // console.log("pageSize", pageSize);
+    // console.log("pageTotal", pageTotal);
+    // console.log("resultCount", resultCount);
 
-    if (resultCount) {
+    const determineFormat = (): JSX.Element => {
+        switch (props.displayFormat) {
+            case "navigation":
+                return (
+                    <NavigationPagination
+                        page={page}
+                        pageTotal={pageTotal}
+                        buttonAlignment={props.buttonAlignment}
+                        resultCountCaption={resultCountCaption}
+                        resultCountCaptionAlignment={props.resultCountCaptionAlignment}
+                        pageDisplay={pageDisplay}
+                        setPage={setPage}
+                    />
+                );
+            case "perPage":
+                return (
+                    <PerPagePagination
+                        page={page}
+                        pageTotal={pageTotal}
+                        buttonAlignment={props.buttonAlignment}
+                        resultCountCaption={resultCountCaption}
+                        resultCountCaptionAlignment={props.resultCountCaptionAlignment}
+                        includeNavs={props.includeNavs}
+                        maxPages={maxPages}
+                        setPage={setPage}
+                    />
+                );
+            default:
+                return <React.Fragment />;
+        }
+    };
+
+    // console.log("format", determineFormat());
+
+    if (resultCount > 0) {
         return (
             <div className={props.class ? "widget-pagination " + props.class : "widget-pagination"}>
-                <div>{resultCountCaption}</div>
-                <button
-                    type="button"
-                    className="btn mx-button"
-                    title="First Page"
-                    aria-label="First Page"
-                    data-disabled="false"
-                    data-dashlane-label="true"
-                    data-form-type="other"
-                    onClick={() => {
-                        if (page > 1) {
-                            console.log("first page");
-                            setPage(1);
-                        }
-                    }}
-                >
-                    <span className="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
-                </button>
-                <button
-                    type="button"
-                    className="btn mx-button"
-                    title="Previous Page"
-                    aria-label="Previous Page"
-                    data-disabled="false"
-                    data-dashlane-label="true"
-                    data-form-type="other"
-                    onClick={() => {
-                        if (page > 1) {
-                            console.log("previous page");
-                            setPage(page - 1);
-                        }
-                    }}
-                >
-                    <span className="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
-                </button>
-                <div>
-                    Page {page} of {pageTotal}
-                </div>
-                <button
-                    type="button"
-                    className="btn mx-button"
-                    title="Next Page"
-                    aria-label="Next Page"
-                    data-disabled="false"
-                    data-dashlane-label="true"
-                    data-form-type="action,next"
-                    onClick={() => {
-                        if (page < pageTotal) {
-                            console.log("next page");
-                            setPage(page + 1);
-                        }
-                    }}
-                >
-                    <span className="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
-                </button>
-                <button
-                    type="button"
-                    className="btn mx-button"
-                    title="Last Page"
-                    aria-label="Last Page"
-                    data-disabled="false"
-                    data-dashlane-label="true"
-                    data-form-type="other"
-                    onClick={() => {
-                        if (page < pageTotal) {
-                            console.log("last page");
-                            setPage(pageTotal);
-                        }
-                    }}
-                >
-                    <span className="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-                </button>
+                {determineFormat()}
             </div>
         );
     } else {
