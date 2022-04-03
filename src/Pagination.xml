@@ -42,7 +42,7 @@
             </property>
         </propertyGroup>
         <propertyGroup caption="Navigation Settings">
-            <property key="pageDisplay" type="expression" defaultValue="''">
+            <property key="pageDisplay" type="expression" defaultValue="empty">
                 <caption>Page Display</caption>
                 <description></description>
                 <returnType type="String" />
@@ -53,7 +53,7 @@
                 <caption>Include Navigations?</caption>
                 <description>When Yes, shows the Previous and Next buttons on the ends of the pages.</description>
             </property>
-            <property key="maxPages" type="expression" defaultValue="4" required="true">
+            <property key="maxPages" type="expression" defaultValue="3" required="true">
                 <caption>Max Pages</caption>
                 <description></description>
                 <returnType type="Integer" />

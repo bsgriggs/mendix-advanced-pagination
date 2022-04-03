@@ -21,14 +21,19 @@ const Pagination = (props: PaginationContainerProps) => {
             : 0;
     const pageTotal = resultCount > 0 ? Math.ceil(resultCount / pageSize) : 1;
     const resultCountCaption =
-        props.resultCountCaption.status === ValueStatus.Available
+        props.resultCountCaption.status === ValueStatus.Available && props.resultCountCaption.value
             ? props.resultCountCaption.value
             : resultCount === 1
             ? "1 result"
             : resultCount + " results";
     const pageDisplay =
-        props.pageDisplay.status === ValueStatus.Available ? props.pageDisplay.value : `Page ${page} of ${pageTotal}`;
-    const maxPages = props.maxPages.status === ValueStatus.Available ? parseFloat(props.maxPages.value.toFixed(0)) : 5;
+        props.pageDisplay.status === ValueStatus.Available && props.pageDisplay.value
+            ? props.pageDisplay.value
+            : `Page ${page} of ${pageTotal}`;
+    const maxPages =
+        props.maxPages.status === ValueStatus.Available && props.maxPages.value
+            ? parseFloat(props.maxPages.value.toFixed(0))
+            : 3;
 
     const setPage = (newPage: number): void => {
         props.page.setValue(Big(newPage));

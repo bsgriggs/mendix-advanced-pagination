@@ -40,36 +40,36 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
     `;
     console.log("PerPagePaginationContainer", PerPagePaginationContainer);
 
-    const createPageNavigations = (): Array<JSX.Element> => {
-        let minPage;
-        if (props.page <= props.maxPages) {
-            //close to 1
-            minPage = 1;
-        } else if (props.page >= props.pageTotal - props.maxPages) {
-            //clsoe to end
-            minPage = props.pageTotal - props.maxPages * 2;
+    let minPage: number;
+    if (props.page <= props.maxPages) {
+        //close to 1
+        minPage = 1;
+    } else if (props.page >= props.pageTotal - props.maxPages) {
+        //clsoe to end
+        minPage = props.pageTotal - props.maxPages * 2;
+    } else {
+        //set so maxPages are below the active button
+        minPage = props.page - props.maxPages;
+    }
+    let maxPage: number;
+    if (props.page <= props.maxPages) {
+        //close to 1
+        const e = props.maxPages * 2;
+        if (props.pageTotal > e) {
+            //total pages are more than the buttons to generate
+            maxPage = e;
         } else {
-            //set so maxPages are below the active button
-            minPage = props.page - props.maxPages;
-        }
-        let maxPage;
-        if (props.page <= props.maxPages) {
-            //close to 1
-            const e = props.maxPages * 2;
-            if (props.pageTotal > e) {
-                //total pages are more than the buttons to generate
-                maxPage = e;
-            } else {
-                maxPage = props.pageTotal;
-            }
-        } else if (props.page >= props.pageTotal - props.maxPages) {
-            //close to end
             maxPage = props.pageTotal;
-        } else {
-            //set so maxPages are above the active button
-            maxPage = props.page + props.maxPages;
         }
+    } else if (props.page >= props.pageTotal - props.maxPages) {
+        //close to end
+        maxPage = props.pageTotal;
+    } else {
+        //set so maxPages are above the active button
+        maxPage = props.page + props.maxPages;
+    }
 
+    const createPageNavigations = (): Array<JSX.Element> => {
         props.page > props.pageTotal - props.maxPages ? props.pageTotal : props.page + props.maxPages;
         console.log("minPage", minPage);
         console.log("maxPage", maxPage);
@@ -99,6 +99,24 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                 <span className="mx-text">{props.resultCountCaption}</span>
             )}
             {props.includeNavs && (
+                <button
+                    className="btn mx-button "
+                    title="Previous Page"
+                    aria-label="Previous Page"
+                    data-disabled="false"
+                    data-dashlane-label="true"
+                    data-form-type="other"
+                    onClick={() => {
+                        if (props.page > 1) {
+                            console.log("previous page");
+                            props.setPage(props.page - 1);
+                        }
+                    }}
+                >
+                    <span className="glyphicon glyphicon-triangle-left"></span>
+                </button>
+            )}
+            {props.includeNavs && minPage !== 1 && (
                 <React.Fragment>
                     <button
                         className="btn mx-button "
@@ -120,7 +138,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                 </React.Fragment>
             )}
             {createPageNavigations().map(element => element)}
-            {props.includeNavs && (
+            {props.includeNavs && maxPage !== props.pageTotal && (
                 <React.Fragment>
                     <span className="mx-text">...</span>
                     <button
@@ -140,6 +158,24 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                         {props.pageTotal}
                     </button>
                 </React.Fragment>
+            )}
+            {props.includeNavs && (
+                <button
+                    className="btn mx-button"
+                    title="Next Page"
+                    aria-label="Next Page"
+                    data-disabled="false"
+                    data-dashlane-label="true"
+                    data-form-type="action,next"
+                    onClick={() => {
+                        if (props.page < props.pageTotal) {
+                            console.log("next page");
+                            props.setPage(props.page + 1);
+                        }
+                    }}
+                >
+                    <span className="glyphicon glyphicon-triangle-right"></span>
+                </button>
             )}
             {props.resultCountCaptionAlignment === "end" && <span className="mx-text">{props.resultCountCaption}</span>}
         </PerPagePaginationContainer>

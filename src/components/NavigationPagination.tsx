@@ -45,7 +45,7 @@ const NavigationPagination = (props: NavigationPaginationProps) => {
                 <span className="mx-text">{props.resultCountCaption}</span>
             )}
             <button
-                className="btn mx-button glyphicon glyphicon-step-backward"
+                className="btn mx-button"
                 title="First Page"
                 aria-label="First Page"
                 data-disabled="false"
@@ -57,9 +57,11 @@ const NavigationPagination = (props: NavigationPaginationProps) => {
                         props.setPage(1);
                     }
                 }}
-            ></button>
+            >
+                <span className="glyphicon glyphicon-step-backward"></span>
+            </button>
             <button
-                className="btn mx-button glyphicon glyphicon-triangle-left"
+                className="btn mx-button"
                 title="Previous Page"
                 aria-label="Previous Page"
                 data-disabled="false"
@@ -71,10 +73,12 @@ const NavigationPagination = (props: NavigationPaginationProps) => {
                         props.setPage(props.page - 1);
                     }
                 }}
-            ></button>
+            >
+                <span className="glyphicon glyphicon-triangle-left"></span>
+            </button>
             <span className="mx-text">{props.pageDisplay}</span>
             <button
-                className="btn mx-button glyphicon glyphicon-triangle-right"
+                className="btn mx-button"
                 title="Next Page"
                 aria-label="Next Page"
                 data-disabled="false"
@@ -86,9 +90,11 @@ const NavigationPagination = (props: NavigationPaginationProps) => {
                         props.setPage(props.page + 1);
                     }
                 }}
-            ></button>
+            >
+                <span className="glyphicon glyphicon-triangle-right"></span>
+            </button>
             <button
-                className="btn mx-button glyphicon glyphicon-step-forward"
+                className="btn mx-button"
                 title="Last Page"
                 aria-label="Last Page"
                 data-disabled="false"
@@ -100,7 +106,9 @@ const NavigationPagination = (props: NavigationPaginationProps) => {
                         props.setPage(props.pageTotal);
                     }
                 }}
-            ></button>
+            >
+                <span className="glyphicon glyphicon-step-forward"></span>
+            </button>
             {props.resultCountCaptionAlignment === "end" && <span className="mx-text">{props.resultCountCaption}</span>}
         </NavigationPaginationContainer>
     );
