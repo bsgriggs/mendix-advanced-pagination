@@ -15,7 +15,7 @@ export type PerPagePaginationProps = {
 };
 
 const PerPagePagination = (props: PerPagePaginationProps) => {
-    console.log("PerPagePaginationProps", props);
+    // console.log("PerPagePaginationProps", props);
 
     const justifyDirection = (): string => {
         switch (props.buttonAlignment) {
@@ -30,7 +30,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
         }
     };
 
-    console.log("justifyDirection", justifyDirection());
+    // console.log("justifyDirection", justifyDirection());
 
     const PerPagePaginationContainer = styled.div`
         display: flex;
@@ -38,7 +38,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
         justify-content: ${justifyDirection()};
         gap: 0.5em;
     `;
-    console.log("PerPagePaginationContainer", PerPagePaginationContainer);
+    // console.log("PerPagePaginationContainer", PerPagePaginationContainer);
 
     let minPage: number;
     if (props.page <= props.maxPages) {
@@ -71,8 +71,8 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
 
     const createPageNavigations = (): Array<JSX.Element> => {
         props.page > props.pageTotal - props.maxPages ? props.pageTotal : props.page + props.maxPages;
-        console.log("minPage", minPage);
-        console.log("maxPage", maxPage);
+        // console.log("minPage", minPage);
+        // console.log("maxPage", maxPage);
 
         let returnButtons: JSX.Element[] = [];
         for (let i = minPage; i <= maxPage; i++) {
@@ -108,7 +108,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                     data-form-type="other"
                     onClick={() => {
                         if (props.page > 1) {
-                            console.log("previous page");
+                            // console.log("previous page");
                             props.setPage(props.page - 1);
                         }
                     }}
@@ -127,7 +127,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                         data-form-type="other"
                         onClick={() => {
                             if (props.page > 1) {
-                                console.log("first page");
+                                // console.log("first page");
                                 props.setPage(1);
                             }
                         }}
@@ -150,7 +150,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                         data-form-type="other"
                         onClick={() => {
                             if (props.page < props.pageTotal) {
-                                console.log("last page");
+                                // console.log("last page");
                                 props.setPage(props.pageTotal);
                             }
                         }}
@@ -169,7 +169,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                     data-form-type="action,next"
                     onClick={() => {
                         if (props.page < props.pageTotal) {
-                            console.log("next page");
+                            // console.log("next page");
                             props.setPage(props.page + 1);
                         }
                     }}
