@@ -116,7 +116,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                     <span className="glyphicon glyphicon-triangle-left"></span>
                 </button>
             )}
-            {props.includeNavs && minPage !== 1 && (
+            {minPage !== 1 && (
                 <React.Fragment>
                     <button
                         className="btn mx-button "
@@ -138,7 +138,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                 </React.Fragment>
             )}
             {createPageNavigations().map(element => element)}
-            {props.includeNavs && maxPage !== props.pageTotal && (
+            {maxPage !== props.pageTotal && (
                 <React.Fragment>
                     <span className="mx-text">...</span>
                     <button
