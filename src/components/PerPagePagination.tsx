@@ -1,6 +1,6 @@
 import React, { createElement } from "react";
 import { ButtonAlignmentEnum, ResultCountCaptionAlignmentEnum } from "../../typings/PaginationProps";
-import styled from "@emotion/styled";
+import { style } from "typestyle";
 
 export type PerPagePaginationProps = {
     page: number;
@@ -32,12 +32,12 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
 
     // console.log("justifyDirection", justifyDirection());
 
-    const PerPagePaginationContainer = styled.div`
-        display: flex;
-        align-items: center;
-        justify-content: ${justifyDirection()};
-        gap: 0.5em;
-    `;
+    const PerPagePaginationContainer = style({
+        display: "flex",
+        alignItems: "center",
+        justifyContent: `${justifyDirection()}`,
+        gap: "0.5em",
+    });
     // console.log("PerPagePaginationContainer", PerPagePaginationContainer);
 
     let minPage: number;
@@ -94,7 +94,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
     };
 
     return (
-        <PerPagePaginationContainer>
+        <div className={PerPagePaginationContainer}>
             {props.resultCountCaptionAlignment === "start" && (
                 <span className="mx-text">{props.resultCountCaption}</span>
             )}
@@ -178,7 +178,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                 </button>
             )}
             {props.resultCountCaptionAlignment === "end" && <span className="mx-text">{props.resultCountCaption}</span>}
-        </PerPagePaginationContainer>
+        </div>
     );
 };
 

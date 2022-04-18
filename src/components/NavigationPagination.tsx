@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { ButtonAlignmentEnum, ResultCountCaptionAlignmentEnum } from "../../typings/PaginationProps";
-import styled from "@emotion/styled";
+import { style } from "typestyle";
 
 export type NavigationPaginationProps = {
     page: number;
@@ -31,16 +31,16 @@ const NavigationPagination = (props: NavigationPaginationProps) => {
 
     // console.log("justifyDirection", justifyDirection());
 
-    const NavigationPaginationContainer = styled.div`
-        display: flex;
-        align-items: center;
-        justify-content: ${justifyDirection()};
-        gap: 0.5em;
-    `;
+    const NavigationPaginationContainer = style({
+        display: "flex",
+        alignItems: "center",
+        justifyContent: `${justifyDirection()}`,
+        gap: "0.5em"
+    });
 
     // console.log("NavigationPaginationContainer", NavigationPaginationContainer);
     return (
-        <NavigationPaginationContainer>
+        <div className={NavigationPaginationContainer}>
             {props.resultCountCaptionAlignment === "start" && (
                 <span className="mx-text">{props.resultCountCaption}</span>
             )}
@@ -110,7 +110,7 @@ const NavigationPagination = (props: NavigationPaginationProps) => {
                 <span className="glyphicon glyphicon-step-forward"></span>
             </button>
             {props.resultCountCaptionAlignment === "end" && <span className="mx-text">{props.resultCountCaption}</span>}
-        </NavigationPaginationContainer>
+        </div>
     );
 };
 
