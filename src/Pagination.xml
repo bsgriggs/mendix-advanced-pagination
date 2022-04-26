@@ -17,7 +17,7 @@
                 <caption>Refresh Action</caption>
                 <description>Action to refresh the datasource</description>
             </property>
-            <property key="resultCountCaption" type="expression" defaultValue="10">
+            <property key="resultCountCaption" type="expression" defaultValue="empty">
                 <caption>Total Caption</caption>
                 <description></description>
                 <returnType type="String" />
