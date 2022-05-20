@@ -5,6 +5,7 @@
  */
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
+import { Big } from "big.js";
 
 export type DisplayFormatEnum = "navigation" | "perPage";
 
@@ -24,15 +25,17 @@ export interface PaginationContainerProps {
     buttonAlignment: ButtonAlignmentEnum;
     pageDisplay: DynamicValue<string>;
     includeNavs: boolean;
-    maxPages: DynamicValue<BigJs.Big>;
-    page: EditableValue<BigJs.Big>;
-    pageSize: DynamicValue<BigJs.Big>;
-    resultCount: EditableValue<BigJs.Big>;
+    maxPages: DynamicValue<Big>;
+    page: EditableValue<Big>;
+    pageSize: DynamicValue<Big>;
+    resultCount: EditableValue<Big>;
 }
 
 export interface PaginationPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     displayFormat: DisplayFormatEnum;
     refreshAction: {} | null;
     resultCountCaption: string;

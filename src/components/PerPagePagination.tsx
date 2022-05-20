@@ -40,39 +40,20 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
     });
     // console.log("PerPagePaginationContainer", PerPagePaginationContainer);
 
-    let minPage: number;
-    if (props.page <= props.maxPages) {
-        //close to 1
+    let minPage: number = props.page - props.maxPages;
+    if (minPage < 1) {
         minPage = 1;
-    } else if (props.page >= props.pageTotal - props.maxPages) {
-        //clsoe to end
-        minPage = props.pageTotal - props.maxPages * 2;
-    } else {
-        //set so maxPages are below the active button
-        minPage = props.page - props.maxPages;
     }
-    let maxPage: number;
-    if (props.page <= props.maxPages) {
-        //close to 1
-        const e = props.maxPages * 2;
-        if (props.pageTotal > e) {
-            //total pages are more than the buttons to generate
-            maxPage = e;
-        } else {
-            maxPage = props.pageTotal;
-        }
-    } else if (props.page >= props.pageTotal - props.maxPages) {
-        //close to end
+
+    let maxPage: number = props.page + props.maxPages;
+    if (maxPage > props.pageTotal) {
         maxPage = props.pageTotal;
-    } else {
-        //set so maxPages are above the active button
-        maxPage = props.page + props.maxPages;
     }
 
     const createPageNavigations = (): Array<JSX.Element> => {
-        props.page > props.pageTotal - props.maxPages ? props.pageTotal : props.page + props.maxPages;
-        // console.log("minPage", minPage);
-        // console.log("maxPage", maxPage);
+        console.log("minPage", minPage);
+        console.log("maxPage", maxPage);
+        console.log("props", props);
 
         let returnButtons: JSX.Element[] = [];
         for (let i = minPage; i <= maxPage; i++) {
