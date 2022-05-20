@@ -47,9 +47,6 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
     }
 
     const createPageNavigations = (): Array<JSX.Element> => {
-        console.log("minPage", minPage);
-        console.log("maxPage", maxPage);
-        console.log("props", props);
 
         let returnButtons: JSX.Element[] = [];
         for (let i = minPage; i <= maxPage; i++) {
@@ -112,7 +109,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                     <span className="mx-text">...</span>
                 </React.Fragment>
             )}
-            {createPageNavigations().map(element => element)}
+            {createPageNavigations()}
             {maxPage !== props.pageTotal && (
                 <React.Fragment>
                     <span className="mx-text">...</span>
