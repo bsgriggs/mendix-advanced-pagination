@@ -8,7 +8,7 @@ import Big from "big.js";
 import "./ui/Pagination.css";
 
 const Pagination = (props: PaginationContainerProps) => {
-    // console.log("main props", props);
+
     const page =
         props.page.status === ValueStatus.Available && props.page.value ? parseFloat(props.page.value.toFixed(0)) : 1;
     const pageSize =
@@ -39,11 +39,6 @@ const Pagination = (props: PaginationContainerProps) => {
         props.page.setValue(Big(newPage));
         props.refreshAction?.execute();
     };
-
-    // console.log("page", page);
-    // console.log("pageSize", pageSize);
-    // console.log("pageTotal", pageTotal);
-    // console.log("resultCount", resultCount);
 
     const determineFormat = (): JSX.Element => {
         switch (props.displayFormat) {
@@ -76,8 +71,6 @@ const Pagination = (props: PaginationContainerProps) => {
                 return <React.Fragment />;
         }
     };
-
-    // console.log("format", determineFormat());
 
     if (resultCount > 0) {
         return (
