@@ -24,8 +24,8 @@ export interface PaginationContainerProps {
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     buttonAlignment: ButtonAlignmentEnum;
     pageDisplay: DynamicValue<string>;
-    includeNavs: boolean;
-    maxPages: DynamicValue<Big>;
+    includeArrows: boolean;
+    pageOffset: DynamicValue<Big>;
     page: EditableValue<Big>;
     pageSize: DynamicValue<Big>;
     resultCount: EditableValue<Big>;
@@ -42,8 +42,8 @@ export interface PaginationPreviewProps {
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     buttonAlignment: ButtonAlignmentEnum;
     pageDisplay: string;
-    includeNavs: boolean;
-    maxPages: string;
+    includeArrows: boolean;
+    pageOffset: string;
     page: string;
     pageSize: string;
     resultCount: string;

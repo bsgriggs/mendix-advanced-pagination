@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id=".pagination.Pagination" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Pagination</name>
-    <description>My widget description</description>
+    <description>Encapsulates math to handling custom grid pagination.</description>
     <icon />
     <properties>
         <propertyGroup caption="General">
@@ -49,15 +49,15 @@
             </property>
         </propertyGroup>
         <propertyGroup caption="Per Page Settings">
-            <property key="includeNavs" type="boolean" defaultValue="true">
-                <caption>Include Navigations?</caption>
-                <description>When Yes, shows the Previous and Next buttons on the ends of the pages.</description>
+            <property key="includeArrows" type="boolean" defaultValue="true">
+                <caption>Include Arrows?</caption>
+                <description>When Yes, shows the Previous and Next arrow buttons on the ends of the pages.</description>
             </property>
-            <property key="maxPages" type="expression" defaultValue="3" required="true">
-                <caption>Max Pages</caption>
-                <description></description>
+            <property key="pageOffset" type="expression" defaultValue="1" required="true">
+                <caption>Page Offset</caption>
+                <description>Number of pages off of the current to display. (e.g. Page Offset = 2, current page = 5 ... pages 3, 4, 5, 6, 7 will be shown)</description>
                 <returnType type="Integer" />
-            </property>
+            </property> 
         </propertyGroup>
         <propertyGroup caption="Attributes">
             <property key="page" type="attribute" required="true">

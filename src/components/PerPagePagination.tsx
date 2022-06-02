@@ -1,6 +1,7 @@
 import React, { createElement } from "react";
 import { ButtonAlignmentEnum, ResultCountCaptionAlignmentEnum } from "../../typings/PaginationProps";
 import { style } from "typestyle";
+import NavButton from "./NavButton";
 
 export type PerPagePaginationProps = {
     page: number;
@@ -8,14 +9,13 @@ export type PerPagePaginationProps = {
     buttonAlignment: ButtonAlignmentEnum;
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     resultCountCaption: string;
-    includeNavs: boolean;
-    maxPages: number;
+    includeArrows: boolean;
+    pageOffset: number;
 
     setPage: (newPage: number) => void;
 };
 
 const PerPagePagination = (props: PerPagePaginationProps) => {
-
     const justifyDirection = (): string => {
         switch (props.buttonAlignment) {
             case "start":
@@ -33,35 +33,49 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
         display: "flex",
         alignItems: "center",
         justifyContent: `${justifyDirection()}`,
-        gap: "0.5em",
+        flexWrap: "wrap",
+        gap: "0.5em"
     });
 
-    let minPage: number = props.page - props.maxPages;
+    // Default values
+    let minPage: number = props.page - props.pageOffset;
+    const middlePage = Math.ceil(props.pageTotal / 2);
+    let maxPage: number = props.page + props.pageOffset;
+
+    // current page is close to start
     if (minPage < 1) {
         minPage = 1;
     }
-
-    let maxPage: number = props.page + props.maxPages;
+    // current page is close to end
     if (maxPage > props.pageTotal) {
         maxPage = props.pageTotal;
     }
 
-    const createPageNavigations = (): Array<JSX.Element> => {
+    // Being on the middle page would show all buttons
+    if (middlePage - props.pageOffset <= 2 && middlePage + props.pageOffset >= props.pageTotal - 1) {
+        minPage = 1;
+        maxPage = props.pageTotal; 
+    } else if (props.page <= props.pageOffset + 1) { // show more pages at the start
+        maxPage = props.pageOffset * 2 + 2;
+    } else if (props.page >= props.pageTotal - props.pageOffset) { // show more pages at the end
+        minPage = props.pageTotal - (props.pageOffset * 2) - 1;
+    }
 
+    // console.log("props",props);
+    // console.log("minPage",minPage);
+    // console.log("middlePage",middlePage);
+    // console.log("maxPage",maxPage);
+
+    const createPageNavigations = (): Array<JSX.Element> => {
         let returnButtons: JSX.Element[] = [];
         for (let i = minPage; i <= maxPage; i++) {
             returnButtons.push(
-                <button
-                    className={i === props.page ? "btn mx-button active" : "btn mx-button"}
-                    title={`Page ${i}`}
-                    aria-label={`Page ${i}`}
-                    data-disabled="false"
-                    data-dashlane-label="true"
-                    data-form-type="other"
+                <NavButton 
+                    active={i=== props.page}
+                    Title={`Page ${i}`}
                     onClick={() => props.setPage(i)}
-                >
-                    {i}
-                </button>
+                    btnCaption={i.toString()}
+                />
             );
         }
         return returnButtons;
@@ -72,80 +86,58 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
             {props.resultCountCaptionAlignment === "start" && (
                 <span className="mx-text">{props.resultCountCaption}</span>
             )}
-            {props.includeNavs && (
-                <button
-                    className="btn mx-button "
-                    title="Previous Page"
-                    aria-label="Previous Page"
-                    data-disabled="false"
-                    data-dashlane-label="true"
-                    data-form-type="other"
+            {props.includeArrows && (
+                <NavButton
+                    Title="Previous Page"
                     onClick={() => {
                         if (props.page > 1) {
                             props.setPage(props.page - 1);
                         }
                     }}
-                >
-                    <span className="glyphicon glyphicon-triangle-left"></span>
-                </button>
+                    GlyphiconClass="glyphicon-triangle-left"
+                />
             )}
             {minPage !== 1 && (
                 <React.Fragment>
-                    <button
-                        className="btn mx-button "
-                        title="First Page"
-                        aria-label="First Page"
-                        data-disabled="false"
-                        data-dashlane-label="true"
-                        data-form-type="other"
+                    <NavButton
+                        Title="First Page"
+                        btnCaption="1"
                         onClick={() => {
                             if (props.page > 1) {
                                 props.setPage(1);
                             }
                         }}
-                    >
-                        1
-                    </button>
-                    <span className="mx-text">...</span>
+                    />
+                    {minPage !== 2 && <span className="mx-text">...</span>}
                 </React.Fragment>
             )}
             {createPageNavigations()}
             {maxPage !== props.pageTotal && (
                 <React.Fragment>
-                    <span className="mx-text">...</span>
-                    <button
-                        className="btn mx-button"
-                        title="Last Page"
-                        aria-label="Last Page"
-                        data-disabled="false"
-                        data-dashlane-label="true"
-                        data-form-type="other"
+                    {maxPage !== props.pageTotal - 1 && (
+                        <span className="mx-text">...</span>
+                    )}
+                    <NavButton 
+                        Title="Last Page"
                         onClick={() => {
                             if (props.page < props.pageTotal) {
                                 props.setPage(props.pageTotal);
                             }
                         }}
-                    >
-                        {props.pageTotal}
-                    </button>
+                        btnCaption={props.pageTotal.toString()}
+                    />
                 </React.Fragment>
             )}
-            {props.includeNavs && (
-                <button
-                    className="btn mx-button"
-                    title="Next Page"
-                    aria-label="Next Page"
-                    data-disabled="false"
-                    data-dashlane-label="true"
-                    data-form-type="action,next"
+            {props.includeArrows && (
+                <NavButton 
+                    Title="Next Page"
                     onClick={() => {
                         if (props.page < props.pageTotal) {
                             props.setPage(props.page + 1);
                         }
                     }}
-                >
-                    <span className="glyphicon glyphicon-triangle-right"></span>
-                </button>
+                    GlyphiconClass="glyphicon-triangle-right"
+                />
             )}
             {props.resultCountCaptionAlignment === "end" && <span className="mx-text">{props.resultCountCaption}</span>}
         </div>

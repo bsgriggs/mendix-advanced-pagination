@@ -1,6 +1,7 @@
 import { createElement } from "react";
 import { ButtonAlignmentEnum, ResultCountCaptionAlignmentEnum } from "../../typings/PaginationProps";
 import { style } from "typestyle";
+import NavButton from "./NavButton";
 
 export type NavigationPaginationProps = {
     page: number;
@@ -14,7 +15,6 @@ export type NavigationPaginationProps = {
 };
 
 const NavigationPagination = (props: NavigationPaginationProps) => {
-
     const justifyDirection = (): string => {
         switch (props.buttonAlignment) {
             case "start":
@@ -32,6 +32,7 @@ const NavigationPagination = (props: NavigationPaginationProps) => {
         display: "flex",
         alignItems: "center",
         justifyContent: `${justifyDirection()}`,
+        flexWrap: "wrap",
         gap: "0.5em"
     });
 
@@ -40,67 +41,43 @@ const NavigationPagination = (props: NavigationPaginationProps) => {
             {props.resultCountCaptionAlignment === "start" && (
                 <span className="mx-text">{props.resultCountCaption}</span>
             )}
-            <button
-                className="btn mx-button"
-                title="First Page"
-                aria-label="First Page"
-                data-disabled="false"
-                data-dashlane-label="true"
-                data-form-type="other"
+            <NavButton
+                Title="First Page"
                 onClick={() => {
                     if (props.page > 1) {
                         props.setPage(1);
                     }
                 }}
-            >
-                <span className="glyphicon glyphicon-step-backward"></span>
-            </button>
-            <button
-                className="btn mx-button"
-                title="Previous Page"
-                aria-label="Previous Page"
-                data-disabled="false"
-                data-dashlane-label="true"
-                data-form-type="other"
+                GlyphiconClass="glyphicon-step-backward"
+            />
+            <NavButton
+                Title="Previous Page"
                 onClick={() => {
                     if (props.page > 1) {
                         props.setPage(props.page - 1);
                     }
                 }}
-            >
-                <span className="glyphicon glyphicon-triangle-left"></span>
-            </button>
+                GlyphiconClass="glyphicon-triangle-left"
+            />
             <span className="mx-text">{props.pageDisplay}</span>
-            <button
-                className="btn mx-button"
-                title="Next Page"
-                aria-label="Next Page"
-                data-disabled="false"
-                data-dashlane-label="true"
-                data-form-type="action,next"
+            <NavButton 
+                Title="Next Page"
                 onClick={() => {
                     if (props.page < props.pageTotal) {
                         props.setPage(props.page + 1);
                     }
                 }}
-            >
-                <span className="glyphicon glyphicon-triangle-right"></span>
-            </button>
-            <button
-                className="btn mx-button"
-                title="Last Page"
-                aria-label="Last Page"
-                data-disabled="false"
-                data-dashlane-label="true"
-                data-form-type="other"
+                GlyphiconClass="glyphicon-triangle-right"
+            />
+            <NavButton 
+                Title="Last Page"
                 onClick={() => {
                     if (props.page < props.pageTotal) {
                         props.setPage(props.pageTotal);
                     }
                 }}
-            >
-                <span className="glyphicon glyphicon-step-forward"></span>
-            </button>
+                GlyphiconClass="glyphicon-step-forward"
+            />
             {props.resultCountCaptionAlignment === "end" && <span className="mx-text">{props.resultCountCaption}</span>}
         </div>
     );

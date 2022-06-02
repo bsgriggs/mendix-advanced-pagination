@@ -30,10 +30,10 @@ const Pagination = (props: PaginationContainerProps) => {
         props.pageDisplay.status === ValueStatus.Available && props.pageDisplay.value
             ? props.pageDisplay.value
             : `Page ${page} of ${pageTotal}`;
-    const maxPages =
-        props.maxPages.status === ValueStatus.Available && props.maxPages.value
-            ? parseFloat(props.maxPages.value.toFixed(0))
-            : 3;
+    const pageOffset =
+        props.pageOffset.status === ValueStatus.Available && props.pageOffset.value
+            ? parseFloat(props.pageOffset.value.toFixed(0))
+            : 1;
 
     const setPage = (newPage: number): void => {
         props.page.setValue(Big(newPage));
@@ -62,8 +62,8 @@ const Pagination = (props: PaginationContainerProps) => {
                         buttonAlignment={props.buttonAlignment}
                         resultCountCaption={resultCountCaption}
                         resultCountCaptionAlignment={props.resultCountCaptionAlignment}
-                        includeNavs={props.includeNavs}
-                        maxPages={maxPages}
+                        includeArrows={props.includeArrows}
+                        pageOffset={pageOffset}
                         setPage={setPage}
                     />
                 );
