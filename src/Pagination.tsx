@@ -1,4 +1,4 @@
-import React, { createElement } from "react";
+import { createElement, Fragment } from "react";
 import { ValueStatus } from "mendix";
 import { PaginationContainerProps } from "../typings/PaginationProps";
 import NavigationPagination from "./components/NavigationPagination";
@@ -8,16 +8,12 @@ import Big from "big.js";
 import "./ui/Pagination.css";
 
 const Pagination = (props: PaginationContainerProps) => {
-
-    const page =
-        props.page.status === ValueStatus.Available && props.page.value ? parseFloat(props.page.value.toFixed(0)) : 1;
+    const page = props.page.status === ValueStatus.Available && props.page.value ? Number(props.page.value) : 1;
     const pageSize =
-        props.pageSize.status === ValueStatus.Available && props.pageSize.value
-            ? parseFloat(props.pageSize.value.toFixed(0))
-            : 10;
+        props.pageSize.status === ValueStatus.Available && props.pageSize.value ? Number(props.pageSize.value) : 10;
     const resultCount =
         props.resultCount.status === ValueStatus.Available && props.resultCount.value
-            ? parseFloat(props.resultCount.value.toFixed(0))
+            ? Number(props.resultCount.value)
             : 0;
     const pageTotal = resultCount > 0 ? Math.ceil(resultCount / pageSize) : 1;
     const resultCountCaption =
@@ -32,7 +28,7 @@ const Pagination = (props: PaginationContainerProps) => {
             : `Page ${page} of ${pageTotal}`;
     const pageOffset =
         props.pageOffset.status === ValueStatus.Available && props.pageOffset.value
-            ? parseFloat(props.pageOffset.value.toFixed(0))
+            ? Number(props.pageOffset.value)
             : 1;
 
     const setPage = (newPage: number): void => {
@@ -52,6 +48,8 @@ const Pagination = (props: PaginationContainerProps) => {
                         resultCountCaptionAlignment={props.resultCountCaptionAlignment}
                         pageDisplay={pageDisplay}
                         setPage={setPage}
+                        renderMode={props.renderMode}
+                        buttonStyle={props.buttonStyle}
                     />
                 );
             case "perPage":
@@ -64,11 +62,14 @@ const Pagination = (props: PaginationContainerProps) => {
                         resultCountCaptionAlignment={props.resultCountCaptionAlignment}
                         includeArrows={props.includeArrows}
                         pageOffset={pageOffset}
+                        pageBreak={props.pageBreak}
                         setPage={setPage}
+                        renderMode={props.renderMode}
+                        buttonStyle={props.buttonStyle}
                     />
                 );
             default:
-                return <React.Fragment />;
+                return <Fragment />;
         }
     };
 

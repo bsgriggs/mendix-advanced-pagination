@@ -1,6 +1,13 @@
-import React, { createElement } from "react";
-import { ButtonAlignmentEnum, ResultCountCaptionAlignmentEnum } from "../../typings/PaginationProps";
+import { createElement, Fragment } from "react";
+import {
+    ButtonAlignmentEnum,
+    ResultCountCaptionAlignmentEnum,
+    PageBreakEnum,
+    RenderModeEnum,
+    ButtonStyleEnum
+} from "../../typings/PaginationProps";
 import { style } from "typestyle";
+import PageBreak from "./PageBreak";
 import NavButton from "./NavButton";
 
 export type PerPagePaginationProps = {
@@ -11,6 +18,9 @@ export type PerPagePaginationProps = {
     resultCountCaption: string;
     includeArrows: boolean;
     pageOffset: number;
+    pageBreak: PageBreakEnum;
+    renderMode: RenderModeEnum;
+    buttonStyle: ButtonStyleEnum;
 
     setPage: (newPage: number) => void;
 };
@@ -54,11 +64,13 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
     // Being on the middle page would show all buttons
     if (middlePage - props.pageOffset <= 2 && middlePage + props.pageOffset >= props.pageTotal - 1) {
         minPage = 1;
-        maxPage = props.pageTotal; 
-    } else if (props.page <= props.pageOffset + 1) { // show more pages at the start
+        maxPage = props.pageTotal;
+    } else if (props.page <= props.pageOffset + 1) {
+        // show more pages at the start
         maxPage = props.pageOffset * 2 + 2;
-    } else if (props.page >= props.pageTotal - props.pageOffset) { // show more pages at the end
-        minPage = props.pageTotal - (props.pageOffset * 2) - 1;
+    } else if (props.page >= props.pageTotal - props.pageOffset) {
+        // show more pages at the end
+        minPage = props.pageTotal - props.pageOffset * 2 - 1;
     }
 
     // console.log("props",props);
@@ -70,11 +82,13 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
         let returnButtons: JSX.Element[] = [];
         for (let i = minPage; i <= maxPage; i++) {
             returnButtons.push(
-                <NavButton 
-                    active={i=== props.page}
+                <NavButton
+                    active={i === props.page}
                     Title={`Page ${i}`}
                     onClick={() => props.setPage(i)}
                     btnCaption={i.toString()}
+                    renderMode={props.renderMode}
+                    buttonStyle={props.buttonStyle}
                 />
             );
         }
@@ -94,11 +108,13 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                             props.setPage(props.page - 1);
                         }
                     }}
+                    renderMode={props.renderMode}
+                    buttonStyle={props.buttonStyle}
                     GlyphiconClass="glyphicon-triangle-left"
                 />
             )}
             {minPage !== 1 && (
-                <React.Fragment>
+                <Fragment>
                     <NavButton
                         Title="First Page"
                         btnCaption="1"
@@ -107,35 +123,39 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                                 props.setPage(1);
                             }
                         }}
+                        renderMode={props.renderMode}
+                        buttonStyle={props.buttonStyle}
                     />
-                    {minPage !== 2 && <span className="mx-text">...</span>}
-                </React.Fragment>
+                    {minPage !== 2 && <PageBreak mode={props.pageBreak} />}
+                </Fragment>
             )}
             {createPageNavigations()}
             {maxPage !== props.pageTotal && (
-                <React.Fragment>
-                    {maxPage !== props.pageTotal - 1 && (
-                        <span className="mx-text">...</span>
-                    )}
-                    <NavButton 
+                <Fragment>
+                    {maxPage !== props.pageTotal - 1 && <PageBreak mode={props.pageBreak} />}
+                    <NavButton
                         Title="Last Page"
                         onClick={() => {
                             if (props.page < props.pageTotal) {
                                 props.setPage(props.pageTotal);
                             }
                         }}
+                        renderMode={props.renderMode}
+                        buttonStyle={props.buttonStyle}
                         btnCaption={props.pageTotal.toString()}
                     />
-                </React.Fragment>
+                </Fragment>
             )}
             {props.includeArrows && (
-                <NavButton 
+                <NavButton
                     Title="Next Page"
                     onClick={() => {
                         if (props.page < props.pageTotal) {
                             props.setPage(props.page + 1);
                         }
                     }}
+                    renderMode={props.renderMode}
+                    buttonStyle={props.buttonStyle}
                     GlyphiconClass="glyphicon-triangle-right"
                 />
             )}

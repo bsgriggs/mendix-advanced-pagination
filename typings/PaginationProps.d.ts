@@ -13,19 +13,28 @@ export type ResultCountCaptionAlignmentEnum = "start" | "end" | "hide";
 
 export type ButtonAlignmentEnum = "start" | "middle" | "end";
 
+export type RenderModeEnum = "button" | "link";
+
+export type ButtonStyleEnum = "default" | "inverse" | "primary" | "info" | "success" | "warning" | "danger";
+
+export type PageBreakEnum = "ellipses" | "line" | "space" | "none";
+
 export interface PaginationContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
     displayFormat: DisplayFormatEnum;
-    refreshAction?: ActionValue;
     resultCountCaption: DynamicValue<string>;
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     buttonAlignment: ButtonAlignmentEnum;
+    renderMode: RenderModeEnum;
+    buttonStyle: ButtonStyleEnum;
+    refreshAction?: ActionValue;
     pageDisplay: DynamicValue<string>;
     includeArrows: boolean;
     pageOffset: DynamicValue<Big>;
+    pageBreak: PageBreakEnum;
     page: EditableValue<Big>;
     pageSize: DynamicValue<Big>;
     resultCount: EditableValue<Big>;
@@ -37,13 +46,16 @@ export interface PaginationPreviewProps {
     styleObject?: CSSProperties;
     readOnly: boolean;
     displayFormat: DisplayFormatEnum;
-    refreshAction: {} | null;
     resultCountCaption: string;
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     buttonAlignment: ButtonAlignmentEnum;
+    renderMode: RenderModeEnum;
+    buttonStyle: ButtonStyleEnum;
+    refreshAction: {} | null;
     pageDisplay: string;
     includeArrows: boolean;
     pageOffset: string;
+    pageBreak: PageBreakEnum;
     page: string;
     pageSize: string;
     resultCount: string;

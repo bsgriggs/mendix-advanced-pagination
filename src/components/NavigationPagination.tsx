@@ -1,5 +1,10 @@
 import { createElement } from "react";
-import { ButtonAlignmentEnum, ResultCountCaptionAlignmentEnum } from "../../typings/PaginationProps";
+import {
+    ButtonAlignmentEnum,
+    ButtonStyleEnum,
+    RenderModeEnum,
+    ResultCountCaptionAlignmentEnum
+} from "../../typings/PaginationProps";
 import { style } from "typestyle";
 import NavButton from "./NavButton";
 
@@ -10,6 +15,8 @@ export type NavigationPaginationProps = {
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     resultCountCaption: string;
     pageDisplay: string;
+    renderMode: RenderModeEnum;
+    buttonStyle: ButtonStyleEnum;
 
     setPage: (newPage: number) => void;
 };
@@ -48,6 +55,8 @@ const NavigationPagination = (props: NavigationPaginationProps) => {
                         props.setPage(1);
                     }
                 }}
+                renderMode={props.renderMode}
+                buttonStyle={props.buttonStyle}
                 GlyphiconClass="glyphicon-step-backward"
             />
             <NavButton
@@ -57,25 +66,31 @@ const NavigationPagination = (props: NavigationPaginationProps) => {
                         props.setPage(props.page - 1);
                     }
                 }}
+                renderMode={props.renderMode}
+                buttonStyle={props.buttonStyle}
                 GlyphiconClass="glyphicon-triangle-left"
             />
             <span className="mx-text">{props.pageDisplay}</span>
-            <NavButton 
+            <NavButton
                 Title="Next Page"
                 onClick={() => {
                     if (props.page < props.pageTotal) {
                         props.setPage(props.page + 1);
                     }
                 }}
+                renderMode={props.renderMode}
+                buttonStyle={props.buttonStyle}
                 GlyphiconClass="glyphicon-triangle-right"
             />
-            <NavButton 
+            <NavButton
                 Title="Last Page"
                 onClick={() => {
                     if (props.page < props.pageTotal) {
                         props.setPage(props.pageTotal);
                     }
                 }}
+                renderMode={props.renderMode}
+                buttonStyle={props.buttonStyle}
                 GlyphiconClass="glyphicon-step-forward"
             />
             {props.resultCountCaptionAlignment === "end" && <span className="mx-text">{props.resultCountCaption}</span>}
