@@ -126,13 +126,13 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                         renderMode={props.renderMode}
                         buttonStyle={props.buttonStyle}
                     />
-                    {minPage !== 2 && <PageBreak mode={props.pageBreak} />}
+                    {minPage !== 2 && <PageBreak mode={props.pageBreak} buttonStyle={props.buttonStyle}/>}
                 </Fragment>
             )}
             {createPageNavigations()}
             {maxPage !== props.pageTotal && (
                 <Fragment>
-                    {maxPage !== props.pageTotal - 1 && <PageBreak mode={props.pageBreak} />}
+                    {maxPage !== props.pageTotal - 1 && <PageBreak mode={props.pageBreak} buttonStyle={props.buttonStyle}/>}
                     <NavButton
                         Title="Last Page"
                         onClick={() => {

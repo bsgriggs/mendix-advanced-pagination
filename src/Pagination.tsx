@@ -50,6 +50,7 @@ const Pagination = (props: PaginationContainerProps) => {
                         setPage={setPage}
                         renderMode={props.renderMode}
                         buttonStyle={props.buttonStyle}
+                        includeEnds={props.includeEnds}
                     />
                 );
             case "perPage":

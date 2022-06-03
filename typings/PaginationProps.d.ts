@@ -31,6 +31,7 @@ export interface PaginationContainerProps {
     renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
     refreshAction?: ActionValue;
+    includeEnds: boolean;
     pageDisplay: DynamicValue<string>;
     includeArrows: boolean;
     pageOffset: DynamicValue<Big>;
@@ -52,6 +53,7 @@ export interface PaginationPreviewProps {
     renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
     refreshAction: {} | null;
+    includeEnds: boolean;
     pageDisplay: string;
     includeArrows: boolean;
     pageOffset: string;

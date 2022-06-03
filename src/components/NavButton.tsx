@@ -12,7 +12,7 @@ type NavButtonProps = {
 };
 
 const NavButton = (props: NavButtonProps): JSX.Element => {
-    const defaultButtonClasses = `btn mx-button btn-${props.buttonStyle} btn-bordered`;
+    
 
     function onClickHandler(event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>) {
         props.onClick();
@@ -23,6 +23,7 @@ const NavButton = (props: NavButtonProps): JSX.Element => {
 
     switch (props.renderMode) {
         case "button":
+            const defaultButtonClasses = `btn mx-button btn-${props.buttonStyle} btn-bordered`;
             return (
                 <button
                     className={props.active ? defaultButtonClasses + " active" : defaultButtonClasses}
@@ -40,9 +41,10 @@ const NavButton = (props: NavButtonProps): JSX.Element => {
                 </button>
             );
         case "link":
+            const defaultAnchorClasses = `mx-link btn-lg text-${props.buttonStyle}`;
             return (
                 <a
-                    className={`mx-link btn-lg text-${props.buttonStyle}`}
+                    className={props.active ? defaultAnchorClasses + " active" : defaultAnchorClasses}
                     title={props.Title}
                     aria-label={props.Title}
                     data-disabled="false"

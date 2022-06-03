@@ -8,7 +8,7 @@
             <propertyGroup caption="Display">
                 <property key="displayFormat" type="enumeration" defaultValue="navigation">
                     <caption>Format</caption>
-                    <description>Which style of pagination to use</description>
+                    <description></description>
                     <enumerationValues>
                         <enumerationValue key="navigation">Navigation</enumerationValue>
                         <enumerationValue key="perPage">Per Page</enumerationValue>
@@ -63,11 +63,15 @@
             <propertyGroup caption="Actions">
                 <property key="refreshAction" type="action">
                     <caption>Refresh Action</caption>
-                    <description>Microflow or Nanoflow that has a Refresh in Client on the parent dataview's object</description>
+                    <description>Must be a Microflow or Nanoflow that has a Refresh in Client on the parent dataview's object</description>
                 </property>            
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Navigation Settings">
+            <property key="includeEnds" type="boolean" defaultValue="true">
+                <caption>Include End Buttons?</caption>
+                <description>When Yes, shows a button to go to the first and last pages</description>
+            </property>
             <property key="pageDisplay" type="expression" defaultValue="empty">
                 <caption>Page Display</caption>
                 <description>Text in the middle of the buttons - default "Page 3 of 14")</description>
@@ -77,7 +81,7 @@
         <propertyGroup caption="Per Page Settings">
             <property key="includeArrows" type="boolean" defaultValue="true">
                 <caption>Include Arrows?</caption>
-                <description>When Yes, shows the Previous and Next arrow buttons on the ends of the pages.</description>
+                <description>When Yes, shows the Previous and Next arrow buttons on the ends of the pages</description>
             </property>
             <property key="pageOffset" type="expression" defaultValue="1" required="true">
                 <caption>Page Offset</caption>

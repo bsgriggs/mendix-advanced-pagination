@@ -1,3 +1,9 @@
 .widget-pagination {
     margin-bottom: 16px;
 }
+
+.widget-pagination a.active{
+    padding: 0.2em 0.3em;
+    border: 1px solid black;
+    transition: none;
+}
