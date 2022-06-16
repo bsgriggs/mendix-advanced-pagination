@@ -73,11 +73,6 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
         minPage = props.pageTotal - props.pageOffset * 2 - 1;
     }
 
-    // console.log("props",props);
-    // console.log("minPage",minPage);
-    // console.log("middlePage",middlePage);
-    // console.log("maxPage",maxPage);
-
     const createPageNavigations = (): Array<JSX.Element> => {
         let returnButtons: JSX.Element[] = [];
         for (let i = minPage; i <= maxPage; i++) {

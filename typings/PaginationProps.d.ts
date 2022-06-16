@@ -9,6 +9,8 @@ import { Big } from "big.js";
 
 export type DisplayFormatEnum = "navigation" | "perPage";
 
+export type PageBreakEnum = "ellipses" | "line" | "space";
+
 export type ResultCountCaptionAlignmentEnum = "start" | "end" | "hide";
 
 export type ButtonAlignmentEnum = "start" | "middle" | "end";
@@ -17,28 +19,26 @@ export type RenderModeEnum = "button" | "link";
 
 export type ButtonStyleEnum = "default" | "inverse" | "primary" | "info" | "success" | "warning" | "danger";
 
-export type PageBreakEnum = "ellipses" | "line" | "space" | "none";
-
 export interface PaginationContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
     displayFormat: DisplayFormatEnum;
-    resultCountCaption: DynamicValue<string>;
-    resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
-    buttonAlignment: ButtonAlignmentEnum;
-    renderMode: RenderModeEnum;
-    buttonStyle: ButtonStyleEnum;
-    refreshAction?: ActionValue;
     includeEnds: boolean;
     pageDisplay: DynamicValue<string>;
     includeArrows: boolean;
     pageOffset: DynamicValue<Big>;
     pageBreak: PageBreakEnum;
+    resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
+    resultCountCaption: DynamicValue<string>;
+    buttonAlignment: ButtonAlignmentEnum;
+    renderMode: RenderModeEnum;
+    buttonStyle: ButtonStyleEnum;
+    refreshAction?: ActionValue;
     page: EditableValue<Big>;
     pageSize: DynamicValue<Big>;
-    resultCount: EditableValue<Big>;
+    resultCount: DynamicValue<Big>;
 }
 
 export interface PaginationPreviewProps {
@@ -47,17 +47,17 @@ export interface PaginationPreviewProps {
     styleObject?: CSSProperties;
     readOnly: boolean;
     displayFormat: DisplayFormatEnum;
-    resultCountCaption: string;
-    resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
-    buttonAlignment: ButtonAlignmentEnum;
-    renderMode: RenderModeEnum;
-    buttonStyle: ButtonStyleEnum;
-    refreshAction: {} | null;
     includeEnds: boolean;
     pageDisplay: string;
     includeArrows: boolean;
     pageOffset: string;
     pageBreak: PageBreakEnum;
+    resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
+    resultCountCaption: string;
+    buttonAlignment: ButtonAlignmentEnum;
+    renderMode: RenderModeEnum;
+    buttonStyle: ButtonStyleEnum;
+    refreshAction: {} | null;
     page: string;
     pageSize: string;
     resultCount: string;
