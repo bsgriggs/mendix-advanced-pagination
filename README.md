@@ -39,12 +39,12 @@ The following steps will create a *Custom Grid* that looks like the image below.
 **Button Style -** Which Mendix brand class should be applied (i.e. text-primary, btn-danger etc.)? These can be easily overridden with a css class (.widget-pagination .btn ...)<br/>
 
 ### Navigation Mode
-![Navigation mode](https://github.com/bsgriggs/pagination/blob/media/config_navigation.png) 
+![Navigation mode](https://github.com/bsgriggs/pagination/blob/media/config_navigation.png)<br/>
 **Include End Buttons? -** Should the user be able to skip to the last page or back to the first page?<br/>
 **Page Display -** Text shown in the middle of the buttons *(default 'Page {Page} of {PageTotal}')*.<br/>
 
 ### Per Page Mode 
-![Per page mode](https://github.com/bsgriggs/pagination/blob/media/config_perpage.png)
+![Per page mode](https://github.com/bsgriggs/pagination/blob/media/config_perpage.png)<br/>
 **Include Arrows? -** Should the user be able to navigate between the page with arrows or only be able to click the specific numbers?<br/>
 **Page Offset -** The Number of pages from the current page to display. For example, Page Offset is 1, Page is 5, and there are 10 pages, then the widget will show Pages 1, 4, 5, 6, 10.<br/><br/>It will include more pages at the beginning and the end of the range. For example, Page Offset is 1, Page is 1, and there are 10 pages, then it will show pages 1, 2, 3, 4, 10. This is because if the user *were* to go to page 3, then they would see pages 1, 2, 3, 4, 10 anyway. Likewise, when the user goes to page 10 they will see pages 1, 7, 8, 9, 10.<br/><br/>It will also check if the user would be displayed all possible pages should they click on any specific page and show all pages from the start. For example, Page Offset is 2 and there are 7 pages. The widget will show all pages 1 through 7, because if the user *were* to go to page 4 they would see all pages anyway.<br/>
 **Page Break -** What whould be in between pages when there is a gap? For example, the widget is showing 1, 2, 3, 4, 10. What should be between 4 and 10?<br/>
