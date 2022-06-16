@@ -50,7 +50,7 @@ The following steps will create a *Custom Grid* that looks like the image below.
 **Page Break -** What whould be in between pages when there is a gap? For example, the widget is showing 1, 2, 3, 4, 10. What should be between 4 and 10?<br/>
 
 ## Demo project
-[link to sandbox]
+https://widgettesting105-sandbox.mxapps.io/p/async-list-view?profile=Responsive
 
 ## Issues, suggestions and feature requests
 Got any ideas for different *styles* of pagination? Submit an issue below!
