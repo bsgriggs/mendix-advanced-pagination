@@ -4,7 +4,7 @@ import {
     ButtonStyleEnum,
     RenderModeEnum,
     ResultCountCaptionAlignmentEnum
-} from "../../typings/PaginationProps";
+} from "../../typings/AdvancedPaginationProps";
 import NavButton from "./NavButton";
 
 export type NavigationPaginationProps = {

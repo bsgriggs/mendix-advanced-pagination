@@ -1,5 +1,5 @@
 import { createElement, Fragment, MouseEvent } from "react";
-import { ButtonStyleEnum, RenderModeEnum } from "../../typings/PaginationProps";
+import { ButtonStyleEnum, RenderModeEnum } from "../../typings/AdvancedPaginationProps";
 
 type NavButtonProps = {
     Title: string;

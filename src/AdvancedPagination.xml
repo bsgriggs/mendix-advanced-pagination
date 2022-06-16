@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id=".pagination.Pagination" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
-    <name>Pagination</name>
-    <description>Encapsulates math to handling custom grid pagination.</description>
+<widget id="mendix.advancedpagination.AdvancedPagination" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Advanced Pagination</name>
+    <description>Encapsulates math for handling custom grid and API pagination.</description>
     <helpUrl>https://github.com/bsgriggs/pagination/blob/master/README.md</helpUrl>
     <properties>
         <propertyGroup caption="General">

@@ -1,4 +1,4 @@
-import { PaginationPreviewProps } from "../typings/PaginationProps";
+import { AdvancedPaginationPreviewProps } from "../typings/AdvancedPaginationProps";
 import { hidePropertiesIn } from "./utils/PageEditorUtils";
 
 export type Properties = PropertyGroup[];
@@ -32,7 +32,7 @@ type ObjectProperties = {
     captions?: string[]; // used for customizing object grids
 };
 
-export function getProperties(_values: PaginationPreviewProps, defaultProperties: Properties): Properties {
+export function getProperties(_values: AdvancedPaginationPreviewProps, defaultProperties: Properties): Properties {
     // Do the values manipulation here to control the visibility of properties in Studio and Studio Pro conditionally.
     /* Example
     if (values.myProperty === "custom") {
@@ -49,7 +49,6 @@ export function getProperties(_values: PaginationPreviewProps, defaultProperties
             hidePropertiesIn(defaultProperties, _values, ["pageDisplay", "includeEnds"]);
             break;
     }
-
     // Total Caption Alignment
     if (_values.resultCountCaptionAlignment === "hide") {
         hidePropertiesIn(defaultProperties, _values, ["resultCountCaption"]);
@@ -58,7 +57,7 @@ export function getProperties(_values: PaginationPreviewProps, defaultProperties
     return defaultProperties;
 }
 
-export function check(_values: PaginationPreviewProps): Problem[] {
+export function check(_values: AdvancedPaginationPreviewProps): Problem[] {
     const errors: Problem[] = [];
     // Add errors to the above array to throw errors in Studio and Studio Pro.
     /* Example
@@ -70,5 +69,13 @@ export function check(_values: PaginationPreviewProps): Problem[] {
         });
     }
     */
+    if (_values.refreshAction === null) {
+        errors.push({
+            property: `refreshAction`,
+            message: `Refresh action is required. Should Microflow with 'Refresh in Client' on the parent DataView's object`,
+            url: "https://github.com/bsgriggs/pagination/blob/master/README.md"
+        });
+    }
+
     return errors;
 }

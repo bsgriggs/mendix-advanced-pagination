@@ -1,13 +1,13 @@
 import { createElement, Fragment } from "react";
 import { ValueStatus } from "mendix";
-import { PaginationContainerProps } from "../typings/PaginationProps";
+import { AdvancedPaginationContainerProps } from "../typings/AdvancedPaginationProps";
 import NavigationPagination from "./components/NavigationPagination";
 import PerPagePagination from "./components/PerPagePagination";
 import Big from "big.js";
 
-import "./ui/Pagination.css";
+import "./ui/AdvancedPagination.css";
 
-const Pagination = (props: PaginationContainerProps): JSX.Element => {
+const Pagination = (props: AdvancedPaginationContainerProps): JSX.Element => {
     const page = props.page.status === ValueStatus.Available && props.page.value ? Number(props.page.value) : 1;
     const pageSize =
         props.pageSize.status === ValueStatus.Available && props.pageSize.value ? Number(props.pageSize.value) : 10;

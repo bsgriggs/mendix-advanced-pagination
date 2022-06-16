@@ -2,7 +2,7 @@
 /**
  * TODO: Include tests for methods
  */
-import { Properties, Property, PropertyGroup } from "../Pagination.editorConfig";
+import { Properties, Property, PropertyGroup } from "../AdvancedPagination.editorConfig";
 
 declare type Option<T> = T | undefined;
 

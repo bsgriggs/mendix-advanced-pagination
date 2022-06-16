@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { ButtonStyleEnum, PageBreakEnum } from "../../typings/PaginationProps";
+import { ButtonStyleEnum, PageBreakEnum } from "../../typings/AdvancedPaginationProps";
 
 type PageBreakProps = {
     mode: PageBreakEnum;

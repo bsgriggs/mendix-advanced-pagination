@@ -5,7 +5,7 @@ import {
     PageBreakEnum,
     RenderModeEnum,
     ButtonStyleEnum
-} from "../../typings/PaginationProps";
+} from "../../typings/AdvancedPaginationProps";
 import PageBreak from "./PageBreak";
 import NavButton from "./NavButton";
 

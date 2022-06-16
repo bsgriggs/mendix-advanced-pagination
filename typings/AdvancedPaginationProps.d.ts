@@ -1,5 +1,5 @@
 /**
- * This file was generated from Pagination.xml
+ * This file was generated from AdvancedPagination.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
@@ -19,7 +19,7 @@ export type RenderModeEnum = "button" | "link";
 
 export type ButtonStyleEnum = "default" | "inverse" | "primary" | "info" | "success" | "warning" | "danger";
 
-export interface PaginationContainerProps {
+export interface AdvancedPaginationContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
@@ -41,7 +41,7 @@ export interface PaginationContainerProps {
     resultCount: DynamicValue<Big>;
 }
 
-export interface PaginationPreviewProps {
+export interface AdvancedPaginationPreviewProps {
     className: string;
     style: string;
     styleObject?: CSSProperties;

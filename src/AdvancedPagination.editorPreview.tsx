@@ -1,11 +1,11 @@
 import { ReactNode, createElement } from "react";
-import { PaginationPreviewProps } from "../typings/PaginationProps";
+import { AdvancedPaginationPreviewProps } from "../typings/AdvancedPaginationProps";
 import NavigationPagination from "./components/NavigationPagination";
 import PerPageNavigation from "./components/PerPagePagination";
 
 declare function require(name: string): string;
 
-export const preview = (props: PaginationPreviewProps): ReactNode => {
+export const preview = (props: AdvancedPaginationPreviewProps): ReactNode => {
     if (props.displayFormat === "navigation") {
         return (
             <NavigationPagination
@@ -45,5 +45,5 @@ export const preview = (props: PaginationPreviewProps): ReactNode => {
 };
 
 export function getPreviewCss(): string {
-    return require("./ui/Pagination.css");
+    return require("./ui/AdvancedPagination.css");
 }
