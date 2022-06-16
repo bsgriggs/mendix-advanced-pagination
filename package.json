@@ -31,10 +31,5 @@
     "@types/react": "~16.9.0",
     "@types/react-dom": "~16.9.0"
   },
-  "dependencies": {
-    "@emotion/react": "^11.8.2",
-    "@emotion/styled": "^11.8.1",
-    "classnames": "^2.2.6",
-    "typestyle": "^2.3.0"
-  }
+  "dependencies": {}
 }

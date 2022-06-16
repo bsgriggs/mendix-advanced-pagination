@@ -1,11 +1,10 @@
-import { createElement } from "react";
+import { createElement, CSSProperties } from "react";
 import {
     ButtonAlignmentEnum,
     ButtonStyleEnum,
     RenderModeEnum,
     ResultCountCaptionAlignmentEnum
 } from "../../typings/PaginationProps";
-import { style } from "typestyle";
 import NavButton from "./NavButton";
 
 export type NavigationPaginationProps = {
@@ -22,7 +21,7 @@ export type NavigationPaginationProps = {
     setPage: (newPage: number) => void;
 };
 
-const NavigationPagination = (props: NavigationPaginationProps) => {
+const NavigationPagination = (props: NavigationPaginationProps): JSX.Element => {
     const justifyDirection = (): string => {
         switch (props.buttonAlignment) {
             case "start":
@@ -36,16 +35,16 @@ const NavigationPagination = (props: NavigationPaginationProps) => {
         }
     };
 
-    const NavigationPaginationContainer = style({
+    const NavigationPaginationContainer: CSSProperties = {
         display: "flex",
         alignItems: "center",
         justifyContent: `${justifyDirection()}`,
         flexWrap: "wrap",
         gap: "0.5em"
-    });
+    };
 
     return (
-        <div className={NavigationPaginationContainer}>
+        <div style={NavigationPaginationContainer}>
             {props.resultCountCaptionAlignment === "start" && (
                 <span className="mx-text">{props.resultCountCaption}</span>
             )}

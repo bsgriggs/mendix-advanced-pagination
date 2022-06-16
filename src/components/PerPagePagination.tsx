@@ -1,4 +1,4 @@
-import { createElement, Fragment } from "react";
+import { createElement, CSSProperties, Fragment } from "react";
 import {
     ButtonAlignmentEnum,
     ResultCountCaptionAlignmentEnum,
@@ -6,7 +6,6 @@ import {
     RenderModeEnum,
     ButtonStyleEnum
 } from "../../typings/PaginationProps";
-import { style } from "typestyle";
 import PageBreak from "./PageBreak";
 import NavButton from "./NavButton";
 
@@ -39,13 +38,13 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
         }
     };
 
-    const PerPagePaginationContainer = style({
+    const PerPagePaginationContainer: CSSProperties = {
         display: "flex",
         alignItems: "center",
         justifyContent: `${justifyDirection()}`,
         flexWrap: "wrap",
         gap: "0.5em"
-    });
+    };
 
     // Default values
     let minPage: number = props.page - props.pageOffset;
@@ -73,8 +72,8 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
         minPage = props.pageTotal - props.pageOffset * 2 - 1;
     }
 
-    const createPageNavigations = (): Array<JSX.Element> => {
-        let returnButtons: JSX.Element[] = [];
+    const createPageNavigations = (): JSX.Element[] => {
+        const returnButtons: JSX.Element[] = [];
         for (let i = minPage; i <= maxPage; i++) {
             returnButtons.push(
                 <NavButton
@@ -91,7 +90,7 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
     };
 
     return (
-        <div className={PerPagePaginationContainer}>
+        <div style={PerPagePaginationContainer}>
             {props.resultCountCaptionAlignment === "start" && (
                 <span className="mx-text">{props.resultCountCaption}</span>
             )}
@@ -121,13 +120,15 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
                         renderMode={props.renderMode}
                         buttonStyle={props.buttonStyle}
                     />
-                    {minPage !== 2 && <PageBreak mode={props.pageBreak} buttonStyle={props.buttonStyle}/>}
+                    {minPage !== 2 && <PageBreak mode={props.pageBreak} buttonStyle={props.buttonStyle} />}
                 </Fragment>
             )}
             {createPageNavigations()}
             {maxPage !== props.pageTotal && (
                 <Fragment>
-                    {maxPage !== props.pageTotal - 1 && <PageBreak mode={props.pageBreak} buttonStyle={props.buttonStyle}/>}
+                    {maxPage !== props.pageTotal - 1 && (
+                        <PageBreak mode={props.pageBreak} buttonStyle={props.buttonStyle} />
+                    )}
                     <NavButton
                         Title="Last Page"
                         onClick={() => {

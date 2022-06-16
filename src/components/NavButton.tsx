@@ -12,9 +12,7 @@ type NavButtonProps = {
 };
 
 const NavButton = (props: NavButtonProps): JSX.Element => {
-    
-
-    function onClickHandler(event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>) {
+    function onClickHandler(event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>): void {
         props.onClick();
         // un-select the button after the event is triggered, but keep focus event styling for tab-ing through
         const button = event.target as HTMLButtonElement;

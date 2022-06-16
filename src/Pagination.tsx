@@ -7,7 +7,7 @@ import Big from "big.js";
 
 import "./ui/Pagination.css";
 
-const Pagination = (props: PaginationContainerProps) => {
+const Pagination = (props: PaginationContainerProps): JSX.Element => {
     const page = props.page.status === ValueStatus.Available && props.page.value ? Number(props.page.value) : 1;
     const pageSize =
         props.pageSize.status === ValueStatus.Available && props.pageSize.value ? Number(props.pageSize.value) : 10;
