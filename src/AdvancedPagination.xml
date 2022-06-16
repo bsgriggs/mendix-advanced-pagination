@@ -108,10 +108,12 @@
                 <description>Integer of how many records are shown per page</description>
                 <returnType type="Integer" />
             </property>
-            <property key="resultCount" type="expression" required="true">
+            <property key="resultCount" type="attribute" required="true">
                 <caption>Result Count</caption>
                 <description>Integer of the total amount of records</description>
-                <returnType type="Integer" />
+                <attributeTypes>
+                    <attributeType name="Integer" />
+                </attributeTypes>
             </property>
         </propertyGroup>
     </properties>

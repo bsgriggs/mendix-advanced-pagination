@@ -38,7 +38,7 @@ export interface AdvancedPaginationContainerProps {
     refreshAction?: ActionValue;
     page: EditableValue<Big>;
     pageSize: DynamicValue<Big>;
-    resultCount: DynamicValue<Big>;
+    resultCount: EditableValue<Big>;
 }
 
 export interface AdvancedPaginationPreviewProps {
