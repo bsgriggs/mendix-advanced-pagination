@@ -1,6 +1,8 @@
 ## Advanced Pagination
 Reusable widget to encapsulate the math required to manually do pagination. Most useful when getting data from an API that allows pagination (e.g. https://facebook.com/me/feed?limit=25&offset=50).
 
+Tip: Need sorting too? Check out Advanced Sorting. (<a href='https://github.com/bsgriggs/mendix-advanced-sorting' target="_blank">GitHub</a>) (<a href='https://marketplace.mendix.com/link/component/202511' target="_blank">Mendix Marketplace</a>)
+
 ![Overview](https://github.com/bsgriggs/pagination/blob/media/Overview.png)
 
 ## Features
