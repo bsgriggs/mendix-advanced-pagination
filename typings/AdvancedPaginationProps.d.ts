@@ -1,7 +1,7 @@
 /**
  * This file was generated from AdvancedPagination.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix UI Content Team
+ * @author Mendix Widgets Framework Team
  */
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
@@ -26,7 +26,7 @@ export interface AdvancedPaginationContainerProps {
     tabIndex?: number;
     displayFormat: DisplayFormatEnum;
     includeEnds: boolean;
-    pageDisplay: DynamicValue<string>;
+    pageDisplay?: DynamicValue<string>;
     includeArrows: boolean;
     pageOffset: DynamicValue<Big>;
     pageBreak: PageBreakEnum;
@@ -42,7 +42,11 @@ export interface AdvancedPaginationContainerProps {
 }
 
 export interface AdvancedPaginationPreviewProps {
+    /**
+     * @deprecated Deprecated since version 9.18.0. Please use class property instead.
+     */
     className: string;
+    class: string;
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;

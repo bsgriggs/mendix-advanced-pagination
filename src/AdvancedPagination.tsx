@@ -23,7 +23,7 @@ const Pagination = (props: AdvancedPaginationContainerProps): JSX.Element => {
             ? "1 result"
             : resultCount + " results";
     const pageDisplay =
-        props.pageDisplay.status === ValueStatus.Available && props.pageDisplay.value
+    props.pageDisplay &&  props.pageDisplay.status === ValueStatus.Available && props.pageDisplay.value
             ? props.pageDisplay.value
             : `Page ${page} of ${pageTotal}`;
     const pageOffset =

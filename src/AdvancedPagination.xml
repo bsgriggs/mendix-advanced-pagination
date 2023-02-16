@@ -20,10 +20,12 @@
                 <caption>Include End Buttons?</caption>
                 <description>When Yes, shows a button to go to the first and last pages</description>
             </property>
-            <property key="pageDisplay" type="expression" defaultValue="empty">
+            <property key="pageDisplay" type="textTemplate" required="false">
                 <caption>Page Display</caption>
                 <description>Text in the middle of the buttons - default "Page 3 of 14")</description>
-                <returnType type="String" />
+                <translations>
+                    <translation lang="en_US"></translation>
+                </translations>
             </property>
             <property key="includeArrows" type="boolean" defaultValue="true">
                 <caption>Include Arrows?</caption>
