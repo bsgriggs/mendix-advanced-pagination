@@ -17,7 +17,9 @@ const Pagination = (props: AdvancedPaginationContainerProps): ReactElement => {
             : 0;
     const pageTotal = resultCount > 0 ? Math.ceil(resultCount / pageSize) : 1;
     const resultCountCaption =
-        props.resultCountCaption.status === ValueStatus.Available && props.resultCountCaption.value
+        props.resultCountCaption &&
+        props.resultCountCaption.status === ValueStatus.Available &&
+        props.resultCountCaption.value
             ? props.resultCountCaption.value
             : resultCount === 1
             ? "1 result"

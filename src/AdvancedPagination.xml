@@ -54,10 +54,12 @@
                     <enumerationValue key="hide">Hide</enumerationValue>
                 </enumerationValues>
             </property>
-            <property key="resultCountCaption" type="expression" defaultValue="empty">
+            <property key="resultCountCaption" type="textTemplate" required="false">
                 <caption>Total Caption</caption>
                 <description>Text for the total number of results - default "# results"</description>
-                <returnType type="String" />
+                <translations>
+                    <translation lang="en_US"></translation>
+                </translations>
             </property>
             <property key="buttonAlignment" type="enumeration" defaultValue="end">
                 <caption>Button Alignment</caption>

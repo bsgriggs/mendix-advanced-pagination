@@ -31,7 +31,7 @@ export interface AdvancedPaginationContainerProps {
     pageOffset: DynamicValue<Big>;
     pageBreak: PageBreakEnum;
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
-    resultCountCaption: DynamicValue<string>;
+    resultCountCaption?: DynamicValue<string>;
     buttonAlignment: ButtonAlignmentEnum;
     renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
