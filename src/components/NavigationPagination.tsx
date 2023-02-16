@@ -1,4 +1,4 @@
-import { createElement, CSSProperties } from "react";
+import { createElement, CSSProperties, ReactElement } from "react";
 import {
     ButtonAlignmentEnum,
     ButtonStyleEnum,
@@ -21,7 +21,7 @@ export type NavigationPaginationProps = {
     setPage: (newPage: number) => void;
 };
 
-const NavigationPagination = (props: NavigationPaginationProps): JSX.Element => {
+const NavigationPagination = (props: NavigationPaginationProps): ReactElement => {
     const justifyDirection = (): string => {
         switch (props.buttonAlignment) {
             case "start":

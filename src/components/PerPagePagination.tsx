@@ -1,4 +1,4 @@
-import { createElement, CSSProperties, Fragment } from "react";
+import { createElement, CSSProperties, Fragment, ReactElement } from "react";
 import {
     ButtonAlignmentEnum,
     ResultCountCaptionAlignmentEnum,
@@ -24,7 +24,7 @@ export type PerPagePaginationProps = {
     setPage: (newPage: number) => void;
 };
 
-const PerPagePagination = (props: PerPagePaginationProps) => {
+const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
     const justifyDirection = (): string => {
         switch (props.buttonAlignment) {
             case "start":
@@ -72,8 +72,8 @@ const PerPagePagination = (props: PerPagePaginationProps) => {
         minPage = props.pageTotal - props.pageOffset * 2 - 1;
     }
 
-    const createPageNavigations = (): JSX.Element[] => {
-        const returnButtons: JSX.Element[] = [];
+    const createPageNavigations = (): ReactElement[] => {
+        const returnButtons: ReactElement[] = [];
         for (let i = minPage; i <= maxPage; i++) {
             returnButtons.push(
                 <NavButton

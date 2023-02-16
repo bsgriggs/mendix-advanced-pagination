@@ -1,7 +1,7 @@
 {
   "name": "advancedpagination",
   "widgetName": "AdvancedPagination",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Encapsulates math for handling custom grid and API pagination.",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "author": "Benjamin Griggs",

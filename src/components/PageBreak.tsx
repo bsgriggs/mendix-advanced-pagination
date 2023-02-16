@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { createElement, ReactElement } from "react";
 import { ButtonStyleEnum, PageBreakEnum } from "../../typings/AdvancedPaginationProps";
 
 type PageBreakProps = {
@@ -6,7 +6,7 @@ type PageBreakProps = {
     buttonStyle: ButtonStyleEnum;
 };
 
-const PageBreak = (props: PageBreakProps): JSX.Element => {
+const PageBreak = (props: PageBreakProps): ReactElement => {
     switch (props.mode) {
         case "ellipses":
             return <span className={`text-${props.buttonStyle} glyphicon glyphicon-option-horizontal`} />;

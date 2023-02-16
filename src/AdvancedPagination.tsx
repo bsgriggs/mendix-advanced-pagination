@@ -1,4 +1,4 @@
-import { createElement, Fragment } from "react";
+import { createElement, Fragment, ReactElement } from "react";
 import { ValueStatus } from "mendix";
 import { AdvancedPaginationContainerProps } from "../typings/AdvancedPaginationProps";
 import NavigationPagination from "./components/NavigationPagination";
@@ -7,7 +7,7 @@ import Big from "big.js";
 
 import "./ui/AdvancedPagination.css";
 
-const Pagination = (props: AdvancedPaginationContainerProps): JSX.Element => {
+const Pagination = (props: AdvancedPaginationContainerProps): ReactElement => {
     const page = props.page.status === ValueStatus.Available && props.page.value ? Number(props.page.value) : 1;
     const pageSize =
         props.pageSize.status === ValueStatus.Available && props.pageSize.value ? Number(props.pageSize.value) : 10;
@@ -23,7 +23,7 @@ const Pagination = (props: AdvancedPaginationContainerProps): JSX.Element => {
             ? "1 result"
             : resultCount + " results";
     const pageDisplay =
-    props.pageDisplay &&  props.pageDisplay.status === ValueStatus.Available && props.pageDisplay.value
+        props.pageDisplay && props.pageDisplay.status === ValueStatus.Available && props.pageDisplay.value
             ? props.pageDisplay.value
             : `Page ${page} of ${pageTotal}`;
     const pageOffset =
@@ -36,7 +36,7 @@ const Pagination = (props: AdvancedPaginationContainerProps): JSX.Element => {
         props.refreshAction?.execute();
     };
 
-    const determineFormat = (): JSX.Element => {
+    const determineFormat = (): ReactElement => {
         switch (props.displayFormat) {
             case "navigation":
                 return (

@@ -1,4 +1,4 @@
-import { createElement, Fragment, MouseEvent } from "react";
+import { createElement, Fragment, MouseEvent, ReactElement } from "react";
 import { ButtonStyleEnum, RenderModeEnum } from "../../typings/AdvancedPaginationProps";
 
 type NavButtonProps = {
@@ -11,7 +11,7 @@ type NavButtonProps = {
     active?: boolean;
 };
 
-const NavButton = (props: NavButtonProps): JSX.Element => {
+const NavButton = (props: NavButtonProps): ReactElement => {
     function onClickHandler(event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLAnchorElement>): void {
         props.onClick();
         // un-select the button after the event is triggered, but keep focus event styling for tab-ing through
