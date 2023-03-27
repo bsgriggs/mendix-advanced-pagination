@@ -9,7 +9,8 @@ Tip: Need sorting too? Check out Advanced Sorting. (<a href='https://github.com/
 - Offers 2 *styles* of pagination. Navigation (first 2 above) and Per Page (last 2 above)
 - Ability to configure most aspects inside the widget settings (text, color, alignment etc.)
 - Accepts Page and Result Count from a parent Data View and calculates the rest for you 
-- uses default Mendix classes to easily copy brand specific styles (e.g. mx-text, btn-primary)
+- Uses default Mendix classes to easily copy brand specific styles (e.g. mx-text, btn-primary)
+- Automatically correct the current page number if it is outside the range
 
 ## Limitations
 - Data source must return an integer of the total number of records available (needed to calculate the total number of pages)
@@ -39,6 +40,9 @@ The following steps will create a *Custom Grid* that looks like the image below.
 **Button Alignment -** Where should the entire widget be displayed inside of it's parent's container?<br/>
 **Render Mode -** Should the buttons contain padding and a border or only an icon?<br/>
 **Button Style -** Which Mendix brand class should be applied (i.e. text-primary, btn-danger etc.)? These can be easily overridden with a CSS class (.widget-pagination .btn ...)<br/>
+**Auto Correct? -** Adjust the page number if the current page is outside the range? (i.e. If showing page 4 of 3 = auto change the page to 1)<br/>
+**Auto Correct To -** The page set when auto correcting. With First, it will set to page 1. With Last, it will set page as the total number of pages<br/>
+
 
 ### Navigation Mode
 ![Navigation mode](https://github.com/bsgriggs/pagination/blob/media/config_navigation.png)<br/>

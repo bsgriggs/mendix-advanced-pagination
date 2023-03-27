@@ -1,4 +1,4 @@
-import { createElement, Fragment, ReactElement } from "react";
+import { createElement, Fragment, ReactElement, useEffect } from "react";
 import { ValueStatus } from "mendix";
 import { AdvancedPaginationContainerProps } from "../typings/AdvancedPaginationProps";
 import NavigationPagination from "./components/NavigationPagination";
@@ -32,6 +32,18 @@ const Pagination = (props: AdvancedPaginationContainerProps): ReactElement => {
         props.pageOffset.status === ValueStatus.Available && props.pageOffset.value
             ? Number(props.pageOffset.value)
             : 1;
+
+    if (props.autoCorrect) {
+        useEffect(() => {
+            if (page > pageTotal || page < 1) {
+                if (props.autoCorrectTo === "FIRST") {
+                    setPage(1);
+                } else {
+                    setPage(pageTotal);
+                }
+            }
+        }, [page, pageTotal]);
+    }
 
     const setPage = (newPage: number): void => {
         props.page.setValue(Big(newPage));

@@ -54,6 +54,10 @@ export function getProperties(_values: AdvancedPaginationPreviewProps, defaultPr
         hidePropertiesIn(defaultProperties, _values, ["resultCountCaption"]);
     }
 
+    if(!_values.autoCorrect){
+        hidePropertiesIn(defaultProperties, _values, ["autoCorrectTo"]);
+    }
+
     return defaultProperties;
 }
 

@@ -13,11 +13,13 @@ export type PageBreakEnum = "ellipses" | "line" | "space";
 
 export type ResultCountCaptionAlignmentEnum = "start" | "end" | "hide";
 
-export type ButtonAlignmentEnum = "start" | "middle" | "end";
+export type AutoCorrectToEnum = "FIRST" | "LAST";
 
 export type RenderModeEnum = "button" | "link";
 
 export type ButtonStyleEnum = "default" | "inverse" | "primary" | "info" | "success" | "warning" | "danger";
+
+export type ButtonAlignmentEnum = "start" | "middle" | "end";
 
 export interface AdvancedPaginationContainerProps {
     name: string;
@@ -32,9 +34,11 @@ export interface AdvancedPaginationContainerProps {
     pageBreak: PageBreakEnum;
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     resultCountCaption?: DynamicValue<string>;
-    buttonAlignment: ButtonAlignmentEnum;
+    autoCorrect: boolean;
+    autoCorrectTo: AutoCorrectToEnum;
     renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
+    buttonAlignment: ButtonAlignmentEnum;
     refreshAction?: ActionValue;
     page: EditableValue<Big>;
     pageSize: DynamicValue<Big>;
@@ -58,9 +62,11 @@ export interface AdvancedPaginationPreviewProps {
     pageBreak: PageBreakEnum;
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     resultCountCaption: string;
-    buttonAlignment: ButtonAlignmentEnum;
+    autoCorrect: boolean;
+    autoCorrectTo: AutoCorrectToEnum;
     renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
+    buttonAlignment: ButtonAlignmentEnum;
     refreshAction: {} | null;
     page: string;
     pageSize: string;
