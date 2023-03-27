@@ -34,6 +34,7 @@ const Pagination = (props: AdvancedPaginationContainerProps): ReactElement => {
             : 1;
 
     if (props.autoCorrect) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         useEffect(() => {
             if (page > pageTotal || page < 1) {
                 if (props.autoCorrectTo === "FIRST") {
@@ -42,6 +43,7 @@ const Pagination = (props: AdvancedPaginationContainerProps): ReactElement => {
                     setPage(pageTotal);
                 }
             }
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [page, pageTotal]);
     }
 
