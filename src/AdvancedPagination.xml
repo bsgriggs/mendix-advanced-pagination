@@ -136,5 +136,10 @@
                 </attributeTypes>
             </property>
         </propertyGroup>
+        <propertyGroup caption="System">
+            <systemProperty key="Name"/>
+            <systemProperty key="TabIndex"/>
+            <systemProperty key="Visibility"/>
+        </propertyGroup>
     </properties>
 </widget>

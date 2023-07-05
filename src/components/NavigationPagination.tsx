@@ -7,7 +7,8 @@ import {
 } from "../../typings/AdvancedPaginationProps";
 import NavButton from "./NavButton";
 
-export type NavigationPaginationProps = {
+type NavigationPaginationProps = {
+    name: string;
     page: number;
     pageTotal: number;
     buttonAlignment: ButtonAlignmentEnum;
@@ -17,13 +18,26 @@ export type NavigationPaginationProps = {
     renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
     includeEnds: boolean;
-
+    tabIndex?: number;
     setPage: (newPage: number) => void;
 };
 
-const NavigationPagination = (props: NavigationPaginationProps): ReactElement => {
+const NavigationPagination = ({
+    name,
+    buttonAlignment,
+    buttonStyle,
+    includeEnds,
+    page,
+    pageDisplay,
+    pageTotal,
+    renderMode,
+    resultCountCaption,
+    resultCountCaptionAlignment,
+    setPage,
+    tabIndex
+}: NavigationPaginationProps): ReactElement => {
     const justifyDirection = (): string => {
-        switch (props.buttonAlignment) {
+        switch (buttonAlignment) {
             case "start":
                 return "flex-start";
             case "middle":
@@ -45,60 +59,66 @@ const NavigationPagination = (props: NavigationPaginationProps): ReactElement =>
 
     return (
         <div style={NavigationPaginationContainer}>
-            {props.resultCountCaptionAlignment === "start" && (
-                <span className="mx-text">{props.resultCountCaption}</span>
-            )}
-            {props.includeEnds && (
+            {resultCountCaptionAlignment === "start" && <span className="mx-text">{resultCountCaption}</span>}
+            {includeEnds && (
                 <NavButton
-                    Title="First Page"
+                    name={name}
+                    title="First Page"
                     onClick={() => {
-                        if (props.page > 1) {
-                            props.setPage(1);
+                        if (page > 1) {
+                            setPage(1);
                         }
                     }}
-                    renderMode={props.renderMode}
-                    buttonStyle={props.buttonStyle}
+                    renderMode={renderMode}
+                    buttonStyle={buttonStyle}
                     GlyphiconClass="glyphicon-step-backward"
+                    tabIndex={tabIndex}
                 />
             )}
             <NavButton
-                Title="Previous Page"
+                name={name}
+                title="Previous Page"
                 onClick={() => {
-                    if (props.page > 1) {
-                        props.setPage(props.page - 1);
+                    if (page > 1) {
+                        setPage(page - 1);
                     }
                 }}
-                renderMode={props.renderMode}
-                buttonStyle={props.buttonStyle}
+                renderMode={renderMode}
+                buttonStyle={buttonStyle}
                 GlyphiconClass="glyphicon-triangle-left"
+                tabIndex={tabIndex}
             />
-            <span className="mx-text">{props.pageDisplay}</span>
+            <span className="mx-text">{pageDisplay}</span>
             <NavButton
-                Title="Next Page"
+                name={name}
+                title="Next Page"
                 onClick={() => {
-                    if (props.page < props.pageTotal) {
-                        props.setPage(props.page + 1);
+                    if (page < pageTotal) {
+                        setPage(page + 1);
                     }
                 }}
-                renderMode={props.renderMode}
-                buttonStyle={props.buttonStyle}
+                renderMode={renderMode}
+                buttonStyle={buttonStyle}
                 GlyphiconClass="glyphicon-triangle-right"
+                tabIndex={tabIndex}
             />
-            {props.includeEnds && (
+            {includeEnds && (
                 <NavButton
-                    Title="Last Page"
+                    name={name}
+                    title="Last Page"
                     onClick={() => {
-                        if (props.page < props.pageTotal) {
-                            props.setPage(props.pageTotal);
+                        if (page < pageTotal) {
+                            setPage(pageTotal);
                         }
                     }}
-                    renderMode={props.renderMode}
-                    buttonStyle={props.buttonStyle}
+                    renderMode={renderMode}
+                    buttonStyle={buttonStyle}
                     GlyphiconClass="glyphicon-step-forward"
+                    tabIndex={tabIndex}
                 />
             )}
 
-            {props.resultCountCaptionAlignment === "end" && <span className="mx-text">{props.resultCountCaption}</span>}
+            {resultCountCaptionAlignment === "end" && <span className="mx-text">{resultCountCaption}</span>}
         </div>
     );
 };

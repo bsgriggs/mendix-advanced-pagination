@@ -9,6 +9,7 @@ export const preview = (props: AdvancedPaginationPreviewProps): ReactNode => {
     if (props.displayFormat === "navigation") {
         return (
             <NavigationPagination
+                name=""
                 page={2}
                 pageTotal={4}
                 buttonAlignment={props.buttonAlignment}
@@ -26,6 +27,7 @@ export const preview = (props: AdvancedPaginationPreviewProps): ReactNode => {
     } else {
         return (
             <PerPageNavigation
+                name=""
                 page={2}
                 pageTotal={7}
                 buttonAlignment={props.buttonAlignment}
