@@ -33,9 +33,11 @@ const NavButton = ({
         onClick();
     }
 
+    const keyName = name + "_" + (btnCaption ? btnCaption : title.replaceAll(" ", "_"));
+
     return renderMode === "button" ? (
         <button
-            id={name + "_" + title.replaceAll(" ", "_")}
+            id={keyName}
             className={`btn mx-button btn-${buttonStyle}${active ? " active" : " btn-bordered"}`}
             title={title}
             aria-label={title}
@@ -50,8 +52,8 @@ const NavButton = ({
         </button>
     ) : (
         <a
-            id={name + "_" + title.replaceAll(" ", "_")}
-            className={`mx-link btn-lg text-${buttonStyle}${active ? " active" : ""}`}
+            id={keyName}
+            className={`text-${buttonStyle}${active ? " active" : ""}`}
             title={title}
             aria-label={title}
             data-disabled="false"
@@ -63,7 +65,7 @@ const NavButton = ({
                     onClick();
                 }
             }}
-            tabIndex={tabIndex}
+            tabIndex={tabIndex || 0}
         >
             {GlyphiconClass !== undefined && <span className={"glyphicon " + GlyphiconClass}></span>}
             {btnCaption !== undefined && <Fragment>{btnCaption}</Fragment>}

@@ -54,7 +54,7 @@ const NavigationPagination = ({
         alignItems: "center",
         justifyContent: `${justifyDirection()}`,
         flexWrap: "wrap",
-        gap: "0.5em"
+        gap: renderMode === "button" ? "0.5em" : undefined
     };
 
     return (

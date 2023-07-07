@@ -40,6 +40,14 @@ const PerPagePagination = ({
     setPage,
     tabIndex
 }: PerPagePaginationProps): ReactElement => {
+    // Function to re-focus the active button on click or keyboard navigation
+    const focusActiveButton = (newPage: number): void => {
+        setTimeout(() => {
+            const activeButton = document.getElementById(name + "_" + newPage);
+            activeButton?.focus();
+        }, 100);
+    };
+
     const justifyDirection = (): string => {
         switch (buttonAlignment) {
             case "start":
@@ -95,7 +103,10 @@ const PerPagePagination = ({
                     name={name}
                     active={i === page}
                     title={`Page ${i}`}
-                    onClick={() => setPage(i)}
+                    onClick={() => {
+                        setPage(i);
+                        focusActiveButton(i);
+                    }}
                     btnCaption={i.toString()}
                     renderMode={renderMode}
                     buttonStyle={buttonStyle}
@@ -133,6 +144,7 @@ const PerPagePagination = ({
                         onClick={() => {
                             if (page > 1) {
                                 setPage(1);
+                                focusActiveButton(1);
                             }
                         }}
                         renderMode={renderMode}
@@ -152,6 +164,7 @@ const PerPagePagination = ({
                         onClick={() => {
                             if (page < pageTotal) {
                                 setPage(pageTotal);
+                                focusActiveButton(pageTotal);
                             }
                         }}
                         renderMode={renderMode}

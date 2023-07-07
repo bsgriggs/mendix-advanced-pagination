@@ -2,8 +2,15 @@
     margin-bottom: 16px;
 }
 
-.widget-pagination a.active{
+.widget-pagination a{
     padding: 0.2em 0.3em;
+}
+
+.widget-pagination a.active{
     border: 1px solid black;
-    transition: none;
+    border-radius: 4px;
+}
+
+.widget-pagination a:focus-visible{
+    outline: -webkit-focus-ring-color auto 1px;
 }
