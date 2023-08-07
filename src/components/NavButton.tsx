@@ -53,6 +53,7 @@ const NavButton = ({
     ) : (
         <a
             id={keyName}
+            role="button"
             className={`text-${buttonStyle}${active ? " active" : ""}`}
             title={title}
             aria-label={title}
