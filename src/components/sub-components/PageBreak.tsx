@@ -1,15 +1,15 @@
 import { createElement, ReactElement } from "react";
-import { ButtonStyleEnum, PageBreakEnum } from "../../typings/AdvancedPaginationProps";
+import { PageBreakEnum } from "../../../typings/AdvancedPaginationProps";
+import { Icon } from "mendix/components/web/Icon";
 
 type PageBreakProps = {
     mode: PageBreakEnum;
-    buttonStyle: ButtonStyleEnum;
 };
 
 const PageBreak = (props: PageBreakProps): ReactElement => {
     switch (props.mode) {
         case "ellipses":
-            return <span className={`text-${props.buttonStyle} glyphicon glyphicon-option-horizontal`} />;
+            return <Icon icon={{ type: "glyph", iconClass: "glyphicon-option-horizontal" }} />;
         case "line":
             return (
                 <span

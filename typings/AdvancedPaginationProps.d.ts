@@ -4,12 +4,22 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { ActionValue, DynamicValue, EditableValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue, WebIcon } from "mendix";
 import { Big } from "big.js";
+
+export type PageSizeTypeEnum = "EXPRESSION" | "TEXT_BOX" | "DROPDOWN";
+
+export interface PageSizesType {
+    value: number;
+}
 
 export type DisplayFormatEnum = "navigation" | "perPage";
 
+export type PageDisplayTypeEnum = "PAGES" | "RECORDS" | "CUSTOM";
+
 export type PageBreakEnum = "ellipses" | "line" | "space";
+
+export type PageSizeAlignmentEnum = "START" | "END";
 
 export type ResultCountCaptionAlignmentEnum = "start" | "end" | "hide";
 
@@ -21,48 +31,92 @@ export type ButtonStyleEnum = "default" | "inverse" | "primary" | "info" | "succ
 
 export type ButtonAlignmentEnum = "start" | "middle" | "end";
 
+export interface PageSizesPreviewType {
+    value: number | null;
+}
+
 export interface AdvancedPaginationContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    page: EditableValue<Big>;
+    resultCount: EditableValue<Big>;
+    pageSizeType: PageSizeTypeEnum;
+    pageSize: DynamicValue<Big>;
+    pageSizeAttr: EditableValue<Big>;
+    pageSizes: PageSizesType[];
+    refreshAction?: ActionValue;
     displayFormat: DisplayFormatEnum;
     includeEnds: boolean;
-    pageDisplay?: DynamicValue<string>;
+    pageDisplayType: PageDisplayTypeEnum;
+    pageDisplay: DynamicValue<string>;
     includeArrows: boolean;
     pageOffset: DynamicValue<Big>;
     pageBreak: PageBreakEnum;
+    pageSizeAlignment: PageSizeAlignmentEnum;
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     resultCountCaption?: DynamicValue<string>;
     autoCorrect: boolean;
     autoCorrectTo: AutoCorrectToEnum;
+    pageLabel: DynamicValue<string>;
+    pageSizeLabel: DynamicValue<string>;
+    ofLabel: DynamicValue<string>;
+    toLabel: DynamicValue<string>;
+    firstLabel: DynamicValue<string>;
+    previousLabel: DynamicValue<string>;
+    nextLabel: DynamicValue<string>;
+    lastLabel: DynamicValue<string>;
     renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
     buttonAlignment: ButtonAlignmentEnum;
-    refreshAction?: ActionValue;
-    page: EditableValue<Big>;
-    pageSize: DynamicValue<Big>;
-    resultCount: EditableValue<Big>;
+    firstPageIcon?: DynamicValue<WebIcon>;
+    previousPageIcon?: DynamicValue<WebIcon>;
+    nextPageIcon?: DynamicValue<WebIcon>;
+    lastPageIcon?: DynamicValue<WebIcon>;
 }
 
 export interface AdvancedPaginationPreviewProps {
+    /**
+     * @deprecated Deprecated since version 9.18.0. Please use class property instead.
+     */
+    className: string;
     class: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
+    page: string;
+    resultCount: string;
+    pageSizeType: PageSizeTypeEnum;
+    pageSize: string;
+    pageSizeAttr: string;
+    pageSizes: PageSizesPreviewType[];
+    refreshAction: {} | null;
     displayFormat: DisplayFormatEnum;
     includeEnds: boolean;
+    pageDisplayType: PageDisplayTypeEnum;
     pageDisplay: string;
     includeArrows: boolean;
     pageOffset: string;
     pageBreak: PageBreakEnum;
+    pageSizeAlignment: PageSizeAlignmentEnum;
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     resultCountCaption: string;
     autoCorrect: boolean;
     autoCorrectTo: AutoCorrectToEnum;
+    pageLabel: string;
+    pageSizeLabel: string;
+    ofLabel: string;
+    toLabel: string;
+    firstLabel: string;
+    previousLabel: string;
+    nextLabel: string;
+    lastLabel: string;
     renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
     buttonAlignment: ButtonAlignmentEnum;
-    refreshAction: {} | null;
-    page: string;
-    pageSize: string;
-    resultCount: string;
+    firstPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    previousPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    nextPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    lastPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
 }

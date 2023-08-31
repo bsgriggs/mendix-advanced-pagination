@@ -1,108 +1,113 @@
-import { createElement, ReactElement, useEffect } from "react";
-import { ValueStatus } from "mendix";
+import { createElement, ReactElement, useEffect, useMemo, useCallback } from "react";
 import { AdvancedPaginationContainerProps } from "../typings/AdvancedPaginationProps";
-import NavigationPagination from "./components/NavigationPagination";
-import PerPagePagination from "./components/PerPagePagination";
 import Big from "big.js";
+import Pagination from "./components/Pagination";
+import "./ui/AdvancedPagination.scss";
 
-import "./ui/AdvancedPagination.css";
+const formatInteger = (newNumber: number): string => {
+    // @ts-ignore
+    return mx.parser.formatValue(newNumber || 0, "integer", { groupDigits: true, decimalPrecision: 0 });
+};
 
-const Pagination = ({
-    autoCorrect,
-    autoCorrectTo,
-    buttonAlignment,
-    buttonStyle,
-    class: className,
-    displayFormat,
-    includeArrows,
-    includeEnds,
-    name,
-    page,
-    pageBreak,
-    pageOffset,
-    pageSize,
-    renderMode,
-    resultCount,
-    resultCountCaptionAlignment,
-    pageDisplay,
-    refreshAction,
-    resultCountCaption,
-    style,
-    tabIndex
-}: AdvancedPaginationContainerProps): ReactElement => {
-    const pageNumberValue = page.status === ValueStatus.Available ? Number(page.value) : 1;
-    const pageSizeValue = pageSize.status === ValueStatus.Available ? Number(pageSize.value) : 10;
-    const resultCountValue = resultCount.status === ValueStatus.Available ? Number(resultCount.value) : 0;
-    const pageTotal = resultCountValue > 0 ? Math.ceil(resultCountValue / pageSizeValue) : 1;
-    const resultCountCaptionValue =
-        resultCountCaption && resultCountCaption.status === ValueStatus.Available && resultCountCaption.value
-            ? resultCountCaption.value
-            : resultCountValue === 1
-            ? "1 result"
-            : resultCountValue + " results";
-    const pageDisplayValue =
-        pageDisplay && pageDisplay.status === ValueStatus.Available && pageDisplay.value
-            ? pageDisplay.value
-            : `Page ${pageNumberValue} of ${pageTotal}`;
-    const pageOffsetValue =
-        pageOffset.status === ValueStatus.Available && pageOffset.value ? Number(pageOffset.value) : 1;
+const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactElement => {
+    const pageSize: number = useMemo(
+        () => (props.pageSizeType === "EXPRESSION" ? Number(props.pageSize.value) : Number(props.pageSizeAttr.value)),
+        [props.pageSize, props.pageSizeAttr]
+    );
 
-    if (autoCorrect) {
+    const page: number = useMemo(() => Number(props.page.value), [props.page]);
+    const resultCount: number = useMemo(() => Number(props.resultCount.value), [props.resultCount.value]);
+    const pageTotal: number = useMemo(
+        () => (resultCount > 0 && pageSize > 0 ? Math.ceil(resultCount / pageSize) : 1),
+        [resultCount, pageSize]
+    );
+    const resultCountCaption = useMemo(
+        () =>
+            props.resultCountCaption?.value
+                ? props.resultCountCaption.value
+                : resultCount === 1
+                ? "1 result"
+                : formatInteger(resultCount) + " results",
+        [props.resultCountCaption, resultCount]
+    );
+    const pageDisplay: string = useMemo(() => {
+        if (pageSize) {
+            const offset = (page - 1) * pageSize;
+            return props.pageDisplayType === "PAGES"
+                ? `${props.pageLabel.value} ${formatInteger(page)} ${props.ofLabel.value} ${formatInteger(pageTotal)}`
+                : props.pageDisplayType === "RECORDS"
+                ? resultCount === 0
+                    ? `0 ${props.toLabel.value} 0 ${props.ofLabel.value} 0`
+                    : `${offset + 1} ${props.toLabel.value} ${page === pageTotal ? resultCount : offset + pageSize} ${
+                          props.ofLabel.value
+                      } ${resultCount}`
+                : (props.pageDisplay.value as string);
+        } else {
+            return "";
+        }
+    }, [page, pageTotal, pageSize, resultCount]);
+
+    const pageOffset = useMemo(
+        () => (props.pageOffset?.value ? Number(props.pageOffset.value) : 1),
+        [props.pageOffset]
+    );
+
+    if (props.autoCorrect) {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         useEffect(() => {
-            if (pageNumberValue > pageTotal || pageNumberValue < 1) {
-                if (autoCorrectTo === "FIRST") {
+            if (page > pageTotal || page < 1) {
+                if (props.autoCorrectTo === "FIRST") {
                     setPage(1);
                 } else {
                     setPage(pageTotal);
                 }
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [pageNumberValue, pageTotal]);
+        }, [page, pageTotal]);
     }
 
-    const setPage = (newPage: number): void => {
-        page.setValue(Big(newPage));
-        refreshAction?.execute();
-    };
+    const setPage = useCallback(
+        (newPage: number): void => {
+            props.page.setValue(Big(newPage));
+            props.refreshAction?.execute();
+        },
+        [props.page, props.refreshAction]
+    );
+    const setPageSize = useCallback(
+        (newPageSize: number): void => {
+            props.pageSizeAttr.setValue(new Big(newPageSize));
+            props.refreshAction?.execute();
+        },
+        [props.page, props.refreshAction]
+    );
 
     return (
-        <div id={name} className={className ? "widget-pagination " + className : "widget-pagination"} style={style}>
-            {resultCountValue > 0 && displayFormat === "navigation" && (
-                <NavigationPagination
-                    name={name}
-                    page={pageNumberValue}
-                    pageTotal={pageTotal}
-                    buttonAlignment={buttonAlignment}
-                    resultCountCaption={resultCountCaptionValue}
-                    resultCountCaptionAlignment={resultCountCaptionAlignment}
-                    pageDisplay={pageDisplayValue}
-                    setPage={setPage}
-                    renderMode={renderMode}
-                    buttonStyle={buttonStyle}
-                    includeEnds={includeEnds}
-                    tabIndex={tabIndex}
-                />
-            )}
-            {resultCountValue > 0 && displayFormat === "perPage" && (
-                <PerPagePagination
-                    name={name}
-                    page={pageNumberValue}
-                    pageTotal={pageTotal}
-                    buttonAlignment={buttonAlignment}
-                    resultCountCaption={resultCountCaptionValue}
-                    resultCountCaptionAlignment={resultCountCaptionAlignment}
-                    includeArrows={includeArrows}
-                    pageOffset={pageOffsetValue}
-                    pageBreak={pageBreak}
-                    setPage={setPage}
-                    renderMode={renderMode}
-                    buttonStyle={buttonStyle}
-                    tabIndex={tabIndex}
-                />
-            )}
-        </div>
+        <Pagination
+            {...props}
+            tabIndex={props.tabIndex || 0}
+            resultCountCaption={resultCountCaption}
+            pageDisplay={pageDisplay}
+            pageOffset={pageOffset}
+            page={page}
+            setPage={setPage}
+            pageTotal={pageTotal}
+            resultCount={resultCount}
+            pageSize={pageSize}
+            setPageSize={setPageSize}
+            /* Label customization */
+            pageLabel={props.pageLabel.value as string}
+            pageSizeLabel={props.pageSizeLabel.value as string}
+            firstLabel={props.firstLabel.value as string}
+            previousLabel={props.previousLabel.value as string}
+            nextLabel={props.nextLabel.value as string}
+            lastLabel={props.lastLabel.value as string}
+            /* Icon set */
+            firstIcon={props.firstPageIcon?.value || { type: "glyph", iconClass: "glyphicon-step-backward" }}
+            previousIcon={props.previousPageIcon?.value || { type: "glyph", iconClass: "glyphicon-triangle-left" }}
+            nextIcon={props.nextPageIcon?.value || { type: "glyph", iconClass: "glyphicon-triangle-right" }}
+            lastIcon={props.lastPageIcon?.value || { type: "glyph", iconClass: "glyphicon-step-forward" }}
+        />
     );
 };
 
-export default Pagination;
+export default AdvancedPagination;

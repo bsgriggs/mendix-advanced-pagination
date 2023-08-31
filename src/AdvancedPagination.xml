@@ -1,53 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.advancedpagination.AdvancedPagination" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
-        supportedPlatform="Web"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+<widget id="mendix.advancedpagination.AdvancedPagination" pluginWidget="true"
+    needsEntityContext="true" offlineCapable="true"
+    supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Advanced Pagination</name>
     <description>Encapsulates math for handling custom grid and API pagination.</description>
     <helpUrl>https://github.com/bsgriggs/pagination/blob/master/README.md</helpUrl>
     <properties>
         <propertyGroup caption="General">
-            <propertyGroup caption="Type">
-            <property key="displayFormat" type="enumeration" defaultValue="navigation">
-                <caption>Format</caption>
-                <description></description>
-                <enumerationValues>
-                    <enumerationValue key="navigation">Navigation</enumerationValue>
-                    <enumerationValue key="perPage">Per Page</enumerationValue>
-                </enumerationValues>
-            </property>
-            <property key="includeEnds" type="boolean" defaultValue="true">
-                <caption>Include End Buttons?</caption>
-                <description>When Yes, shows a button to go to the first and last pages</description>
-            </property>
-            <property key="pageDisplay" type="textTemplate" required="false">
-                <caption>Page Display</caption>
-                <description>Text in the middle of the buttons - default "Page 3 of 14")</description>
-                <translations>
-                    <translation lang="en_US"></translation>
-                </translations>
-            </property>
-            <property key="includeArrows" type="boolean" defaultValue="true">
-                <caption>Include Arrows?</caption>
-                <description>When Yes, shows the Previous and Next arrow buttons on the ends of the pages</description>
-            </property>
-            <property key="pageOffset" type="expression" defaultValue="1" required="true">
-                <caption>Page Offset</caption>
-                <description>Number of pages from the current page to display (e.g. Page Offset = 2 and Page = 5 => pages 3, 4, 5, 6, 7)</description>
-                <returnType type="Integer" />
-            </property>
-            <property key="pageBreak" type="enumeration" defaultValue="ellipses">
-                <caption>Page Break</caption>
-                <description>What is displayed in the gap and the current page and the first and last pages (e.g. Page Offset = 1 and Page = 5 => 1 ... 4, 5, 6 ... 10)</description>
-                <enumerationValues>
-                    <enumerationValue key="ellipses">Ellipses</enumerationValue>
-                    <enumerationValue key="line">Line</enumerationValue>
-                    <enumerationValue key="space">Space</enumerationValue>
-                </enumerationValues>
-            </property>
+            <propertyGroup caption="Data">
+                <property key="page" type="attribute" required="true">
+                    <caption>Page</caption>
+                    <description>Integer of the page number being displayed</description>
+                    <attributeTypes>
+                        <attributeType name="Integer" />
+                    </attributeTypes>
+                </property>
+                <property key="resultCount" type="attribute" required="true">
+                    <caption>Result Count</caption>
+                    <description>Integer of the total amount of records</description>
+                    <attributeTypes>
+                        <attributeType name="Integer" />
+                    </attributeTypes>
+                </property>
+                <property key="pageSizeType" type="enumeration" defaultValue="EXPRESSION">
+                    <caption>Page size type</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="EXPRESSION">Expression</enumerationValue>
+                        <enumerationValue key="TEXT_BOX">Text box</enumerationValue>
+                        <enumerationValue key="DROPDOWN">Dropdown</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="pageSize" type="expression" defaultValue="10" required="true">
+                    <caption>Page Size</caption>
+                    <description>Integer of how many records are shown per page</description>
+                    <returnType type="Integer" />
+                </property>
+                <property key="pageSizeAttr" type="attribute" required="true">
+                    <caption>Page Size</caption>
+                    <description>Integer of how many records are shown per page</description>
+                    <attributeTypes>
+                        <attributeType name="Integer" />
+                    </attributeTypes>
+                </property>
+                <property key="pageSizes" type="object" required="true" isList="true">
+                    <caption>Page sizes</caption>
+                    <description></description>
+                    <properties>
+                        <propertyGroup caption="Page size">
+                            <property key="value" type="integer" defaultValue="10" required="true">
+                                <caption>Value</caption>
+                                <description></description>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
             </propertyGroup>
-            <propertyGroup caption="Customization">
+            <propertyGroup caption="Actions">
+                <property key="refreshAction" type="action" required="true">
+                    <caption>Refresh Action</caption>
+                    <description>Must be an action with a Refresh in Client on the parent dataview's object</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Customization">
+            <propertyGroup caption="Type">
+                <property key="displayFormat" type="enumeration" defaultValue="navigation">
+                    <caption>Format</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="navigation">Navigation</enumerationValue>
+                        <enumerationValue key="perPage">Per Page</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="includeEnds" type="boolean" defaultValue="true">
+                    <caption>Include End Buttons?</caption>
+                    <description>When Yes, shows a button to go to the first and last pages</description>
+                </property>
+                <property key="pageDisplayType" type="enumeration" defaultValue="PAGES">
+                    <caption>Page display type</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="PAGES">Page X of Y</enumerationValue>
+                        <enumerationValue key="RECORDS">X to Y of Z</enumerationValue>
+                        <enumerationValue key="CUSTOM">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="pageDisplay" type="textTemplate" required="true">
+                    <caption>Page Display</caption>
+                    <description>Text in the middle of the buttons</description>
+                    <translations>
+                        <translation lang="en_US"></translation>
+                    </translations>
+                </property>
+                <property key="includeArrows" type="boolean" defaultValue="true">
+                    <caption>Include Arrows?</caption>
+                    <description>Shows the Previous and Next arrow buttons</description>
+                </property>
+                <property key="pageOffset" type="expression" defaultValue="1" required="true">
+                    <caption>Page Offset</caption>
+                    <description>Number of pages from the current page to display</description>
+                    <returnType type="Integer" />
+                </property>
+                <property key="pageBreak" type="enumeration" defaultValue="ellipses">
+                    <caption>Page Break</caption>
+                    <description>Displayed in the gap between the current page and the first and last pages</description>
+                    <enumerationValues>
+                        <enumerationValue key="ellipses">Ellipses</enumerationValue>
+                        <enumerationValue key="line">Line</enumerationValue>
+                        <enumerationValue key="space">Space</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Style">
+                <property key="pageSizeAlignment" type="enumeration" defaultValue="START">
+                    <caption>Page Size Alignment</caption>
+                    <description>Where to show the Page Size input relative to the buttons</description>
+                    <enumerationValues>
+                        <enumerationValue key="START">Start</enumerationValue>
+                        <enumerationValue key="END">End</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <property key="resultCountCaptionAlignment" type="enumeration" defaultValue="start">
                     <caption>Total Caption Alignment</caption>
                     <description>Where to show the Total Caption relative to the buttons</description>
@@ -64,6 +139,8 @@
                         <translation lang="en_US"></translation>
                     </translations>
                 </property>
+            </propertyGroup>
+            <propertyGroup caption="Auto correct">
                 <property key="autoCorrect" type="boolean" defaultValue="true">
                     <caption>Auto Correct?</caption>
                     <description>Adjust the page number if the current page is outside the range? (i.e. If showing page 4 of 3 = auto change the page to 1)</description>
@@ -76,6 +153,68 @@
                         <enumerationValue key="LAST">Last page</enumerationValue>
                     </enumerationValues>
                 </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Text">
+            <property key="pageLabel" type="textTemplate" required="true">
+                <caption>Page label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Page</translation>
+                </translations>
+            </property>
+            <property key="pageSizeLabel" type="textTemplate" required="true">
+                <caption>Page size label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Page size</translation>
+                </translations>
+            </property>
+            <property key="ofLabel" type="textTemplate" required="true">
+                <caption>Of label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">of</translation>
+                </translations>
+            </property>
+            <property key="toLabel" type="textTemplate" required="true">
+                <caption>To label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">to</translation>
+                </translations>
+            </property>
+            <property key="firstLabel" type="textTemplate" required="true">
+                <caption>First label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">First</translation>
+                </translations>
+            </property>
+            <property key="previousLabel" type="textTemplate" required="true">
+                <caption>Previous label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Previous</translation>
+                </translations>
+            </property>
+            <property key="nextLabel" type="textTemplate" required="true">
+                <caption>Next label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Next</translation>
+                </translations>
+            </property>
+            <property key="lastLabel" type="textTemplate" required="true">
+                <caption>Last label</caption>
+                <description></description>
+                <translations>
+                    <translation lang="en_US">Last</translation>
+                </translations>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Buttons">
+            <propertyGroup caption="Style">
                 <property key="renderMode" type="enumeration" defaultValue="button">
                     <caption>Render Mode</caption>
                     <description></description>
@@ -106,40 +245,41 @@
                         <enumerationValue key="end">End</enumerationValue>
                     </enumerationValues>
                 </property>
-                <systemProperty key="Visibility" />
+            </propertyGroup>
+            <propertyGroup caption="Icons">
+                <property key="firstPageIcon" type="icon" required="false">
+                    <caption>First page</caption>
+                    <description></description>
+                </property>
+                <property key="previousPageIcon" type="icon" required="false">
+                    <caption>Previous page</caption>
+                    <description></description>
+                </property>
+                <property key="nextPageIcon" type="icon" required="false">
+                    <caption>Next page</caption>
+                    <description></description>
+                </property>
+                <property key="lastPageIcon" type="icon" required="false">
+                    <caption>Last page</caption>
+                    <description></description>
+                </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Actions">
-            <property key="refreshAction" type="action" required="true">
-                <caption>Refresh Action</caption>
-                <description>Must be a Microflow or Nanoflow that has a Refresh in Client on the parent dataview's object</description>
-            </property>
-        </propertyGroup>
-        <propertyGroup caption="Attributes">
-            <property key="page" type="attribute" required="true">
-                <caption>Page</caption>
-                <description>Integer of the current page displaying</description>
-                <attributeTypes>
-                    <attributeType name="Integer" />
-                </attributeTypes>
-            </property>
-            <property key="pageSize" type="expression" defaultValue="10" required="true">
-                <caption>Page Size</caption>
-                <description>Integer of how many records are shown per page</description>
-                <returnType type="Integer" />
-            </property>
-            <property key="resultCount" type="attribute" required="true">
-                <caption>Result Count</caption>
-                <description>Integer of the total amount of records</description>
-                <attributeTypes>
-                    <attributeType name="Integer" />
-                </attributeTypes>
-            </property>
-        </propertyGroup>
-        <propertyGroup caption="System">
-            <systemProperty key="Name"/>
-            <systemProperty key="TabIndex"/>
-            <systemProperty key="Visibility"/>
+        <!-- <propertyGroup caption="Events">
+            <propertyGroup caption="Events">
+            </propertyGroup>
+        </propertyGroup> -->
+        <propertyGroup caption="Common">
+            <propertyGroup caption="Common">
+                <systemProperty key="Name" />
+                <systemProperty key="TabIndex" />
+            </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+            <!-- <propertyGroup caption="Editbility">
+                <systemProperty key="Editability" />
+            </propertyGroup> -->
         </propertyGroup>
     </properties>
 </widget>
