@@ -1,5 +1,5 @@
 import { AdvancedPaginationPreviewProps } from "../typings/AdvancedPaginationProps";
-import { hidePropertyIn, hidePropertiesIn } from "@mendix/pluggable-widgets-tools";
+import { hidePropertiesIn } from "@mendix/pluggable-widgets-tools";
 export type Platform = "web" | "desktop";
 
 export type Properties = PropertyGroup[];
@@ -99,22 +99,14 @@ export type PreviewProps =
     | DatasourceProps;
 
 export function getProperties(_values: AdvancedPaginationPreviewProps, defaultProperties: Properties): Properties {
-    // Do the values manipulation here to control the visibility of properties in Studio and Studio Pro conditionally.
-    /* Example
-    if (values.myProperty === "custom") {
-        delete defaultProperties.properties.myOtherProperty;
-    }
-    */
-
     // Display Format
     switch (_values.displayFormat) {
         case "navigation":
-            hidePropertiesIn(defaultProperties, _values, ["includeArrows", "pageOffset", "pageBreak"]);
+            hidePropertiesIn(defaultProperties, _values, ["pageOffset", "pageBreak"]);
             break;
         case "perPage":
             hidePropertiesIn(defaultProperties, _values, [
                 "pageDisplay",
-                "includeEnds",
                 "pageDisplayType",
                 "firstPageIcon",
                 "lastPageIcon",
@@ -126,13 +118,16 @@ export function getProperties(_values: AdvancedPaginationPreviewProps, defaultPr
     // Total Caption Alignment
     if (_values.resultCountCaptionAlignment === "hide") {
         hidePropertiesIn(defaultProperties, _values, ["resultCountCaption"]);
+        if (_values.pageSizeType === "EXPRESSION") {
+            hidePropertiesIn(defaultProperties, _values, ["showLineBreaks"]);
+        }
     }
 
     if (!_values.autoCorrect) {
         hidePropertiesIn(defaultProperties, _values, ["autoCorrectTo"]);
     }
 
-    if (!_values.includeArrows || !_values.includeEnds) {
+    if (!_values.includeEnds) {
         hidePropertiesIn(defaultProperties, _values, ["firstLabel", "firstPageIcon", "lastLabel", "lastPageIcon"]);
     }
 
@@ -145,7 +140,8 @@ export function getProperties(_values: AdvancedPaginationPreviewProps, defaultPr
                 "pageSizes",
                 "pageSizeAlignment",
                 "pageSizeAttr",
-                "pageSizeLabel"
+                "pageSizeLabel",
+                "showPageSizeLabel"
             ]);
             break;
         case "TEXT_BOX":
@@ -165,25 +161,11 @@ export function getProperties(_values: AdvancedPaginationPreviewProps, defaultPr
             break;
     }
 
-    if (_values.renderMode === "link") {
-        hidePropertyIn(defaultProperties, _values, "buttonStyle");
-    }
-
     return defaultProperties;
 }
 
 export function check(_values: AdvancedPaginationPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    // Add errors to the above array to throw errors in Studio and Studio Pro.
-    /* Example
-    if (values.myProperty !== "custom") {
-        errors.push({
-            property: `myProperty`,
-            message: `The value of 'myProperty' is different of 'custom'.`,
-            url: "https://github.com/myrepo/mywidget"
-        });
-    }
-    */
     if (_values.refreshAction === null) {
         errors.push({
             property: `refreshAction`,

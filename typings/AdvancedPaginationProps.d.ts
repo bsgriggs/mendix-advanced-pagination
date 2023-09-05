@@ -17,7 +17,7 @@ export type DisplayFormatEnum = "navigation" | "perPage";
 
 export type PageDisplayTypeEnum = "PAGES" | "RECORDS" | "CUSTOM";
 
-export type PageBreakEnum = "ellipses" | "line" | "space";
+export type PageBreakEnum = "ellipses" | "line" | "space" | "none";
 
 export type PageSizeAlignmentEnum = "START" | "END";
 
@@ -54,9 +54,12 @@ export interface AdvancedPaginationContainerProps {
     includeArrows: boolean;
     pageOffset: DynamicValue<Big>;
     pageBreak: PageBreakEnum;
+    groupDigits: boolean;
+    showPageSizeLabel: boolean;
     pageSizeAlignment: PageSizeAlignmentEnum;
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     resultCountCaption?: DynamicValue<string>;
+    showLineBreaks: boolean;
     autoCorrect: boolean;
     autoCorrectTo: AutoCorrectToEnum;
     pageLabel: DynamicValue<string>;
@@ -99,9 +102,12 @@ export interface AdvancedPaginationPreviewProps {
     includeArrows: boolean;
     pageOffset: string;
     pageBreak: PageBreakEnum;
+    groupDigits: boolean;
+    showPageSizeLabel: boolean;
     pageSizeAlignment: PageSizeAlignmentEnum;
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     resultCountCaption: string;
+    showLineBreaks: boolean;
     autoCorrect: boolean;
     autoCorrectTo: AutoCorrectToEnum;
     pageLabel: string;

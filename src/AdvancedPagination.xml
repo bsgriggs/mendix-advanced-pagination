@@ -18,7 +18,7 @@
                     </attributeTypes>
                 </property>
                 <property key="resultCount" type="attribute" required="true">
-                    <caption>Result Count</caption>
+                    <caption>Result count</caption>
                     <description>Integer of the total amount of records</description>
                     <attributeTypes>
                         <attributeType name="Integer" />
@@ -33,13 +33,13 @@
                         <enumerationValue key="DROPDOWN">Dropdown</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="pageSize" type="expression" defaultValue="10" required="true">
-                    <caption>Page Size</caption>
+                <property key="pageSize" type="expression" required="true">
+                    <caption>Page size</caption>
                     <description>Integer of how many records are shown per page</description>
                     <returnType type="Integer" />
                 </property>
                 <property key="pageSizeAttr" type="attribute" required="true">
-                    <caption>Page Size</caption>
+                    <caption>Page size</caption>
                     <description>Integer of how many records are shown per page</description>
                     <attributeTypes>
                         <attributeType name="Integer" />
@@ -60,7 +60,7 @@
             </propertyGroup>
             <propertyGroup caption="Actions">
                 <property key="refreshAction" type="action" required="true">
-                    <caption>Refresh Action</caption>
+                    <caption>Refresh action</caption>
                     <description>Must be an action with a Refresh in Client on the parent dataview's object</description>
                 </property>
             </propertyGroup>
@@ -76,8 +76,8 @@
                     </enumerationValues>
                 </property>
                 <property key="includeEnds" type="boolean" defaultValue="true">
-                    <caption>Include End Buttons?</caption>
-                    <description>When Yes, shows a button to go to the first and last pages</description>
+                    <caption>Include end buttons?</caption>
+                    <description>Shows a button to go to the first and last pages</description>
                 </property>
                 <property key="pageDisplayType" type="enumeration" defaultValue="PAGES">
                     <caption>Page display type</caption>
@@ -89,34 +89,43 @@
                     </enumerationValues>
                 </property>
                 <property key="pageDisplay" type="textTemplate" required="true">
-                    <caption>Page Display</caption>
-                    <description>Text in the middle of the buttons</description>
+                    <caption>Page display</caption>
+                    <description></description>
                     <translations>
                         <translation lang="en_US"></translation>
                     </translations>
                 </property>
                 <property key="includeArrows" type="boolean" defaultValue="true">
-                    <caption>Include Arrows?</caption>
+                    <caption>Include arrows?</caption>
                     <description>Shows the Previous and Next arrow buttons</description>
                 </property>
                 <property key="pageOffset" type="expression" defaultValue="1" required="true">
-                    <caption>Page Offset</caption>
+                    <caption>Page offset</caption>
                     <description>Number of pages from the current page to display</description>
                     <returnType type="Integer" />
                 </property>
                 <property key="pageBreak" type="enumeration" defaultValue="ellipses">
-                    <caption>Page Break</caption>
+                    <caption>Page break</caption>
                     <description>Displayed in the gap between the current page and the first and last pages</description>
                     <enumerationValues>
                         <enumerationValue key="ellipses">Ellipses</enumerationValue>
                         <enumerationValue key="line">Line</enumerationValue>
                         <enumerationValue key="space">Space</enumerationValue>
+                        <enumerationValue key="none">None</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Style">
+                <property key="groupDigits" type="boolean" defaultValue="true">
+                    <caption>Group digits</caption>
+                    <description></description>
+                </property>
+                <property key="showPageSizeLabel" type="boolean" defaultValue="true">
+                    <caption>Show page size label</caption>
+                    <description></description>
+                </property>
                 <property key="pageSizeAlignment" type="enumeration" defaultValue="START">
-                    <caption>Page Size Alignment</caption>
+                    <caption>Page size alignment</caption>
                     <description>Where to show the Page Size input relative to the buttons</description>
                     <enumerationValues>
                         <enumerationValue key="START">Start</enumerationValue>
@@ -124,7 +133,7 @@
                     </enumerationValues>
                 </property>
                 <property key="resultCountCaptionAlignment" type="enumeration" defaultValue="start">
-                    <caption>Total Caption Alignment</caption>
+                    <caption>Total caption alignment</caption>
                     <description>Where to show the Total Caption relative to the buttons</description>
                     <enumerationValues>
                         <enumerationValue key="start">Start</enumerationValue>
@@ -133,21 +142,25 @@
                     </enumerationValues>
                 </property>
                 <property key="resultCountCaption" type="textTemplate" required="false">
-                    <caption>Total Caption</caption>
+                    <caption>Total caption</caption>
                     <description>Text for the total number of results - default "# results"</description>
                     <translations>
                         <translation lang="en_US"></translation>
                     </translations>
                 </property>
+                <property key="showLineBreaks" type="boolean" defaultValue="true">
+                    <caption>Show line breaks</caption>
+                    <description>Breaks up different sections of the widget by a vertical line</description>
+                </property>
             </propertyGroup>
             <propertyGroup caption="Auto correct">
                 <property key="autoCorrect" type="boolean" defaultValue="true">
-                    <caption>Auto Correct?</caption>
+                    <caption>Enabled?</caption>
                     <description>Adjust the page number if the current page is outside the range? (i.e. If showing page 4 of 3 = auto change the page to 1)</description>
                 </property>
                 <property key="autoCorrectTo" type="enumeration" defaultValue="FIRST">
-                    <caption>Auto Correct To</caption>
-                    <description>The page set when auto correcting</description>
+                    <caption>Auto correct type</caption>
+                    <description>When auto-correcting, set  the page as:</description>
                     <enumerationValues>
                         <enumerationValue key="FIRST">First page</enumerationValue>
                         <enumerationValue key="LAST">Last page</enumerationValue>
@@ -163,6 +176,7 @@
                     <translation lang="en_US">Page</translation>
                 </translations>
             </property>
+
             <property key="pageSizeLabel" type="textTemplate" required="true">
                 <caption>Page size label</caption>
                 <description></description>
@@ -216,7 +230,7 @@
         <propertyGroup caption="Buttons">
             <propertyGroup caption="Style">
                 <property key="renderMode" type="enumeration" defaultValue="button">
-                    <caption>Render Mode</caption>
+                    <caption>Render mode</caption>
                     <description></description>
                     <enumerationValues>
                         <enumerationValue key="button">Button</enumerationValue>
@@ -224,7 +238,7 @@
                     </enumerationValues>
                 </property>
                 <property key="buttonStyle" type="enumeration" defaultValue="primary">
-                    <caption>Button Style</caption>
+                    <caption>Button style</caption>
                     <description></description>
                     <enumerationValues>
                         <enumerationValue key="default">Default</enumerationValue>
@@ -237,7 +251,7 @@
                     </enumerationValues>
                 </property>
                 <property key="buttonAlignment" type="enumeration" defaultValue="end">
-                    <caption>Button Alignment</caption>
+                    <caption>Button alignment</caption>
                     <description>Where to show the buttons relative to the parent container</description>
                     <enumerationValues>
                         <enumerationValue key="start">Start</enumerationValue>

@@ -1,5 +1,5 @@
 import { createElement, Fragment, MouseEvent, ReactElement } from "react";
-import { ButtonStyleEnum, RenderModeEnum } from "../../../typings/AdvancedPaginationProps";
+import { ButtonStyleEnum } from "../../../typings/AdvancedPaginationProps";
 import classNames from "classnames";
 import { Icon } from "mendix/components/web/Icon";
 import { WebIcon } from "mendix";
@@ -7,7 +7,6 @@ import { WebIcon } from "mendix";
 type NavButtonProps = {
     title: string;
     onClick(): void;
-    renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
     icon?: WebIcon;
     btnCaption?: string;
@@ -29,9 +28,7 @@ const NavButton = (props: NavButtonProps): ReactElement => {
     return (
         <button
             className={classNames(
-                "btn",
-                props.renderMode === "button" ? `mx-button btn-bordered btn-${props.buttonStyle}` : "",
-                { "pagination-button": props.renderMode === "link" },
+                `btn mx-button btn-${props.buttonStyle} btn-bordered`,
                 { active: props.active },
                 { disabled: props.disabled }
             )}

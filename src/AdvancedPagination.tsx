@@ -4,12 +4,15 @@ import Big from "big.js";
 import Pagination from "./components/Pagination";
 import "./ui/AdvancedPagination.scss";
 
-const formatInteger = (newNumber: number): string => {
-    // @ts-ignore
-    return mx.parser.formatValue(newNumber || 0, "integer", { groupDigits: true, decimalPrecision: 0 });
-};
-
 const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactElement => {
+    const groupDigits = useCallback(
+        (newNumber: number): string =>
+            props.groupDigits
+                ? // @ts-ignore
+                  mx.parser.formatValue(newNumber || 0, "integer", { groupDigits: true, decimalPrecision: 0 })
+                : newNumber,
+        [props.groupDigits]
+    );
     const pageSize: number = useMemo(
         () => (props.pageSizeType === "EXPRESSION" ? Number(props.pageSize.value) : Number(props.pageSizeAttr.value)),
         [props.pageSize, props.pageSizeAttr]
@@ -27,20 +30,20 @@ const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactEleme
                 ? props.resultCountCaption.value
                 : resultCount === 1
                 ? "1 result"
-                : formatInteger(resultCount) + " results",
+                : groupDigits(resultCount) + " results",
         [props.resultCountCaption, resultCount]
     );
     const pageDisplay: string = useMemo(() => {
         if (pageSize) {
             const offset = (page - 1) * pageSize;
             return props.pageDisplayType === "PAGES"
-                ? `${props.pageLabel.value} ${formatInteger(page)} ${props.ofLabel.value} ${formatInteger(pageTotal)}`
+                ? `${props.pageLabel.value} ${groupDigits(page)} ${props.ofLabel.value} ${groupDigits(pageTotal)}`
                 : props.pageDisplayType === "RECORDS"
                 ? resultCount === 0
                     ? `0 ${props.toLabel.value} 0 ${props.ofLabel.value} 0`
-                    : `${offset + 1} ${props.toLabel.value} ${page === pageTotal ? resultCount : offset + pageSize} ${
-                          props.ofLabel.value
-                      } ${resultCount}`
+                    : `${groupDigits(offset + 1)} ${props.toLabel.value} ${groupDigits(
+                          page === pageTotal ? resultCount : offset + pageSize
+                      )} ${props.ofLabel.value} ${groupDigits(resultCount)}`
                 : (props.pageDisplay.value as string);
         } else {
             return "";

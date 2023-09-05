@@ -17,6 +17,7 @@ import {
     RenderModeEnum,
     ResultCountCaptionAlignmentEnum
 } from "../../typings/AdvancedPaginationProps";
+import PageBreak from "./sub-components/PageBreak";
 
 interface PaginationProps {
     class: string;
@@ -36,6 +37,9 @@ interface PaginationProps {
     includeArrows: boolean;
     pageOffset: number;
     pageBreak: PageBreakEnum;
+    groupDigits: boolean;
+    showPageSizeLabel: boolean;
+    showLineBreaks: boolean;
     /* Cleaned Props */
     page: number;
     setPage: (newPage: number) => void;
@@ -64,29 +68,48 @@ const Pagination = (props: PaginationProps): ReactElement => {
             className={classNames(
                 props.class,
                 "advanced-pagination",
-                "spacing-outer-bottom-medium",
-                props.buttonAlignment
+                // "spacing-outer-bottom-medium",
+                props.buttonAlignment,
+                `render-${props.renderMode}`
             )}
             style={props.style}
         >
             {props.resultCountCaptionAlignment === "start" && (
-                <span className="mx-text">{props.resultCountCaption}</span>
-            )}
-            {props.pageSizeAlignment === "START" && (
                 <Fragment>
+                    <span className="mx-text">{props.resultCountCaption}</span>
+                    {props.showLineBreaks && <PageBreak mode="line" />}
+                </Fragment>
+            )}
+            {props.pageSizeAlignment === "START" && props.pageSizeType !== "EXPRESSION" && (
+                <Fragment>
+                    {props.pageSizeType === "DROPDOWN" && <PageSizeDropdown {...props} />}
+                    {props.pageSizeType === "TEXT_BOX" && <PageSizeTextbox {...props} />}
+                    {props.showLineBreaks && <PageBreak mode="line" />}
+                </Fragment>
+            )}
+            {props.resultCount > 0 && props.displayFormat === "navigation" && (
+                <Fragment>
+                    <NavigationPagination {...props} />
+                </Fragment>
+            )}
+            {props.resultCount > 0 && props.displayFormat === "perPage" && (
+                <Fragment>
+                    <PerPagePagination {...props} />
+                </Fragment>
+            )}
+            {props.pageSizeAlignment === "END" && props.pageSizeType !== "EXPRESSION" && (
+                <Fragment>
+                    {props.showLineBreaks && <PageBreak mode="line" />}
                     {props.pageSizeType === "DROPDOWN" && <PageSizeDropdown {...props} />}
                     {props.pageSizeType === "TEXT_BOX" && <PageSizeTextbox {...props} />}
                 </Fragment>
             )}
-            {props.resultCount > 0 && props.displayFormat === "navigation" && <NavigationPagination {...props} />}
-            {props.resultCount > 0 && props.displayFormat === "perPage" && <PerPagePagination {...props} />}
-            {props.pageSizeAlignment === "END" && (
+            {props.resultCountCaptionAlignment === "end" && (
                 <Fragment>
-                    {props.pageSizeType === "DROPDOWN" && <PageSizeDropdown {...props} />}
-                    {props.pageSizeType === "TEXT_BOX" && <PageSizeTextbox {...props} />}
+                    {props.showLineBreaks && <PageBreak mode="line" />}
+                    <span className="mx-text">{props.resultCountCaption}</span>
                 </Fragment>
             )}
-            {props.resultCountCaptionAlignment === "end" && <span className="mx-text">{props.resultCountCaption}</span>}
         </div>
     );
 };

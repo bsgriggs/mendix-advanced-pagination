@@ -1,5 +1,5 @@
 import { createElement, ReactElement } from "react";
-import { ButtonStyleEnum, RenderModeEnum } from "../../../typings/AdvancedPaginationProps";
+import { ButtonStyleEnum } from "../../../typings/AdvancedPaginationProps";
 import NavButton from "./NavButton";
 import classNames from "classnames";
 import { WebIcon } from "mendix";
@@ -8,7 +8,6 @@ type NavigationPaginationProps = {
     page: number;
     pageTotal: number;
     pageDisplay: string;
-    renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
     includeEnds: boolean;
     tabIndex: number;
@@ -28,7 +27,7 @@ type NavigationPaginationProps = {
 
 const NavigationPagination = (props: NavigationPaginationProps): ReactElement => {
     return (
-        <div className={classNames("navigation-pagination", { "pagination-bar": props.renderMode === "link" })}>
+        <div className={classNames("navigation-pagination")}>
             {props.includeEnds && (
                 <NavButton
                     title={`${props.firstLabel} ${props.pageLabel}`}
@@ -38,7 +37,6 @@ const NavigationPagination = (props: NavigationPaginationProps): ReactElement =>
                         }
                     }}
                     disabled={props.page === 1}
-                    renderMode={props.renderMode}
                     buttonStyle={props.buttonStyle}
                     icon={props.firstIcon}
                     tabIndex={props.tabIndex}
@@ -52,7 +50,6 @@ const NavigationPagination = (props: NavigationPaginationProps): ReactElement =>
                     }
                 }}
                 disabled={props.page === 1}
-                renderMode={props.renderMode}
                 buttonStyle={props.buttonStyle}
                 icon={props.previousIcon}
                 tabIndex={props.tabIndex}
@@ -66,7 +63,6 @@ const NavigationPagination = (props: NavigationPaginationProps): ReactElement =>
                     }
                 }}
                 disabled={props.page === props.pageTotal}
-                renderMode={props.renderMode}
                 buttonStyle={props.buttonStyle}
                 icon={props.nextIcon}
                 tabIndex={props.tabIndex}
@@ -80,7 +76,6 @@ const NavigationPagination = (props: NavigationPaginationProps): ReactElement =>
                         }
                     }}
                     disabled={props.page === props.pageTotal}
-                    renderMode={props.renderMode}
                     buttonStyle={props.buttonStyle}
                     icon={props.lastIcon}
                     tabIndex={props.tabIndex}

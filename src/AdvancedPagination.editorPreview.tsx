@@ -51,23 +51,13 @@ export const preview = (props: AdvancedPaginationPreviewProps): ReactNode => {
 
     return (
         <Pagination
-            class={props.class}
+            {...props}
             style={props.styleObject}
             tabIndex={0}
-            resultCountCaptionAlignment={props.resultCountCaptionAlignment}
             resultCountCaption={resultCountCaption}
-            pageSizeAlignment={props.pageSizeAlignment}
-            pageSizeType={props.pageSizeType}
             pageSizes={props.pageSizes as PageSizesType[]}
-            displayFormat={props.displayFormat}
-            buttonAlignment={props.buttonAlignment}
             pageDisplay={pageDisplay}
-            renderMode={props.renderMode}
-            buttonStyle={props.buttonStyle}
-            includeEnds={props.includeEnds}
-            includeArrows={props.includeArrows}
             pageOffset={pageOffset}
-            pageBreak={props.pageBreak}
             page={1}
             pageSize={tryParseNumber(props.pageSizeType === "EXPRESSION" ? props.pageSize : props.pageSizeAttr, 10)}
             // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -76,13 +66,6 @@ export const preview = (props: AdvancedPaginationPreviewProps): ReactNode => {
             setPageSize={() => {}}
             pageTotal={pageTotal}
             resultCount={resultCount}
-            /* Label customization */
-            pageLabel={props.pageLabel as string}
-            pageSizeLabel={props.pageSizeLabel as string}
-            firstLabel={props.firstLabel as string}
-            previousLabel={props.previousLabel as string}
-            nextLabel={props.nextLabel as string}
-            lastLabel={props.lastLabel as string}
             /* Icon set */
             firstIcon={
                 props.firstPageIcon !== null

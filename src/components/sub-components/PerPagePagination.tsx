@@ -1,5 +1,5 @@
-import { createElement, ReactElement, useMemo } from "react";
-import { PageBreakEnum, RenderModeEnum, ButtonStyleEnum } from "../../../typings/AdvancedPaginationProps";
+import { createElement, ReactElement, useMemo, useCallback } from "react";
+import { PageBreakEnum, ButtonStyleEnum } from "../../../typings/AdvancedPaginationProps";
 import PageBreak from "./PageBreak";
 import NavButton from "./NavButton";
 import classNames from "classnames";
@@ -11,10 +11,10 @@ type PerPagePaginationProps = {
     includeArrows: boolean;
     pageOffset: number;
     pageBreak: PageBreakEnum;
-    renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
     tabIndex: number;
     setPage: (newPage: number) => void;
+    groupDigits: boolean;
     /* Label customization */
     pageLabel: string;
     firstLabel: string;
@@ -29,6 +29,15 @@ type PerPagePaginationProps = {
 };
 
 const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
+    const groupDigits = useCallback(
+        (newNumber: number): string =>
+            props.groupDigits
+                ? // @ts-ignore
+                  mx.parser.formatValue(newNumber || 0, "integer", { groupDigits: true, decimalPrecision: 0 })
+                : newNumber,
+        [props.groupDigits]
+    );
+
     // Default values
     let minPage: number = props.page - props.pageOffset;
     const middlePage = Math.ceil(props.pageTotal / 2);
@@ -68,8 +77,7 @@ const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
                             props.setPage(i);
                         }}
                         disabled={false}
-                        btnCaption={i.toString()}
-                        renderMode={props.renderMode}
+                        btnCaption={groupDigits(i)}
                         buttonStyle={props.buttonStyle}
                         tabIndex={props.tabIndex}
                     />
@@ -80,7 +88,7 @@ const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
     }, [props.page, props.pageTotal, minPage, maxPage, props.pageLabel]);
 
     return (
-        <div className={classNames("per-page-pagination", { "pagination-bar": props.renderMode === "link" })}>
+        <div className={classNames("per-page-pagination")}>
             {props.includeArrows && (
                 <NavButton
                     key={`${props.previousLabel} ${props.pageLabel}`}
@@ -91,7 +99,6 @@ const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
                         }
                     }}
                     disabled={props.page === 1}
-                    renderMode={props.renderMode}
                     buttonStyle={props.buttonStyle}
                     icon={props.previousIcon}
                     tabIndex={props.tabIndex}
@@ -109,15 +116,14 @@ const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
                 }}
                 active={props.page === 1}
                 disabled={false}
-                renderMode={props.renderMode}
                 buttonStyle={props.buttonStyle}
                 tabIndex={props.tabIndex}
             />
-            {minPage > 2 && <PageBreak mode={props.pageBreak} />}
+            {minPage > 2 && props.pageBreak !== "none" && <PageBreak mode={props.pageBreak} />}
 
             {pageNavigations}
 
-            {maxPage < props.pageTotal - 1 && <PageBreak mode={props.pageBreak} />}
+            {maxPage < props.pageTotal - 1 && props.pageBreak !== "none" && <PageBreak mode={props.pageBreak} />}
 
             {props.pageTotal !== 1 && (
                 <NavButton
@@ -130,9 +136,8 @@ const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
                     }}
                     active={props.page === props.pageTotal}
                     disabled={false}
-                    renderMode={props.renderMode}
                     buttonStyle={props.buttonStyle}
-                    btnCaption={props.pageTotal.toString()}
+                    btnCaption={groupDigits(props.pageTotal)}
                     tabIndex={props.tabIndex}
                 />
             )}
@@ -147,7 +152,6 @@ const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
                         }
                     }}
                     disabled={props.page === props.pageTotal}
-                    renderMode={props.renderMode}
                     buttonStyle={props.buttonStyle}
                     icon={props.nextIcon}
                     tabIndex={props.tabIndex}
