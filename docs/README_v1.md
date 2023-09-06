@@ -1,4 +1,3 @@
-<!-- prettier-ignore-start -->
 ## Advanced Pagination
 Reusable widget to encapsulate the math required to manually do pagination. Most useful when getting data from an API that allows pagination (e.g. https://facebook.com/me/feed?limit=25&offset=50).
 
@@ -13,7 +12,6 @@ Need selection too? Check out Listview Selection. (<a href='https://github.com/b
 - Accepts Page and Result Count from a parent Data View and calculates the rest for you 
 - Uses default Mendix classes to easily copy brand specific styles (e.g. mx-text, btn-primary)
 - Automatically correct the current page number if it is outside the range
-- Set the page size with either an expression, a text box, or a dropdown
 
 ## Limitations
 - Data source must return an integer of the total number of records available (needed to calculate the total number of pages)
@@ -67,4 +65,3 @@ https://github.com/bsgriggs/mendix-advanced-pagination/issues
 
 ## Development and contribution
 Benjamin Griggs
-<!-- prettier-ignore-end -->
