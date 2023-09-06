@@ -6,16 +6,18 @@ import "./ui/AdvancedPagination.scss";
 
 const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactElement => {
     const groupDigits = useCallback(
+        /* eslint-disable */
         (newNumber: number): string =>
             props.groupDigits
                 ? // @ts-ignore
                   mx.parser.formatValue(newNumber || 0, "integer", { groupDigits: true, decimalPrecision: 0 })
                 : newNumber,
+        /* eslint-enable */
         [props.groupDigits]
     );
     const pageSize: number = useMemo(
         () => (props.pageSizeType === "EXPRESSION" ? Number(props.pageSize.value) : Number(props.pageSizeAttr.value)),
-        [props.pageSize, props.pageSizeAttr]
+        [props.pageSize, props.pageSizeAttr, props.pageSizeType]
     );
 
     const page: number = useMemo(() => Number(props.page.value), [props.page]);
@@ -31,6 +33,7 @@ const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactEleme
                 : resultCount === 1
                 ? "1 result"
                 : groupDigits(resultCount) + " results",
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [props.resultCountCaption, resultCount]
     );
     const pageDisplay: string = useMemo(() => {
@@ -48,10 +51,12 @@ const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactEleme
         } else {
             return "";
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, pageTotal, pageSize, resultCount]);
 
     const pageOffset = useMemo(
         () => (props.pageOffset?.value ? Number(props.pageOffset.value) : 1),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [props.pageOffset]
     );
 
@@ -74,6 +79,7 @@ const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactEleme
             props.page.setValue(Big(newPage));
             props.refreshAction?.execute();
         },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [props.page, props.refreshAction]
     );
     const setPageSize = useCallback(
@@ -81,6 +87,7 @@ const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactEleme
             props.pageSizeAttr.setValue(new Big(newPageSize));
             props.refreshAction?.execute();
         },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [props.page, props.refreshAction]
     );
 

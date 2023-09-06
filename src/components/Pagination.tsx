@@ -34,7 +34,6 @@ interface PaginationProps {
     renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
     includeEnds: boolean;
-    includeArrows: boolean;
     pageOffset: number;
     pageBreak: PageBreakEnum;
     groupDigits: boolean;

@@ -77,7 +77,7 @@
                 </property>
                 <property key="includeEnds" type="boolean" defaultValue="true">
                     <caption>Include end buttons?</caption>
-                    <description>Shows a button to go to the first and last pages</description>
+                    <description>Shows buttons to go to the first and last pages</description>
                 </property>
                 <property key="pageDisplayType" type="enumeration" defaultValue="PAGES">
                     <caption>Page display type</caption>
@@ -94,10 +94,6 @@
                     <translations>
                         <translation lang="en_US"></translation>
                     </translations>
-                </property>
-                <property key="includeArrows" type="boolean" defaultValue="true">
-                    <caption>Include arrows?</caption>
-                    <description>Shows the Previous and Next arrow buttons</description>
                 </property>
                 <property key="pageOffset" type="expression" defaultValue="1" required="true">
                     <caption>Page offset</caption>
@@ -124,7 +120,7 @@
                     <caption>Show page size label</caption>
                     <description></description>
                 </property>
-                <property key="pageSizeAlignment" type="enumeration" defaultValue="START">
+                <property key="pageSizeAlignment" type="enumeration" defaultValue="END">
                     <caption>Page size alignment</caption>
                     <description>Where to show the Page Size input relative to the buttons</description>
                     <enumerationValues>
@@ -141,14 +137,8 @@
                         <enumerationValue key="hide">Hide</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="resultCountCaption" type="textTemplate" required="false">
-                    <caption>Total caption</caption>
-                    <description>Text for the total number of results - default "# results"</description>
-                    <translations>
-                        <translation lang="en_US"></translation>
-                    </translations>
-                </property>
-                <property key="showLineBreaks" type="boolean" defaultValue="true">
+
+                <property key="showLineBreaks" type="boolean" defaultValue="false">
                     <caption>Show line breaks</caption>
                     <description>Breaks up different sections of the widget by a vertical line</description>
                 </property>
@@ -160,7 +150,7 @@
                 </property>
                 <property key="autoCorrectTo" type="enumeration" defaultValue="FIRST">
                     <caption>Auto correct type</caption>
-                    <description>When auto-correcting, set  the page as:</description>
+                    <description>What the page is set to when auto correcting</description>
                     <enumerationValues>
                         <enumerationValue key="FIRST">First page</enumerationValue>
                         <enumerationValue key="LAST">Last page</enumerationValue>
@@ -169,6 +159,13 @@
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Text">
+            <property key="resultCountCaption" type="textTemplate" required="false">
+                <caption>Total caption</caption>
+                <description>Customizes the text for the total number of results - default "# results"</description>
+                <translations>
+                    <translation lang="en_US"></translation>
+                </translations>
+            </property>
             <property key="pageLabel" type="textTemplate" required="true">
                 <caption>Page label</caption>
                 <description></description>
@@ -176,7 +173,6 @@
                     <translation lang="en_US">Page</translation>
                 </translations>
             </property>
-
             <property key="pageSizeLabel" type="textTemplate" required="true">
                 <caption>Page size label</caption>
                 <description></description>

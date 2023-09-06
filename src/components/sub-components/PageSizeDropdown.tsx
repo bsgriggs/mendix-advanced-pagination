@@ -13,7 +13,7 @@ type PageSizeDropdownProps = {
 const PageSizeDropdown = (props: PageSizeDropdownProps): ReactElement => {
     const validPageSize = useMemo(
         () => props.pageSizes.find(pageSize => pageSize.value === props.pageSize),
-        [props.pageSize]
+        [props.pageSize, props.pageSizes]
     );
     return (
         <Fragment>

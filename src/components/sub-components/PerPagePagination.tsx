@@ -8,7 +8,7 @@ import { WebIcon } from "mendix";
 type PerPagePaginationProps = {
     page: number;
     pageTotal: number;
-    includeArrows: boolean;
+    includeEnds: boolean;
     pageOffset: number;
     pageBreak: PageBreakEnum;
     buttonStyle: ButtonStyleEnum;
@@ -30,11 +30,13 @@ type PerPagePaginationProps = {
 
 const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
     const groupDigits = useCallback(
+        /* eslint-disable */
         (newNumber: number): string =>
             props.groupDigits
                 ? // @ts-ignore
                   mx.parser.formatValue(newNumber || 0, "integer", { groupDigits: true, decimalPrecision: 0 })
                 : newNumber,
+        /* eslint-enable */
         [props.groupDigits]
     );
 
@@ -73,9 +75,7 @@ const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
                         key={i}
                         active={i === props.page}
                         title={`${props.pageLabel} ${i}`}
-                        onClick={() => {
-                            props.setPage(i);
-                        }}
+                        onClick={() => props.setPage(i)}
                         disabled={false}
                         btnCaption={groupDigits(i)}
                         buttonStyle={props.buttonStyle}
@@ -85,11 +85,12 @@ const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
             }
         }
         return returnButtons;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.page, props.pageTotal, minPage, maxPage, props.pageLabel]);
 
     return (
         <div className={classNames("per-page-pagination")}>
-            {props.includeArrows && (
+            {props.includeEnds && (
                 <NavButton
                     key={`${props.previousLabel} ${props.pageLabel}`}
                     title={`${props.previousLabel} ${props.pageLabel}`}
@@ -142,7 +143,7 @@ const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
                 />
             )}
 
-            {props.includeArrows && (
+            {props.includeEnds && (
                 <NavButton
                     key={`${props.nextLabel} ${props.pageLabel}`}
                     title={`${props.nextLabel} ${props.pageLabel}`}
