@@ -64,6 +64,20 @@
                     <description>Must be an action with a Refresh in Client on the parent dataview's object</description>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Auto correct">
+                <property key="autoCorrect" type="boolean" defaultValue="true">
+                    <caption>Enabled?</caption>
+                    <description>Adjust the page number if the current page is outside the range? (i.e. If showing page 4 of 3 = auto change the page to 1)</description>
+                </property>
+                <property key="autoCorrectTo" type="enumeration" defaultValue="FIRST">
+                    <caption>Auto correct type</caption>
+                    <description>What the page is set to when auto correcting</description>
+                    <enumerationValues>
+                        <enumerationValue key="FIRST">First page</enumerationValue>
+                        <enumerationValue key="LAST">Last page</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Customization">
             <propertyGroup caption="Type">
@@ -116,6 +130,19 @@
                     <caption>Group digits</caption>
                     <description></description>
                 </property>
+                <property key="resultCountCaptionAlignment" type="enumeration" defaultValue="start">
+                    <caption>Total caption alignment</caption>
+                    <description>Where to show the Total Caption relative to the buttons</description>
+                    <enumerationValues>
+                        <enumerationValue key="start">Start</enumerationValue>
+                        <enumerationValue key="end">End</enumerationValue>
+                        <enumerationValue key="hide">Hide</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="showLineBreaks" type="boolean" defaultValue="false">
+                    <caption>Show line breaks</caption>
+                    <description>Breaks up different sections of the widget by a vertical line</description>
+                </property>
                 <property key="showPageSizeLabel" type="boolean" defaultValue="true">
                     <caption>Show page size label</caption>
                     <description></description>
@@ -126,34 +153,6 @@
                     <enumerationValues>
                         <enumerationValue key="START">Start</enumerationValue>
                         <enumerationValue key="END">End</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="resultCountCaptionAlignment" type="enumeration" defaultValue="start">
-                    <caption>Total caption alignment</caption>
-                    <description>Where to show the Total Caption relative to the buttons</description>
-                    <enumerationValues>
-                        <enumerationValue key="start">Start</enumerationValue>
-                        <enumerationValue key="end">End</enumerationValue>
-                        <enumerationValue key="hide">Hide</enumerationValue>
-                    </enumerationValues>
-                </property>
-
-                <property key="showLineBreaks" type="boolean" defaultValue="false">
-                    <caption>Show line breaks</caption>
-                    <description>Breaks up different sections of the widget by a vertical line</description>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Auto correct">
-                <property key="autoCorrect" type="boolean" defaultValue="true">
-                    <caption>Enabled?</caption>
-                    <description>Adjust the page number if the current page is outside the range? (i.e. If showing page 4 of 3 = auto change the page to 1)</description>
-                </property>
-                <property key="autoCorrectTo" type="enumeration" defaultValue="FIRST">
-                    <caption>Auto correct type</caption>
-                    <description>What the page is set to when auto correcting</description>
-                    <enumerationValues>
-                        <enumerationValue key="FIRST">First page</enumerationValue>
-                        <enumerationValue key="LAST">Last page</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>

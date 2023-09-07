@@ -13,17 +13,17 @@ export interface PageSizesType {
     value: number;
 }
 
+export type AutoCorrectToEnum = "FIRST" | "LAST";
+
 export type DisplayFormatEnum = "navigation" | "perPage";
 
 export type PageDisplayTypeEnum = "PAGES" | "RECORDS" | "CUSTOM";
 
 export type PageBreakEnum = "ellipses" | "line" | "space" | "none";
 
-export type PageSizeAlignmentEnum = "START" | "END";
-
 export type ResultCountCaptionAlignmentEnum = "start" | "end" | "hide";
 
-export type AutoCorrectToEnum = "FIRST" | "LAST";
+export type PageSizeAlignmentEnum = "START" | "END";
 
 export type RenderModeEnum = "button" | "link";
 
@@ -47,6 +47,8 @@ export interface AdvancedPaginationContainerProps {
     pageSizeAttr: EditableValue<Big>;
     pageSizes: PageSizesType[];
     refreshAction?: ActionValue;
+    autoCorrect: boolean;
+    autoCorrectTo: AutoCorrectToEnum;
     displayFormat: DisplayFormatEnum;
     includeEnds: boolean;
     pageDisplayType: PageDisplayTypeEnum;
@@ -54,12 +56,10 @@ export interface AdvancedPaginationContainerProps {
     pageOffset: DynamicValue<Big>;
     pageBreak: PageBreakEnum;
     groupDigits: boolean;
-    showPageSizeLabel: boolean;
-    pageSizeAlignment: PageSizeAlignmentEnum;
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     showLineBreaks: boolean;
-    autoCorrect: boolean;
-    autoCorrectTo: AutoCorrectToEnum;
+    showPageSizeLabel: boolean;
+    pageSizeAlignment: PageSizeAlignmentEnum;
     resultCountCaption?: DynamicValue<string>;
     pageLabel: DynamicValue<string>;
     pageSizeLabel: DynamicValue<string>;
@@ -95,6 +95,8 @@ export interface AdvancedPaginationPreviewProps {
     pageSizeAttr: string;
     pageSizes: PageSizesPreviewType[];
     refreshAction: {} | null;
+    autoCorrect: boolean;
+    autoCorrectTo: AutoCorrectToEnum;
     displayFormat: DisplayFormatEnum;
     includeEnds: boolean;
     pageDisplayType: PageDisplayTypeEnum;
@@ -102,12 +104,10 @@ export interface AdvancedPaginationPreviewProps {
     pageOffset: string;
     pageBreak: PageBreakEnum;
     groupDigits: boolean;
-    showPageSizeLabel: boolean;
-    pageSizeAlignment: PageSizeAlignmentEnum;
     resultCountCaptionAlignment: ResultCountCaptionAlignmentEnum;
     showLineBreaks: boolean;
-    autoCorrect: boolean;
-    autoCorrectTo: AutoCorrectToEnum;
+    showPageSizeLabel: boolean;
+    pageSizeAlignment: PageSizeAlignmentEnum;
     resultCountCaption: string;
     pageLabel: string;
     pageSizeLabel: string;
