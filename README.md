@@ -63,9 +63,10 @@ Inside the domain model of the entity you need to retrieve, create a non-persist
 a. For standard database retrieves, it should be from a second database retrieve that has range set to all. Directly after the second retrieve, add an Aggregate List action set to Count.  
 ![calcResultTotal](https://github.com/bsgriggs/pagination/blob/media_v2/calcResultTotal.png)  
 b. For API Calls, you will need to get this number from the API itself. ResultTotal should be the total number of records that match the search criteria without the limit or offset.  
-6. Run the project and see how the widget looks. Adjust the settings in Advanced Pagination's Customization, Text, and Buttons tabs to your liking. Details on what each of the settings does can be found below in the Widget Customization section.  
+6. Run the project and see how the widget looks. 
 
-
+## Customization Settings
+See the documentation [here](docs/Customization.md) to learn how each setting in the Customization, Text, and Buttons tabs changes the widget.
 
 
 ## Demo project
