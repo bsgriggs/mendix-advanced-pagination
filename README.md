@@ -74,7 +74,7 @@ This is helpful when the user to looking at data that is changing. For example, 
 By default, this setting is enabled and set to the first page. You should only have 1 advanced pagination widget per page with this setting enabled to avoid extra refreshes.  
 
 ## Customization Settings
-See the documentation [here](docs/Customization.md) to learn how each setting in the Customization, Text, and Buttons tabs changes the widget.
+See the documentation [here](https://github.com/bsgriggs/mendix-advanced-pagination/blob/master/docs/Customization.md) to learn how each setting in the Customization, Text, and Buttons tabs changes the widget.
 
 ## Demo project
 https://widgettesting105-sandbox.mxapps.io/p/advanced-listview-controls
