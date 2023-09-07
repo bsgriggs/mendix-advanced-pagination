@@ -63,11 +63,18 @@ Inside the domain model of the entity you need to retrieve, create a non-persist
 a. For standard database retrieves, it should be from a second database retrieve that has range set to all. Directly after the second retrieve, add an Aggregate List action set to Count.  
 ![calcResultTotal](https://github.com/bsgriggs/pagination/blob/media_v2/calcResultTotal.png)  
 b. For API Calls, you will need to get this number from the API itself. ResultTotal should be the total number of records that match the search criteria without the limit or offset.  
-6. Run the project and see how the widget looks. 
+6. Run the project and see how the widget looks.
+
+### Auto Correct
+![required configuration](https://github.com/bsgriggs/pagination/blob/media_v2/general.png)  
+When enabled, the widget will update the page number if it is outside the range of valid pages. It can set the page to either the first or last page.  
+
+This is helpful when the user to looking at data that is changing. For example, think of a page listing Orders in the open status. User1 is looking at the last page while User2 is changing the status of the Orders to closed. User1's current page would become invalid on a refresh if too many Orders changed status (i.e. Page 4 of 3).  
+
+By default, this setting is enabled and set to the first page. You should only have 1 advanced pagination widget per page with this setting enabled to avoid extra refreshes.  
 
 ## Customization Settings
 See the documentation [here](docs/Customization.md) to learn how each setting in the Customization, Text, and Buttons tabs changes the widget.
-
 
 ## Demo project
 https://widgettesting105-sandbox.mxapps.io/p/advanced-listview-controls
