@@ -72,8 +72,8 @@ See the documentation [here](docs/Customization.md) to learn how each setting in
 ## Demo project
 https://widgettesting105-sandbox.mxapps.io/p/advanced-listview-controls
 
-## Issues, suggestions and feature requests
-Got any ideas for different *styles* of pagination? Submit an issue below!
+## Issues, suggestions, and feature requests
+Got any ideas for different *styles* of pagination? Submit an issue below!  
 https://github.com/bsgriggs/mendix-advanced-pagination/issues
 
 ## Development and contribution
