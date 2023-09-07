@@ -83,7 +83,7 @@ This tab controls all text inside the widget. They are all text templates meanin
 
 **Button style** - Determines the brand styling used for the buttons. This is by the CSS class btn-{style} (e.g. Button Style "Primary" uses CSS class btn-primary).  
 ![buttonStyle](https://github.com/bsgriggs/pagination/blob/media_v2/customization/buttonStyle.png)  
-_Note: the colors for these classes are in your custom-variables.scss file (ProjectRoot\theme\web\custom-variables.scss)_  
+_Note: the colors for these classes are in your custom-variables.scss file (ProjectRoot -> theme -> web -> custom-variables.scss)_  
 
 **Button alignment** - Determines how the widget's content is justified using flex-box.  
 ![buttonAlignment](https://github.com/bsgriggs/pagination/blob/media_v2/customization/buttonAlignment.png)  
