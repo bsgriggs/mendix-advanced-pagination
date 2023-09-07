@@ -1,7 +1,7 @@
 ## Advanced Pagination Customization
 This section assumes you've already completed the Usage in the main ReadMe (https://github.com/bsgriggs/pagination/edit/master/README.md#usage). With the widget working, this section explains how each of the customization options affects the widget.  
   
-_Tip: Want to reuse your customized settings across your app? Create a Mendix building block of the widget after you've made all your changes. I would recommend storing these building blocks in the Pagination Module for easier exporting and importing into other projects._
+_Tip: Want to re-use your customized settings across your app? Create a Mendix building block of the widget after you've made all your changes. I would recommend storing these building blocks in the Pagination Module for easier exporting and importing into other projects._
 
 ### General Tab
 ![general](https://github.com/bsgriggs/pagination/blob/media_v2/general.png)  
