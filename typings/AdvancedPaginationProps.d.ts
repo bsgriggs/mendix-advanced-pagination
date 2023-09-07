@@ -119,8 +119,8 @@ export interface AdvancedPaginationPreviewProps {
     renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
     buttonAlignment: ButtonAlignmentEnum;
-    firstPageIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
-    previousPageIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
-    nextPageIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
-    lastPageIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    firstPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    previousPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    nextPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    lastPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
 }
