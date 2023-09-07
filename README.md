@@ -1,17 +1,19 @@
 <!-- prettier-ignore-start -->
 ## Advanced Pagination
-Reusable widget to encapsulate the math required to manually do pagination. Most useful when getting data from an API that allows pagination (e.g. https://facebook.com/me/feed?limit=25&offset=50).
+A reusable widget to encapsulate the math required to manually do server-side pagination. It's useful for the following scenarios:
+1. Getting data from an API (e.g. an OData API - https://facebook.com/feed?$top=2$skip=18).
+2. Building a list view, template grid, or gallery that resembles a data grid with custom search criteria and/or aggregates that change with the search criteria.
 
 Tip: Need sorting too? Check out Advanced Sorting. (<a href='https://github.com/bsgriggs/mendix-advanced-sorting' target="_blank">GitHub</a>) (<a href='https://marketplace.mendix.com/link/component/202511' target="_blank">Mendix Marketplace</a>)  
-Need selection too? Check out Listview Selection. (<a href='https://github.com/bsgriggs/mendix-listview-selection' target="_blank">GitHub</a>) (<a href='https://marketplace.mendix.com/link/component/212384' target="_blank">Mendix Marketplace</a>)
+Need row selection too? Check out Listview Selection. (<a href='https://github.com/bsgriggs/mendix-listview-selection' target="_blank">GitHub</a>) (<a href='https://marketplace.mendix.com/link/component/212384' target="_blank">Mendix Marketplace</a>)
 
-![Overview](https://github.com/bsgriggs/pagination/blob/media/Overview.png)
+![Overview](https://github.com/bsgriggs/pagination/blob/media_v2/demo.png)
 
 ## Features
 - Offers 2 *styles* of pagination. Navigation (first 2 above) and Per Page (last 2 above)
 - Ability to configure most aspects inside the widget settings (text, color, alignment etc.)
 - Accepts Page and Result Count from a parent Data View and calculates the rest for you 
-- Uses default Mendix classes to easily copy brand specific styles (e.g. mx-text, btn-primary)
+- Uses default Mendix classes to easily copy brand-specific styles (e.g. mx-text, btn-primary)
 - Automatically correct the current page number if it is outside the range
 - Set the page size with either an expression, a text box, or a dropdown
 
@@ -19,44 +21,80 @@ Need selection too? Check out Listview Selection. (<a href='https://github.com/b
 - Data source must return an integer of the total number of records available (needed to calculate the total number of pages)
 
 ## Usage
-The following steps will create a *Custom Grid* that looks like the image below. Be aware that the text boxes are **not** required.
-![page web](https://github.com/bsgriggs/pagination/blob/media/page_web.png)
+The following steps will create a list view with server-side pagination that looks like the image below.  
+![demoBrowser](https://github.com/bsgriggs/pagination/blob/media_v2/demoBrowser.png)  
+### Create the Pagination Module
+I usually make a separate, small module for some of the core functionality. This serves 2 purposes:
+1. The module can easily be exported and imported into other projects
+2. The core logic is stored in a common place if you need to make multiple Custom Grids in your app
 
-1. Create a non-persistent entity called **Pagination** with Page, PageSize, and ResultTotal. Ideally this should be in it's own module for easier importing and exporting to new projects!<br/>![pagination entity](https://github.com/bsgriggs/pagination/blob/media/pagination_entity.png)
-2. Create a non-persistent entity **specific** to your grid (i.e. AsyncListViewPagination), have it **inherit** Pagination and give it an association to **System.Session**<br/>![inheritance](https://github.com/bsgriggs/pagination/blob/media/inheritance.png)
-3. Create a Microflow called **ACT_RefreshPagination** with a Pagination parameter, add a change object activity, and set the change object activity to refresh in client<br/>![ACT refresh pagination](https://github.com/bsgriggs/pagination/blob/media/ACT_RefreshPagination.png)
-4. Create a Microflow called **DS_CreateRetrieve_{*SpecificEntityName*}** that will check the System.Session for an existing {*Specific Entity Name*} object. If an object is found, return it; otherwise create a new one *(don't forget to set the $currentSession in the Create Object activity)*<br/>![DS create retrieve specific entity](https://github.com/bsgriggs/pagination/blob/media/DS_Inheritance.png)
-5. Setup your page similar to how you see below<br/>![page_mendix](https://github.com/bsgriggs/pagination/blob/media/page_mendix.png)
-6. In the Advanced Pagination widgets, setup to Attributes tab using Page, PageSize, and ResultTotal.<br/>![configuration attributes](https://github.com/bsgriggs/pagination/blob/media/config_attributes.png)
-7. In the Advanced Pagination widgets, setup the Refresh Action with **ACT_RefreshPagination**<br/>![refresh action](https://github.com/bsgriggs/pagination/blob/media/config_actions.png)
-8. In your API call Microflow, calculate the Offset and Amount using the Pagination object. In my example, I'm using a retrieve from database action, but you should pass these as variables into your API call. <br/>![calculate offset](https://github.com/bsgriggs/pagination/blob/media/calculate_offset.png)
-9. In your API Call Microflow, set the Pagination's ResultTotal attribute as the total count from the API Call. In my example, this is $Count from a database aggregate, but you would likely need to get this value from the API's return structure.<br/>![after API change object](https://github.com/bsgriggs/pagination/blob/media/afterapi_changeobject.png) 
-10. Run the project and see what it looks like! Adjust the settings in the Advanced Pagination's general tab to your liking.
+Follow these steps to make the Pagination Module:
+1. Right-click on your app name in Studio Pro, click 'Add module ...', and name the module "Pagination"
+2. In the domain model, create a non-persistent entity called **Pagination** with Page (default to 1), PageSize, and ResultTotal.  
+![pagination entity](https://github.com/bsgriggs/pagination/blob/media_v2/pagination/paginationEntity.png)  
+_Note: The SortAscending and SortAttribute are not used for this example, but you'll need them if you want to use the Advanced Sorting widget. (<a href='https://github.com/bsgriggs/mendix-advanced-sorting' target="_blank">GitHub</a>) (<a href='https://marketplace.mendix.com/link/component/202511' target="_blank">Mendix Marketplace</a>)_
+3. Create a Microflow called **ACT_Pagination_Refresh** with a Pagination parameter. Add a change object activity with refresh in client set to Yes.  
+![ACT Pagination_Refresh](https://github.com/bsgriggs/pagination/blob/media_v2/pagination/ACT_Pagination_Refresh.png)
+4. Create a Microflow called **ACT_Pagination_Search** with a Pagination parameter. Add a change object activity and set the Page attribute to 1. Then call the **ACT_Pagination_Refresh** Microflow.  
+![ACT Pagination_Refresh](https://github.com/bsgriggs/pagination/blob/media_v2/pagination/ACT_Pagination_Search.png)
+5. Create a module role called User and grant that module role full access to the Pagination entity and the Microflows from steps 3 and 4.  
+6. In your project security settings, grant all user roles the Pagination module's User user role.  
 
-## Configuration Details
-***For configuration outside of the widget (e.g. how to setup your project) change the [Usage](https://github.com/bsgriggs/pagination/edit/master/README.md#usage) section first.***<br/><br/>
+_What are the two Microflows for? ~ ACT_Pagination_Refresh should be used when you just want to refresh the results (e.g. changing pages or sorting). ACT_Pagination_Search should be used when the user may have changed the search criteria (e.g. on-change action for a text box or a search button)_
 
-### Settings on Both Modes
-**Format -** Which *style* of pagination should be displayed in this location? In the overview image, the first 2 examples are the 'Navigation' style and the last 2 are the 'Per Page' style.<br/>
-**Total Caption Alignment -** Where should the 'Total Caption' text be shown relative to the buttons?<br/>
-**Total Caption -** Text that tells the user how many results exist. *(default '{ResultTotal} results')*.<br/>
-**Button Alignment -** Where should the entire widget be displayed inside of it's parent's container?<br/>
-**Render Mode -** Should the buttons contain padding and a border or only an icon?<br/>
-**Button Style -** Which Mendix brand class should be applied (i.e. text-primary, btn-danger etc.)? These can be easily overridden with a CSS class (.widget-pagination .btn ...)<br/>
-**Auto Correct? -** Adjust the page number if the current page is outside the range? (i.e. If showing page 4 of 3 = auto change the page to 1)<br/>
-**Auto Correct To -** The page set when auto correcting. With First, it will set to page 1. With Last, it will set page as the total number of pages<br/>
+### Main Domain Model
+Inside the domain model of the entity you need to retrieve, create a non-persistent entity **specific** to your grid. I usually put this right next to the entity it retrieves in the domain model  
+- I use the format Search{ReturnedEntity} (e.g. if my grid is going to return Employee objects, I would name it SearchEmployees). _For the rest of the documentation, this entity will be referred to as **Search{Entity}**_  
+- Set **Search{Entity}** to generalize Pagination  
+- Add an association to **System.Session**.  
+- Add attributes and associations for any search criteria you want. For me, FuzzySearch is for the text input and the associations are for multi-select popups I want to display.  
+![searchEmployees](https://github.com/bsgriggs/pagination/blob/media_v2/searchEmployees.png)
+
+### Page and Widget Setup
+1. Create a Microflow called **DS_Search{Entity}** that retrieves the list from **$currentSession** for an existing **Search{Entity}** object. If the list is not empty, head the list and return the object. Otherwise, create a new object with the association to System.Session as $currentSession and PageSize as whatever default page size you want.  
+![DS_SearchEmployees](https://github.com/bsgriggs/pagination/blob/media_v2/DS_SearchEmployees.png)  
+2. Wrap your list view with a data view that calls **DS_Search{Entity}**. Add input widgets for your search criteria and the Advanced Pagination widget where you would like the buttons.  
+![page_mendix](https://github.com/bsgriggs/pagination/blob/media_v2/demoMendix.png)  
+3. In the Advanced Pagination widget(s), set the Page, Result Count, Page Size, and the refresh action as the following:  
+![required configuration](https://github.com/bsgriggs/pagination/blob/media_v2/general.png)  
+4. In your listview's data source Microflow, you can calculate the Offset and Amount/Limit using the Pagination object. In my example, I'm using a custom retrieve from database action, but you could use the same expressions for your retrieve or API call.  
+![calcLimitOffset](https://github.com/bsgriggs/pagination/blob/media_v2/calcLimitOffset.png)  
+5. Also in your listview's data source Microflow, set the Pagination's ResultTotal attribute as the total count of objects.  
+a. For standard database retrieves, it should be from a second database retrieve that has range set to all. Directly after the second retrieve, add an Aggregate List action set to Count.  
+![calcResultTotal](https://github.com/bsgriggs/pagination/blob/media_v2/calcResultTotal.png)  
+b. For API Calls, you will need to get this number from the API itself. ResultTotal should be the total number of records that match the search criteria without the limit or offset.  
+6. Run the project and see how the widget looks. Adjust the settings in Advanced Pagination's Customization, Text, and Buttons tabs to your liking. Details on what each of the settings does can be found below in the Widget Customization section.  
 
 
-### Navigation Mode
-![Navigation mode](https://github.com/bsgriggs/pagination/blob/media/config_navigation.png)<br/>
-**Include End Buttons? -** Should the user be able to skip to the last page or back to the first page?<br/>
-**Page Display -** Text shown in the middle of the buttons *(default 'Page {Page} of {PageTotal}')*.<br/>
+### Widget Customization
+This section assumes you've already completed the Usage section above (https://github.com/bsgriggs/pagination/edit/master/README.md#usage). With that widget running, this section explains how each of the customization options affects the widget.  
+  
+_Tip: Want to reuse your customized settings across your app? Create a Mendix building block of the widget after you've made all your changes. I would recommend storing these building blocks in the Pagination Module for easier exporting and importing into other projects._
 
-### Per Page Mode 
-![Per page mode](https://github.com/bsgriggs/pagination/blob/media/config_perpage.png)<br/>
-**Include Arrows? -** Should the user be able to navigate between the page with arrows or only be able to click the specific numbers?<br/>
-**Page Offset -** The number of pages from the current page to display. For example, Page Offset is 1, Page is 5, and there are 10 pages, then the widget will show Pages 1, 4, 5, 6, and 10.<br/><br/>It will include more pages at the beginning and the end of the range. For example, Page Offset is 1, Page is 1, and there are 10 pages, then it will show pages 1, 2, 3, 4, and 10. This is because if the user *were* to go to page 3, then they would see pages 1, 2, 3, 4, and 10 anyway. Likewise, when the user goes to page 10, they will see pages 1, 7, 8, 9, and 10.<br/><br/>It will also check if the user would be displayed all possible pages should they click on any specific page. For example, Page Offset is 2 and there are 7 pages. The widget will show all pages 1 through 7, because if the user *were* to go to page 4, they would see all pages anyway.<br/>
-**Page Break -** What should be in between pages when there is a gap? For example, the widget is showing 1, 2, 3, 4, and 10. What should be between 4 and 10?<br/>
+#### General Tab
+![general](https://github.com/bsgriggs/pagination/blob/media_v2/general.png)  
+**Page Size Type** - Controls how the widget sources the page size number. Must be one of the following settings:
+- Expression: Page size is an integer expression. This can be a static integer or a dynamic value based on other attribute(s).
+- Text box: Page size is an integer attribute. The user is presented with an input with type="number" to set the page size to whatever they want.  
+![pageSizeType_Textbox](https://github.com/bsgriggs/pagination/blob/media_v2/customization/pageSizeType_Textbox.png)  
+- Dropdown: Page size is an integer attribute. A list is displayed where you enter each of the selectable page sizes. The user is presented with a standard select with the configured values.  
+![pageSizeType_Dropdown](https://github.com/bsgriggs/pagination/blob/media_v2/customization/pageSizeType_Dropdown.png)
+
+Each of the times looks like the following in the browser.  
+![pageSizeType](https://github.com/bsgriggs/pagination/blob/media_v2/customization/pageSizeType.png)  
+
+#### Customization Tab
+
+#### Text Tab
+![text](https://github.com/bsgriggs/pagination/blob/media_v2/customization/text.png)  
+
+#### Buttons Tab
+![buttons](https://github.com/bsgriggs/pagination/blob/media_v2/customization/buttons.png)  
+*Render mode*
+
+#### Common Tab
+![common](https://github.com/bsgriggs/pagination/blob/media_v2/customization/common.png)  
+Displays the applicable standard Mendix properties
 
 ## Demo project
 https://widgettesting105-sandbox.mxapps.io/p/advanced-listview-controls
