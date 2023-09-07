@@ -22,6 +22,7 @@ type PerPagePaginationProps = {
     nextLabel: string;
     lastLabel: string;
     /* Icon set */
+    pageBreakIcon: WebIcon | undefined;
     firstIcon: WebIcon;
     previousIcon: WebIcon;
     nextIcon: WebIcon;
@@ -120,11 +121,15 @@ const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
                 buttonStyle={props.buttonStyle}
                 tabIndex={props.tabIndex}
             />
-            {minPage > 2 && props.pageBreak !== "none" && <PageBreak mode={props.pageBreak} />}
+            {minPage > 2 && props.pageBreak !== "none" && (
+                <PageBreak mode={props.pageBreak} customIcon={props.pageBreakIcon} />
+            )}
 
             {pageNavigations}
 
-            {maxPage < props.pageTotal - 1 && props.pageBreak !== "none" && <PageBreak mode={props.pageBreak} />}
+            {maxPage < props.pageTotal - 1 && props.pageBreak !== "none" && (
+                <PageBreak mode={props.pageBreak} customIcon={props.pageBreakIcon} />
+            )}
 
             {props.pageTotal !== 1 && (
                 <NavButton

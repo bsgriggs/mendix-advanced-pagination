@@ -161,6 +161,10 @@ export function getProperties(_values: AdvancedPaginationPreviewProps, defaultPr
             break;
     }
 
+    if (_values.displayFormat !== "perPage" || _values.pageBreak !== "ellipses") {
+        hidePropertiesIn(defaultProperties, _values, ["pageBreakIcon"]);
+    }
+
     return defaultProperties;
 }
 

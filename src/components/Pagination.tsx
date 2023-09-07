@@ -55,6 +55,7 @@ interface PaginationProps {
     lastLabel: string;
 
     /* Icon set */
+    pageBreakIcon: WebIcon;
     firstIcon: WebIcon;
     previousIcon: WebIcon;
     nextIcon: WebIcon;

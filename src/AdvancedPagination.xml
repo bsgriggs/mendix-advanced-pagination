@@ -257,6 +257,10 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Icons">
+                <property key="pageBreakIcon" type="icon" required="false">
+                    <caption>Page break icon</caption>
+                    <description></description>
+                </property>
                 <property key="firstPageIcon" type="icon" required="false">
                     <caption>First page</caption>
                     <description></description>

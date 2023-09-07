@@ -41,6 +41,11 @@ export const preview = (props: AdvancedPaginationPreviewProps): ReactNode => {
             pageTotal={10}
             resultCount={100}
             /* Icon set */
+            pageBreakIcon={
+                props.firstPageIcon !== null
+                    ? (props.firstPageIcon as WebIcon)
+                    : { type: "glyph", iconClass: "glyphicon-option-horizontal" }
+            }
             firstIcon={
                 props.firstPageIcon !== null
                     ? (props.firstPageIcon as WebIcon)

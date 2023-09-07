@@ -2,14 +2,16 @@ import { createElement, ReactElement } from "react";
 import { PageBreakEnum } from "../../../typings/AdvancedPaginationProps";
 import { Icon } from "mendix/components/web/Icon";
 import classNames from "classnames";
+import { WebIcon } from "mendix";
 
 type PageBreakProps = {
+    customIcon?: WebIcon;
     mode: PageBreakEnum;
 };
 
 const PageBreak = (props: PageBreakProps): ReactElement =>
     props.mode === "ellipses" ? (
-        <Icon icon={{ type: "glyph", iconClass: "glyphicon-option-horizontal" }} />
+        <Icon icon={props.customIcon} />
     ) : (
         <span className={classNames("mx-text", `page-break-${props.mode}`)} />
     );

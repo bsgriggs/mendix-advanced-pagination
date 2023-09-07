@@ -112,6 +112,7 @@ const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactEleme
             nextLabel={props.nextLabel.value as string}
             lastLabel={props.lastLabel.value as string}
             /* Icon set */
+            pageBreakIcon={props.pageBreakIcon?.value || { type: "glyph", iconClass: "glyphicon-option-horizontal" }}
             firstIcon={props.firstPageIcon?.value || { type: "glyph", iconClass: "glyphicon-step-backward" }}
             previousIcon={props.previousPageIcon?.value || { type: "glyph", iconClass: "glyphicon-triangle-left" }}
             nextIcon={props.nextPageIcon?.value || { type: "glyph", iconClass: "glyphicon-triangle-right" }}
