@@ -19,11 +19,13 @@ Each of the times looks like the following in the browser.
 ![customizationNavigation](https://github.com/bsgriggs/pagination/blob/media_v2/customization/customizationNavigation.png)  
 **Format** - The main structure of the buttons. Each has its own sub-set of options in the Type section shown in the expandable sections below. The two types look like this by default:   
 ![format](https://github.com/bsgriggs/pagination/blob/media_v2/customization/format.png)  
-**Include end buttons** - Show buttons to navigate to the first and last page.  
-![includeEndButtons](https://github.com/bsgriggs/pagination/blob/media_v2/customization/includeEndButtons.png)  
+
 
 <details>
 <summary><h4>Navigation</h4></summary>
+
+**Include end buttons** - Show buttons to navigate to the first and last page.  
+![includeEndButtons](https://github.com/bsgriggs/pagination/blob/media_v2/customization/includeEndButtons.png)  
 
 **Page display type** - Determines the format of the text in the middle of the buttons. Each part of the text can be customized in the Text tab (e.g. "Page" or "of"). If set to Custom, a text template appears for you to enter whatever you want.  
 ![pageDisplayType](https://github.com/bsgriggs/pagination/blob/media_v2/customization/pageDisplayType.png)  
@@ -35,6 +37,9 @@ Each of the times looks like the following in the browser.
 
 ![customizationPerPage](https://github.com/bsgriggs/pagination/blob/media_v2/customization/customizationPerPage.png)  
 
+**Include end buttons** - Show buttons to navigate to the first and last page.  
+![includeEndButtons](https://github.com/bsgriggs/pagination/blob/media_v2/customization/includeEndButtons.png)  
+
 **Page offset** - The number of pages away from the current page to display in the list. Should be at least 1.  
 ![pageOffset_Middle](https://github.com/bsgriggs/pagination/blob/media_v2/customization/pageOffset_Middle.png)  
 
@@ -43,7 +48,29 @@ Each of the times looks like the following in the browser.
  
 </details>
 
+**Group digits** - When enabled, all numbers greater than 999 have a comma separating the digits.  
+![groupDigits](https://github.com/bsgriggs/pagination/blob/media_v2/customization/groupDigits.png)  
 
+**Total caption alignment** - Determines where the total caption appears relative to the buttons.  
+![totalCaptionAlignment](https://github.com/bsgriggs/pagination/blob/media_v2/customization/totalCaptionAlignment.png)  
+If set to either Start or End, a text template will appear in the Text tab that lets you customize this text. This is useful if you want to label what was retrieved.  
+![totalCaption_Custom](https://github.com/bsgriggs/pagination/blob/media_v2/customization/totalCaption_Custom.png)  
+
+**Show line breaks** - When enabled, each section of the widget will be separated by a vertical line. This makes the widget easier to read if the page size and the total count are both showing.  
+![showLineBreaks](https://github.com/bsgriggs/pagination/blob/media_v2/customization/showLineBreaks.png)  
+
+If the **Page Size Type** is set to either Text box or Dropdown, then the following settings will be available in the Style section.
+
+![styleWithPageSize](https://github.com/bsgriggs/pagination/blob/media_v2/customization/styleWithPageSize.png)  
+
+**Show page size label** - Whether or not to a label next to the page size input or dropdown. The text of the label itself is customizable in the Text tab.  
+![showPageSizeLabel](https://github.com/bsgriggs/pagination/blob/media_v2/customization/showPageSizeLabel.png)  
+
+**Page size alignment** - Determines where the page size input or dropdown appears relative to the buttons.  
+![pageSizeAlignment](https://github.com/bsgriggs/pagination/blob/media_v2/customization/pageSizeAlignment.png)  
+
+**Auto correct**
+{ToDo}
 
 ### Text Tab
 ![text](https://github.com/bsgriggs/pagination/blob/media_v2/customization/text.png)  
