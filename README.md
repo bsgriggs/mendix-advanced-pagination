@@ -66,35 +66,7 @@ b. For API Calls, you will need to get this number from the API itself. ResultTo
 6. Run the project and see how the widget looks. Adjust the settings in Advanced Pagination's Customization, Text, and Buttons tabs to your liking. Details on what each of the settings does can be found below in the Widget Customization section.  
 
 
-### Widget Customization
-This section assumes you've already completed the Usage section above (https://github.com/bsgriggs/pagination/edit/master/README.md#usage). With that widget running, this section explains how each of the customization options affects the widget.  
-  
-_Tip: Want to reuse your customized settings across your app? Create a Mendix building block of the widget after you've made all your changes. I would recommend storing these building blocks in the Pagination Module for easier exporting and importing into other projects._
 
-#### General Tab
-![general](https://github.com/bsgriggs/pagination/blob/media_v2/general.png)  
-**Page Size Type** - Controls how the widget sources the page size number. Must be one of the following settings:
-- Expression: Page size is an integer expression. This can be a static integer or a dynamic value based on other attribute(s).
-- Text box: Page size is an integer attribute. The user is presented with an input with type="number" to set the page size to whatever they want.  
-![pageSizeType_Textbox](https://github.com/bsgriggs/pagination/blob/media_v2/customization/pageSizeType_Textbox.png)  
-- Dropdown: Page size is an integer attribute. A list is displayed where you enter each of the selectable page sizes. The user is presented with a standard select with the configured values.  
-![pageSizeType_Dropdown](https://github.com/bsgriggs/pagination/blob/media_v2/customization/pageSizeType_Dropdown.png)
-
-Each of the times looks like the following in the browser.  
-![pageSizeType](https://github.com/bsgriggs/pagination/blob/media_v2/customization/pageSizeType.png)  
-
-#### Customization Tab
-
-#### Text Tab
-![text](https://github.com/bsgriggs/pagination/blob/media_v2/customization/text.png)  
-
-#### Buttons Tab
-![buttons](https://github.com/bsgriggs/pagination/blob/media_v2/customization/buttons.png)  
-*Render mode*
-
-#### Common Tab
-![common](https://github.com/bsgriggs/pagination/blob/media_v2/customization/common.png)  
-Displays the applicable standard Mendix properties
 
 ## Demo project
 https://widgettesting105-sandbox.mxapps.io/p/advanced-listview-controls
