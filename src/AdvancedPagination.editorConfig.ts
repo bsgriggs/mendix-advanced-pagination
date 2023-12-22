@@ -108,8 +108,8 @@ export function getProperties(_values: AdvancedPaginationPreviewProps, defaultPr
             hidePropertiesIn(defaultProperties, _values, [
                 "pageDisplay",
                 "pageDisplayType",
-                "nextPageIcon",
-                "previousPageIcon",
+                "firstPageIcon",
+                "lastPageIcon",
                 "toLabel",
                 "ofLabel"
             ]);
