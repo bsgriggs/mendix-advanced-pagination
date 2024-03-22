@@ -34,9 +34,7 @@ const NavButton = (props: NavButtonProps): ReactElement => {
             )}
             title={props.title}
             aria-label={props.title}
-            // data-disabled="false"
-            aria-disabled={props.disabled ? "true" : "false"}
-            // disabled={props.disabled}
+            aria-disabled={props.disabled ? "true" : undefined}
             onClick={onClickHandler}
             tabIndex={props.tabIndex}
         >
