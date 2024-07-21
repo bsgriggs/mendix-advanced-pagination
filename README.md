@@ -29,18 +29,19 @@ I usually make a separate, small module for some of the core functionality. This
 2. The core logic is stored in a common place if you need to make multiple Custom Grids in your app
 
 Follow these steps to make the Pagination Module:
-1. Right-click on your app name in Studio Pro, click 'Add module ...', and name the module "Pagination"
-2. In the domain model, create a non-persistent entity called **Pagination** with Page (default to 1), PageSize, and ResultTotal.  
+1. Download the latest version of the [Nanoflow Commons](https://marketplace.mendix.com/link/component/109515) module
+2. Right-click on your app name in Studio Pro, click 'Add module ...', and name the module "Pagination"
+3. In the domain model, create a non-persistent entity called **Pagination** with Page (default to 1), PageSize, and ResultTotal.  
 ![pagination entity](https://github.com/bsgriggs/pagination/blob/media_v2/pagination/paginationEntity.png)  
 _Note: The SortAscending and SortAttribute are not used for this example, but you'll need them if you want to use the Advanced Sorting widget. (<a href='https://github.com/bsgriggs/mendix-advanced-sorting' target="_blank">GitHub</a>) (<a href='https://marketplace.mendix.com/link/component/202511' target="_blank">Mendix Marketplace</a>)_
-3. Create a Microflow called **ACT_Pagination_Refresh** with a Pagination parameter. Add a change object activity with refresh in client set to Yes.  
+4. Create a Nanoflow called **ACT_Pagination_Refresh** with a Pagination parameter. Add a refresh object activity from the Nanoflow Commons module.  
 ![ACT Pagination_Refresh](https://github.com/bsgriggs/pagination/blob/media_v2/pagination/ACT_Pagination_Refresh.png)
-4. Create a Microflow called **ACT_Pagination_Search** with a Pagination parameter. Add a change object activity and set the Page attribute to 1. Then call the **ACT_Pagination_Refresh** Microflow.  
+5. Create a Nanoflow called **ACT_Pagination_Search** with a Pagination parameter. Add a change object activity and set the Page attribute to 1. Then call the **ACT_Pagination_Refresh** Nanoflow.  
 ![ACT Pagination_Refresh](https://github.com/bsgriggs/pagination/blob/media_v2/pagination/ACT_Pagination_Search.png)
-5. Create a module role called User and grant that module role full access to the Pagination entity and the Microflows from steps 3 and 4.  
-6. In your project security settings, grant all user roles the Pagination module's User user role.  
+6. Create a module role called User and grant that module role full access to the Pagination entity and the Microflows from steps 3 and 4.  
+7. In your project security settings, grant all user roles the Pagination module's User user role.  
 
-_What are the two Microflows for? ~ ACT_Pagination_Refresh should be used when you just want to refresh the results (e.g. changing pages or sorting). ACT_Pagination_Search should be used when the user may have changed the search criteria (e.g. on-change action for a text box or a search button)_
+_What are the two Nanoflows for? ~ ACT_Pagination_Refresh should be used when you just want to refresh the results (e.g. changing pages or sorting). ACT_Pagination_Search should be used when the user may have changed the search criteria (e.g. on-change action for a text box or a search button)_
 
 ### Main Domain Model
 Inside the domain model of the entity you need to retrieve, create a non-persistent entity **specific** to your grid. I usually put this right next to the entity it retrieves in the domain model  
