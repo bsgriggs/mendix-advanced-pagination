@@ -64,8 +64,6 @@ const DropdownPagination = (props: DropdownPaginationProps): ReactElement => {
         props.ofLabel
     ]);
 
-    console.info(props);
-
     return (
         <div className="dropdown-pagination">
             {props.includeEnds && (
