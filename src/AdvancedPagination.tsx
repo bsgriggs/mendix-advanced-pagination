@@ -81,7 +81,7 @@ const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactEleme
             /* Label customization */
             pageLabel={props.pageLabel.value as string}
             ofLabel={props.ofLabel.value as string}
-            toLabel={props.ofLabel.value as string}
+            toLabel={props.toLabel.value as string}
             pageSizeLabel={props.pageSizeLabel.value as string}
             firstLabel={props.firstLabel.value as string}
             previousLabel={props.previousLabel.value as string}
