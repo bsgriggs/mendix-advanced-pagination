@@ -17,7 +17,7 @@ Each of the times looks like the following in the browser.
 
 ### Customization Tab
 ![customizationNavigation](https://github.com/bsgriggs/pagination/blob/media_v2/customization/customizationNavigation.png)  
-**Format** - The main structure of the buttons. Each has its own sub-set of options in the Type section shown in the expandable sections below. The two types look like this by default:   
+**Format** - The main structure of the buttons. Each has its own sub-set of options in the Type section shown in the expandable sections below. The three types look like this by default:   
 ![format](https://github.com/bsgriggs/pagination/blob/media_v2/customization/format.png)  
 
 
@@ -69,8 +69,11 @@ If the **Page Size Type** is set to either Text box or Dropdown, then the follow
 **Page size alignment** - Determines where the page size input or dropdown appears relative to the buttons.  
 ![pageSizeAlignment](https://github.com/bsgriggs/pagination/blob/media_v2/customization/pageSizeAlignment.png)  
 
-**Auto correct**
-{ToDo}
+**Auto correct**  
+![auto correct](https://github.com/bsgriggs/pagination/blob/media_v2/customization/autoCorrect.png)  
+If the widget receives a page number outside the available pages, should the widget automatically return to a valid page? This setting has 2 available options when enabled: First Page & Last Page. These settings tell the widget which page to automatically return to.  
+
+_Note: Only 1 Advanced Pagination widget per grid should have this setting enabled or it may cause an infinite refresh_
 
 ### Text Tab
 ![text](https://github.com/bsgriggs/pagination/blob/media_v2/customization/text.png)  
