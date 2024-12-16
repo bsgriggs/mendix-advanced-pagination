@@ -10,12 +10,15 @@ Need row selection too? Check out Listview Selection. (<a href='https://github.c
 ![Overview](https://github.com/bsgriggs/pagination/blob/media_v2/demo.png)
 
 ## Features
-- Offers 2 *styles* of pagination. Navigation (first 2 above) and Per Page (last 2 above)
+- Offers 3 *styles* of pagination. Navigation, Per Page, and Dropdown as seen above
 - Ability to configure most aspects inside the widget settings (text, color, alignment etc.)
 - Accepts Page and Result Count from a parent Data View and calculates the rest for you 
-- Uses default Mendix classes to easily copy brand-specific styles (e.g. mx-text, btn-primary)
+- Uses default Mendix classes to easily apply brand-specific styles (e.g. mx-text, btn-primary)
 - Automatically correct the current page number if it is outside the range
 - Set the page size with either an expression, a text box, or a dropdown
+- Multiple options for displaying the current page: "Page 2 of 400", "5 to 10 of 2000", or your own custom text
+- Full customization of text that appears in the widget for multi-lingual app support
+- Passes WCAG AA accessibility requirements according to [Axe Dev Tools](https://www.deque.com/axe/devtools/) automated testing
 
 ## Limitations
 - Data source must return an integer of the total number of records available (needed to calculate the total number of pages)
@@ -67,7 +70,7 @@ b. For API Calls, you will need to get this number from the API itself. ResultTo
 6. Run the project and see how the widget looks.
 
 ### Auto Correct
-![required configuration](https://github.com/bsgriggs/pagination/blob/media_v2/general.png)  
+![auto correct](https://github.com/bsgriggs/pagination/blob/media_v2/customization/autoCorrect.png)  
 When enabled, the widget will update the page number if it is outside the range of valid pages. It can set the page to either the first or last page.  
 
 This is helpful when the user to looking at data that is changing. For example, think of a page listing Orders in the open status. User1 is looking at the last page while User2 is changing the status of the Orders to closed. User1's current page would become invalid on a refresh if too many Orders changed status (i.e. Page 4 of 3).  
