@@ -1,7 +1,7 @@
 /**
  * This file was generated from AdvancedPagination.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix UI Content Team
+ * @author Mendix Widgets Framework Team
  */
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, WebIcon } from "mendix";
@@ -13,9 +13,7 @@ export interface PageSizesType {
     value: number;
 }
 
-export type AutoCorrectToEnum = "FIRST" | "LAST";
-
-export type DisplayFormatEnum = "navigation" | "perPage";
+export type DisplayFormatEnum = "navigation" | "perPage" | "dropdown";
 
 export type PageDisplayTypeEnum = "PAGES" | "RECORDS" | "CUSTOM";
 
@@ -24,6 +22,8 @@ export type PageBreakEnum = "ellipses" | "line" | "space" | "none";
 export type ResultCountCaptionAlignmentEnum = "start" | "end" | "hide";
 
 export type PageSizeAlignmentEnum = "START" | "END";
+
+export type AutoCorrectToEnum = "FIRST" | "LAST";
 
 export type RenderModeEnum = "button" | "link";
 
@@ -47,8 +47,6 @@ export interface AdvancedPaginationContainerProps {
     pageSizeAttr: EditableValue<Big>;
     pageSizes: PageSizesType[];
     refreshAction?: ActionValue;
-    autoCorrect: boolean;
-    autoCorrectTo: AutoCorrectToEnum;
     displayFormat: DisplayFormatEnum;
     includeEnds: boolean;
     pageDisplayType: PageDisplayTypeEnum;
@@ -60,6 +58,8 @@ export interface AdvancedPaginationContainerProps {
     showLineBreaks: boolean;
     showPageSizeLabel: boolean;
     pageSizeAlignment: PageSizeAlignmentEnum;
+    autoCorrect: boolean;
+    autoCorrectTo: AutoCorrectToEnum;
     resultCountCaption?: DynamicValue<string>;
     pageLabel: DynamicValue<string>;
     pageSizeLabel: DynamicValue<string>;
@@ -95,8 +95,6 @@ export interface AdvancedPaginationPreviewProps {
     pageSizeAttr: string;
     pageSizes: PageSizesPreviewType[];
     refreshAction: {} | null;
-    autoCorrect: boolean;
-    autoCorrectTo: AutoCorrectToEnum;
     displayFormat: DisplayFormatEnum;
     includeEnds: boolean;
     pageDisplayType: PageDisplayTypeEnum;
@@ -108,6 +106,8 @@ export interface AdvancedPaginationPreviewProps {
     showLineBreaks: boolean;
     showPageSizeLabel: boolean;
     pageSizeAlignment: PageSizeAlignmentEnum;
+    autoCorrect: boolean;
+    autoCorrectTo: AutoCorrectToEnum;
     resultCountCaption: string;
     pageLabel: string;
     pageSizeLabel: string;
@@ -120,9 +120,9 @@ export interface AdvancedPaginationPreviewProps {
     renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
     buttonAlignment: ButtonAlignmentEnum;
-    pageBreakIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    firstPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    previousPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    nextPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    lastPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    pageBreakIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;
+    firstPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;
+    previousPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;
+    nextPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;
+    lastPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;
 }

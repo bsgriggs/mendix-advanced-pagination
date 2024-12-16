@@ -114,6 +114,8 @@ export function getProperties(_values: AdvancedPaginationPreviewProps, defaultPr
                 "ofLabel"
             ]);
             break;
+        case "dropdown":
+            hidePropertiesIn(defaultProperties, _values, ["pageBreak", "pageOffset"]);
     }
     // Total Caption Alignment
     if (_values.resultCountCaptionAlignment === "hide") {
@@ -186,6 +188,14 @@ export function check(_values: AdvancedPaginationPreviewProps): Problem[] {
                 url: "https://github.com/bsgriggs/pagination/blob/master/README.md"
             });
         }
+    }
+
+    if (_values.displayFormat === "dropdown" && _values.pageDisplayType === "CUSTOM") {
+        errors.push({
+            property: `pageDisplayType`,
+            message: `Page display type 'Custom' is not compatible with display format 'Dropdown'`,
+            url: "https://github.com/bsgriggs/pagination/blob/master/README.md"
+        });
     }
 
     return errors;

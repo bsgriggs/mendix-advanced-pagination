@@ -3,18 +3,9 @@ import { AdvancedPaginationContainerProps } from "../typings/AdvancedPaginationP
 import Big from "big.js";
 import Pagination from "./components/Pagination";
 import "./ui/AdvancedPagination.scss";
+import MxFormatter from "./utils/MxFormatter";
 
 const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactElement => {
-    const groupDigits = useCallback(
-        /* eslint-disable */
-        (newNumber: number): string =>
-            props.groupDigits
-                ? // @ts-ignore
-                  mx.parser.formatValue(newNumber || 0, "integer", { groupDigits: true, decimalPrecision: 0 })
-                : newNumber,
-        /* eslint-enable */
-        [props.groupDigits]
-    );
     const pageSize: number = useMemo(
         () => (props.pageSizeType === "EXPRESSION" ? Number(props.pageSize.value) : Number(props.pageSizeAttr.value)),
         [props.pageSize, props.pageSizeAttr, props.pageSizeType]
@@ -32,27 +23,10 @@ const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactEleme
                 ? props.resultCountCaption.value
                 : resultCount === 1
                 ? "1 result"
-                : groupDigits(resultCount) + " results",
+                : MxFormatter(resultCount, props.groupDigits) + " results",
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [props.resultCountCaption, resultCount]
     );
-    const pageDisplay: string = useMemo(() => {
-        if (pageSize) {
-            const offset = (page - 1) * pageSize;
-            return props.pageDisplayType === "PAGES"
-                ? `${props.pageLabel.value} ${groupDigits(page)} ${props.ofLabel.value} ${groupDigits(pageTotal)}`
-                : props.pageDisplayType === "RECORDS"
-                ? resultCount === 0
-                    ? `0 ${props.toLabel.value} 0 ${props.ofLabel.value} 0`
-                    : `${groupDigits(offset + 1)} ${props.toLabel.value} ${groupDigits(
-                          page === pageTotal ? resultCount : offset + pageSize
-                      )} ${props.ofLabel.value} ${groupDigits(resultCount)}`
-                : (props.pageDisplay.value as string);
-        } else {
-            return "";
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page, pageTotal, pageSize, resultCount]);
 
     const pageOffset = useMemo(
         () => (props.pageOffset?.value ? Number(props.pageOffset.value) : 1),
@@ -96,7 +70,7 @@ const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactEleme
             {...props}
             tabIndex={props.tabIndex || 0}
             resultCountCaption={resultCountCaption}
-            pageDisplay={pageDisplay}
+            // pageDisplay={pageDisplay}
             pageOffset={pageOffset}
             page={page}
             setPage={setPage}
@@ -106,11 +80,14 @@ const AdvancedPagination = (props: AdvancedPaginationContainerProps): ReactEleme
             setPageSize={setPageSize}
             /* Label customization */
             pageLabel={props.pageLabel.value as string}
+            ofLabel={props.ofLabel.value as string}
+            toLabel={props.ofLabel.value as string}
             pageSizeLabel={props.pageSizeLabel.value as string}
             firstLabel={props.firstLabel.value as string}
             previousLabel={props.previousLabel.value as string}
             nextLabel={props.nextLabel.value as string}
             lastLabel={props.lastLabel.value as string}
+            customPageDisplay={props.pageDisplay.value as string}
             /* Icon set */
             pageBreakIcon={props.pageBreakIcon?.value || { type: "glyph", iconClass: "glyphicon-option-horizontal" }}
             firstIcon={props.firstPageIcon?.value || { type: "glyph", iconClass: "glyphicon-step-backward" }}

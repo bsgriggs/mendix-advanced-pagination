@@ -18,10 +18,9 @@ const PageSizeDropdown = (props: PageSizeDropdownProps): ReactElement => {
     return (
         <Fragment>
             {props.showPageSizeLabel && <span className="mx-text">{props.pageSizeLabel}</span>}
-
             <div>
                 <select
-                    className="form-control"
+                    className="form-control page-size"
                     tabIndex={props.tabIndex}
                     value={props.pageSize}
                     onChange={event => props.setPageSize(Number(event.target.value))}

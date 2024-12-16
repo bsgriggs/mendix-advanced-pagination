@@ -1,15 +1,15 @@
-import { createElement, ReactElement, useMemo } from "react";
-import { ButtonStyleEnum, PageDisplayTypeEnum } from "../../../typings/AdvancedPaginationProps";
-import NavButton from "./NavButton";
-import classNames from "classnames";
 import { WebIcon } from "mendix";
+import { createElement, ReactElement, useMemo } from "react";
+import NavButton from "./NavButton";
+import { ButtonStyleEnum, PageDisplayTypeEnum } from "../../../typings/AdvancedPaginationProps";
 import pageDisplayFormatter from "../../utils/pageDisplayFormatter";
 
-type NavigationPaginationProps = {
+interface DropdownPaginationProps {
+    name: string;
     page: number;
     pageSize: number;
-    pageTotal: number;
     resultCount: number;
+    pageTotal: number;
     pageDisplayType: PageDisplayTypeEnum;
     buttonStyle: ButtonStyleEnum;
     includeEnds: boolean;
@@ -24,45 +24,50 @@ type NavigationPaginationProps = {
     previousLabel: string;
     nextLabel: string;
     lastLabel: string;
-    customPageDisplay: string;
     /* Icon set */
     firstIcon: WebIcon;
     previousIcon: WebIcon;
     nextIcon: WebIcon;
     lastIcon: WebIcon;
-};
+}
 
-const NavigationPagination = (props: NavigationPaginationProps): ReactElement => {
-    const pageDisplay: string = useMemo(
-        () =>
-            pageDisplayFormatter(
-                props.page,
-                props.pageSize,
-                props.resultCount,
-                props.pageTotal,
-                props.pageDisplayType,
-                props.groupDigits,
-                props.pageLabel,
-                props.toLabel,
-                props.ofLabel,
-                props.customPageDisplay
-            ),
-        [
-            props.page,
-            props.pageSize,
-            props.resultCount,
-            props.pageTotal,
-            props.pageDisplayType,
-            props.groupDigits,
-            props.pageLabel,
-            props.toLabel,
-            props.ofLabel,
-            props.customPageDisplay
-        ]
-    );
+const DropdownPagination = (props: DropdownPaginationProps): ReactElement => {
+    const options = useMemo(() => {
+        const newOptions = [];
+        for (let i = 1; i <= props.pageTotal; i++) {
+            newOptions.push(
+                <option key={i} value={i}>
+                    {pageDisplayFormatter(
+                        i,
+                        props.pageSize,
+                        props.resultCount,
+                        props.pageTotal,
+                        props.pageDisplayType,
+                        props.groupDigits,
+                        props.pageLabel,
+                        props.toLabel,
+                        props.ofLabel,
+                        ""
+                    )}
+                </option>
+            );
+        }
+        return newOptions;
+    }, [
+        props.pageTotal,
+        props.pageSize,
+        props.resultCount,
+        props.pageDisplayType,
+        props.groupDigits,
+        props.pageLabel,
+        props.toLabel,
+        props.ofLabel
+    ]);
+
+    console.info(props);
 
     return (
-        <div className={classNames("navigation-pagination")}>
+        <div className="dropdown-pagination">
             {props.includeEnds && (
                 <NavButton
                     title={`${props.firstLabel} ${props.pageLabel}`}
@@ -89,7 +94,17 @@ const NavigationPagination = (props: NavigationPaginationProps): ReactElement =>
                 icon={props.previousIcon}
                 tabIndex={props.tabIndex}
             />
-            <span className="mx-text">{pageDisplay}</span>
+            <select
+                id={props.name}
+                className="form-control"
+                tabIndex={props.tabIndex}
+                value={props.page}
+                onChange={event => {
+                    props.setPage(Number(event.target.value));
+                }}
+            >
+                {...options}
+            </select>
             <NavButton
                 title={`${props.nextLabel} ${props.pageLabel}`}
                 onClick={() => {
@@ -120,4 +135,4 @@ const NavigationPagination = (props: NavigationPaginationProps): ReactElement =>
     );
 };
 
-export default NavigationPagination;
+export default DropdownPagination;

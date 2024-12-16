@@ -64,20 +64,6 @@
                     <description>Must be an action with a Refresh in Client on the parent dataview's object</description>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Auto correct">
-                <property key="autoCorrect" type="boolean" defaultValue="true">
-                    <caption>Enabled?</caption>
-                    <description>Adjust the page number if the current page is outside the range? (i.e. If showing page 4 of 3 = auto change the page to 1)</description>
-                </property>
-                <property key="autoCorrectTo" type="enumeration" defaultValue="FIRST">
-                    <caption>Auto correct type</caption>
-                    <description>What the page is set to when auto correcting</description>
-                    <enumerationValues>
-                        <enumerationValue key="FIRST">First page</enumerationValue>
-                        <enumerationValue key="LAST">Last page</enumerationValue>
-                    </enumerationValues>
-                </property>
-            </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Customization">
             <propertyGroup caption="Type">
@@ -87,6 +73,7 @@
                     <enumerationValues>
                         <enumerationValue key="navigation">Navigation</enumerationValue>
                         <enumerationValue key="perPage">Per Page</enumerationValue>
+                        <enumerationValue key="dropdown">Dropdown</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="includeEnds" type="boolean" defaultValue="true">
@@ -153,6 +140,20 @@
                     <enumerationValues>
                         <enumerationValue key="START">Start</enumerationValue>
                         <enumerationValue key="END">End</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Auto correct">
+                <property key="autoCorrect" type="boolean" defaultValue="true">
+                    <caption>Enabled?</caption>
+                    <description>Adjust the page number if the current page is outside the range? (i.e. If showing page 4 of 3 = auto change the page to 1)</description>
+                </property>
+                <property key="autoCorrectTo" type="enumeration" defaultValue="FIRST">
+                    <caption>Auto correct type</caption>
+                    <description>What the page is set to when auto correcting</description>
+                    <enumerationValues>
+                        <enumerationValue key="FIRST">First page</enumerationValue>
+                        <enumerationValue key="LAST">Last page</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>

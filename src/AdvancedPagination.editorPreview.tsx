@@ -26,11 +26,12 @@ export const preview = (props: AdvancedPaginationPreviewProps): ReactNode => {
     return (
         <Pagination
             {...props}
+            name=""
             style={props.styleObject}
             tabIndex={0}
             resultCountCaption={resultCountCaption}
             pageSizes={[{ value: 10 }]}
-            pageDisplay={pageDisplay}
+            customPageDisplay={pageDisplay}
             pageOffset={tryParseNumber(props.pageOffset, 1)}
             page={1}
             pageSize={10}

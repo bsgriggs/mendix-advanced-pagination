@@ -11,6 +11,7 @@ import {
     ButtonStyleEnum,
     DisplayFormatEnum,
     PageBreakEnum,
+    PageDisplayTypeEnum,
     PageSizeAlignmentEnum,
     PageSizeTypeEnum,
     PageSizesType,
@@ -18,8 +19,10 @@ import {
     ResultCountCaptionAlignmentEnum
 } from "../../typings/AdvancedPaginationProps";
 import PageBreak from "./sub-components/PageBreak";
+import DropdownPagination from "./sub-components/DropdownPagination";
 
 interface PaginationProps {
+    name: string;
     class: string;
     style?: CSSProperties;
     tabIndex: number;
@@ -28,15 +31,15 @@ interface PaginationProps {
     pageSizeAlignment: PageSizeAlignmentEnum;
     pageSizeType: PageSizeTypeEnum;
     pageSizes: PageSizesType[];
+    pageDisplayType: PageDisplayTypeEnum;
     displayFormat: DisplayFormatEnum;
     buttonAlignment: ButtonAlignmentEnum;
-    pageDisplay: string;
+    // pageDisplay: string;
     renderMode: RenderModeEnum;
     buttonStyle: ButtonStyleEnum;
     includeEnds: boolean;
     pageOffset: number;
     pageBreak: PageBreakEnum;
-    groupDigits: boolean;
     showPageSizeLabel: boolean;
     showLineBreaks: boolean;
     /* Cleaned Props */
@@ -47,13 +50,16 @@ interface PaginationProps {
     pageTotal: number;
     resultCount: number;
     /* Label customization */
+    groupDigits: boolean;
     pageLabel: string;
+    ofLabel: string;
+    toLabel: string;
     pageSizeLabel: string;
     firstLabel: string;
     previousLabel: string;
     nextLabel: string;
     lastLabel: string;
-
+    customPageDisplay: string;
     /* Icon set */
     pageBreakIcon: WebIcon;
     firstIcon: WebIcon;
@@ -88,15 +94,10 @@ const Pagination = (props: PaginationProps): ReactElement => {
                 </Fragment>
             )}
             {props.resultCount > 0 && props.displayFormat === "navigation" && (
-                <Fragment>
-                    <NavigationPagination {...props} />
-                </Fragment>
+                <NavigationPagination {...props} customPageDisplay={props.customPageDisplay} />
             )}
-            {props.resultCount > 0 && props.displayFormat === "perPage" && (
-                <Fragment>
-                    <PerPagePagination {...props} />
-                </Fragment>
-            )}
+            {props.resultCount > 0 && props.displayFormat === "perPage" && <PerPagePagination {...props} />}
+            {props.resultCount > 0 && props.displayFormat === "dropdown" && <DropdownPagination {...props} />}
             {props.pageSizeAlignment === "END" && props.pageSizeType !== "EXPRESSION" && (
                 <Fragment>
                     {props.showLineBreaks && <PageBreak mode="line" />}

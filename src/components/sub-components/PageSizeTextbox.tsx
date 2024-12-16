@@ -15,7 +15,7 @@ const PageSizeTextbox = (props: PageSizeTextboxProps): ReactElement => {
 
             <div>
                 <input
-                    className="form-control"
+                    className="form-control page-size"
                     title={props.pageSizeLabel}
                     aria-label={props.pageSizeLabel}
                     type="number"
