@@ -1,7 +1,7 @@
 {
     "name": "advancedpagination",
     "widgetName": "AdvancedPagination",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "description": "Encapsulates math for handling custom grid and API pagination.",
     "copyright": "Benjamin Griggs 2022",
     "author": "Benjamin Griggs",

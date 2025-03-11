@@ -175,8 +175,8 @@ export function check(_values: AdvancedPaginationPreviewProps): Problem[] {
     if (_values.refreshAction === null) {
         errors.push({
             property: `refreshAction`,
-            message: `Refresh action is required. Should Microflow with 'Refresh in Client' on the parent DataView's object`,
-            url: "https://github.com/bsgriggs/pagination/blob/master/README.md"
+            message: `Refresh action is required. Should be a Nanoflow with 'Refresh Object' from Nanoflow Commons or a Microflow with 'Refresh in Client' on the parent DataView's object`,
+            url: "https://github.com/bsgriggs/mendix-advanced-pagination/blob/master/README.md"
         });
     }
 
@@ -185,7 +185,7 @@ export function check(_values: AdvancedPaginationPreviewProps): Problem[] {
             errors.push({
                 property: `pageSizes`,
                 message: `At least 1 page size is required`,
-                url: "https://github.com/bsgriggs/pagination/blob/master/README.md"
+                url: "https://github.com/bsgriggs/mendix-advanced-pagination/blob/master/README.md"
             });
         }
     }
@@ -194,7 +194,7 @@ export function check(_values: AdvancedPaginationPreviewProps): Problem[] {
         errors.push({
             property: `pageDisplayType`,
             message: `Page display type 'Custom' is not compatible with display format 'Dropdown'`,
-            url: "https://github.com/bsgriggs/pagination/blob/master/README.md"
+            url: "https://github.com/bsgriggs/mendix-advanced-pagination/blob/master/README.md"
         });
     }
 
