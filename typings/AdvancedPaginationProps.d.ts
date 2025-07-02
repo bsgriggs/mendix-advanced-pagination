@@ -122,9 +122,29 @@ export interface AdvancedPaginationPreviewProps {
     renderType: RenderTypeEnum;
     buttonStyle: ButtonStyleEnum;
     buttonAlignment: ButtonAlignmentEnum;
-    pageBreakIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;
-    firstPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;
-    previousPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;
-    nextPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;
-    lastPageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;
+    pageBreakIcon:
+        | { type: "glyph"; iconClass: string }
+        | { type: "image"; imageUrl: string; iconUrl: string }
+        | { type: "icon"; iconClass: string }
+        | undefined;
+    firstPageIcon:
+        | { type: "glyph"; iconClass: string }
+        | { type: "image"; imageUrl: string; iconUrl: string }
+        | { type: "icon"; iconClass: string }
+        | undefined;
+    previousPageIcon:
+        | { type: "glyph"; iconClass: string }
+        | { type: "image"; imageUrl: string; iconUrl: string }
+        | { type: "icon"; iconClass: string }
+        | undefined;
+    nextPageIcon:
+        | { type: "glyph"; iconClass: string }
+        | { type: "image"; imageUrl: string; iconUrl: string }
+        | { type: "icon"; iconClass: string }
+        | undefined;
+    lastPageIcon:
+        | { type: "glyph"; iconClass: string }
+        | { type: "image"; imageUrl: string; iconUrl: string }
+        | { type: "icon"; iconClass: string }
+        | undefined;
 }
