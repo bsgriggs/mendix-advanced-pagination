@@ -225,7 +225,7 @@
         </propertyGroup>
         <propertyGroup caption="Buttons">
             <propertyGroup caption="Style">
-                <property key="renderMode" type="enumeration" defaultValue="button">
+                <property key="renderType" type="enumeration" defaultValue="button">
                     <caption>Render mode</caption>
                     <description></description>
                     <enumerationValues>

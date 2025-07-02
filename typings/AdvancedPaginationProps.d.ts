@@ -25,7 +25,7 @@ export type PageSizeAlignmentEnum = "START" | "END";
 
 export type AutoCorrectToEnum = "FIRST" | "LAST";
 
-export type RenderModeEnum = "button" | "link";
+export type RenderTypeEnum = "button" | "link";
 
 export type ButtonStyleEnum = "default" | "inverse" | "primary" | "info" | "success" | "warning" | "danger";
 
@@ -69,7 +69,7 @@ export interface AdvancedPaginationContainerProps {
     previousLabel: DynamicValue<string>;
     nextLabel: DynamicValue<string>;
     lastLabel: DynamicValue<string>;
-    renderMode: RenderModeEnum;
+    renderType: RenderTypeEnum;
     buttonStyle: ButtonStyleEnum;
     buttonAlignment: ButtonAlignmentEnum;
     pageBreakIcon?: DynamicValue<WebIcon>;
@@ -88,6 +88,8 @@ export interface AdvancedPaginationPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
+    renderMode: "design" | "xray" | "structure";
+    translate: (text: string) => string;
     page: string;
     resultCount: string;
     pageSizeType: PageSizeTypeEnum;
@@ -117,7 +119,7 @@ export interface AdvancedPaginationPreviewProps {
     previousLabel: string;
     nextLabel: string;
     lastLabel: string;
-    renderMode: RenderModeEnum;
+    renderType: RenderTypeEnum;
     buttonStyle: ButtonStyleEnum;
     buttonAlignment: ButtonAlignmentEnum;
     pageBreakIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; iconUrl: string; } | { type: "icon"; iconClass: string; } | undefined;

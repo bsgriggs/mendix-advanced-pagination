@@ -1,9 +1,10 @@
-import { createElement, ReactElement, useMemo, useCallback } from "react";
+import { createElement, ReactElement, useMemo } from "react";
 import { PageBreakEnum, ButtonStyleEnum } from "../../../typings/AdvancedPaginationProps";
 import PageBreak from "./PageBreak";
 import NavButton from "./NavButton";
 import classNames from "classnames";
 import { WebIcon } from "mendix";
+import MxFormatter from "../../utils/MxFormatter";
 
 type PerPagePaginationProps = {
     page: number;
@@ -30,17 +31,6 @@ type PerPagePaginationProps = {
 };
 
 const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
-    const groupDigits = useCallback(
-        /* eslint-disable */
-        (newNumber: number): string =>
-            props.groupDigits
-                ? // @ts-ignore
-                  mx.parser.formatValue(newNumber || 0, "integer", { groupDigits: true, decimalPrecision: 0 })
-                : newNumber,
-        /* eslint-enable */
-        [props.groupDigits]
-    );
-
     // Default values
     let minPage: number = props.page - props.pageOffset;
     const middlePage = Math.ceil(props.pageTotal / 2);
@@ -78,7 +68,7 @@ const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
                         title={`${props.pageLabel} ${i}`}
                         onClick={() => props.setPage(i)}
                         disabled={false}
-                        btnCaption={groupDigits(i)}
+                        btnCaption={MxFormatter(i, props.groupDigits)}
                         buttonStyle={props.buttonStyle}
                         tabIndex={props.tabIndex}
                     />
@@ -143,7 +133,7 @@ const PerPagePagination = (props: PerPagePaginationProps): ReactElement => {
                     active={props.page === props.pageTotal}
                     disabled={false}
                     buttonStyle={props.buttonStyle}
-                    btnCaption={groupDigits(props.pageTotal)}
+                    btnCaption={MxFormatter(props.pageTotal, props.groupDigits)}
                     tabIndex={props.tabIndex}
                 />
             )}

@@ -15,7 +15,7 @@ import {
     PageSizeAlignmentEnum,
     PageSizeTypeEnum,
     PageSizesType,
-    RenderModeEnum,
+    RenderTypeEnum,
     ResultCountCaptionAlignmentEnum
 } from "../../typings/AdvancedPaginationProps";
 import PageBreak from "./sub-components/PageBreak";
@@ -35,7 +35,7 @@ interface PaginationProps {
     displayFormat: DisplayFormatEnum;
     buttonAlignment: ButtonAlignmentEnum;
     // pageDisplay: string;
-    renderMode: RenderModeEnum;
+    renderType: RenderTypeEnum;
     buttonStyle: ButtonStyleEnum;
     includeEnds: boolean;
     pageOffset: number;
@@ -74,9 +74,8 @@ const Pagination = (props: PaginationProps): ReactElement => {
             className={classNames(
                 props.class,
                 "advanced-pagination",
-                // "spacing-outer-bottom-medium",
                 props.buttonAlignment,
-                `render-${props.renderMode}`
+                `render-${props.renderType}`
             )}
             style={props.style}
         >
